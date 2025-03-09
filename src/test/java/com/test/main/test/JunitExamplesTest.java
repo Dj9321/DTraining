@@ -12,8 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import com.test.main.classes.JuniExamples;
-import com.test.main.classes.Person;
+import com.main.classes.JuniExamples;
+import com.main.classes.Person;
 
 class JunitExamplesTest {
 
