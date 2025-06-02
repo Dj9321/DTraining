@@ -4,9 +4,13 @@ import java.util.Arrays;
 import java.util.Collection; // Required for flatMap
 import java.util.Collections;
 import java.util.Comparator; // Required for sorted
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional; // Required for reduce, findFirst, findAny
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,6 +30,7 @@ public class JavaStreamExamples {
 		examples.matchExamples();
 		examples.findExamples();
 		examples.streamCreationExamples(); // Call the new streamCreationExamples method
+		examples.collectingAndGrouping();
 	}
 
 	List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
@@ -256,6 +261,38 @@ public class JavaStreamExamples {
 		System.out.println();
 		System.out.println("Stream.generate() (random numbers): " + randomNumbers);
 		System.out.println("Stream.generate() (random numbers): " + randomNumbersOne);
+	}
+
+	private void collectingAndGrouping() {
+		List<String> givenList = Arrays.asList("a", "bb", "ccc", "dd", "a");
+		// Collecting to a LinkedList
+		List<String> result = givenList.stream().collect(Collectors.toCollection(LinkedList::new));
+		System.out.println(result);
+		List<String> resultList = givenList.stream().toList();
+		System.out.println(resultList);
+		// Here Collectors.toSet() not simply toSet() > unordered and no duplicates
+		Set<String> resultSet = givenList.stream().collect(Collectors.toSet());
+		System.out.println(resultSet);
+		// Converts to Map. Doesn't work if there are duplicates.
+		// (IllegalStateException) Funtion.identity same as a -> a
+//		Map<String, Integer> resultMap = givenList.stream()
+//				.collect(Collectors.toMap(Function.identity(), String::length));
+//		System.out.println(resultMap);
+		// if there are duplicates, then use this 3rd parameter to merge collisions
+		// (Binary operator). as both are equal we can pick any one.
+		Map<String, Integer> resultMapForDuplicates = givenList.stream()
+				.collect(Collectors.toMap(Function.identity(), String::length, (item, identicalItem) -> item));
+		System.out.println(resultMapForDuplicates);
+		// collectingAndThen > after collecting converting to unmodifiable list
+		// similarly you can use Collections::unmodifiableSet, unmodifiableMap
+		List<String> resultImmutable = givenList.stream()
+				.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+		System.out.println(resultImmutable);
+		Map<String, Integer> resultMapForDuplicatesAndCollecting = givenList.stream()
+				.collect(Collectors.collectingAndThen(
+						Collectors.toMap(Function.identity(), String::length, (item, identicalItem) -> item),
+						Collections::unmodifiableMap));
+		System.out.println(resultMapForDuplicatesAndCollecting);
 	}
 
 }
