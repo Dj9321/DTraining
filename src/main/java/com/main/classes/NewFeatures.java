@@ -73,7 +73,9 @@ public class NewFeatures {
 		int daysInMonth = switch (month) {
 		// default is not needed here as we wrote all the possible enum values for
 		// Month.
-		case JANUARY, MARCH, MAY, JULY, AUGUST, OCTOBER, DECEMBER -> 31;
+		case JANUARY, MARCH, MAY, JULY, AUGUST, OCTOBER, DECEMBER -> {
+			yield 31; // you can also give directly. If multiline you can give like this.
+		} // you don't need a semicolon if you give {}
 		case APRIL, JUNE, SEPTEMBER, NOVEMBER -> 30;
 		case FEBRUARY -> year.isLeap() ? 29 : 28;
 		};
@@ -86,7 +88,19 @@ public class NewFeatures {
 
 	public void recordExample() {
 		User u = new User("Dheeraj", 35);
+//		u.getName(); > There is no getName() just name();
+		System.out.println("Name: " + u.name());
+		// as toString is already implemented you can directly print and get meaningful
+		// data.
 		System.out.println(u);
+		User u1 = new User("Dheeraj");
+		System.out.println(u1);
+		EmployeeRecord e = new EmployeeRecord("", 33, "Electronics");
+		try {
+			System.out.println(e);
+		} catch (Exception ex) {
+			ex.getCause();
+		}
 	}
 
 	public record User(String name, int age) {
@@ -96,6 +110,19 @@ public class NewFeatures {
 		// In cases using property types that are inherently mutable, for instance an
 		// array, explicitly declaring the accessor method for the property is a way to
 		// ensure immutability.
+
+		public User {
+			if (name.isBlank()) {
+				throw new IllegalArgumentException("User Name can't be blank");
+			}
+		}
+
+		public User(String user) {
+			// If you want a record to have a no-arg constructor, records do allow adding
+			// extra constructors or factory methods, as long as the "canonical constructor"
+			// that takes all of the record fields as arguments is called.
+			this(user, 0);
+		}
 	};
 
 }
