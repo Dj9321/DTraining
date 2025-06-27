@@ -1,6 +1,7 @@
 package com.main.classes;
 
 import java.time.Month;
+import java.time.Year;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ public class NewFeatures {
 		NewFeatures n = new NewFeatures();
 		n.textBlocksExample("Dheeraj");
 		n.switchExample("S");
+		n.switchExampleE2(Month.FEBRUARY, Year.of(2024)); // Year of 2025
 		n.varExample();
 		n.recordExample();
 	}
@@ -59,17 +61,27 @@ public class NewFeatures {
 		System.out.println(result);
 	}
 
-	public void switchExampleE2(Month month) {
+	public void switchExampleE2(Month month, Year year) {
 		String result = switch (month) {
 		// Java allows use of operator ->(arrow) instead of : (colon) to denote the
 		// return expression.
-		case JANUARY, FEBRUARY, MARCH -> "Monday, Wednesday or Friday";
-		case APRIL, MAY, JUNE, JULY -> "Tuesday, Thursday or Saturday"; // break is not needed
-		case AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER -> "Tuesday, Thursday or Saturday"; // break is not needed
+		case APRIL, JUNE, SEPTEMBER, NOVEMBER -> "30 days"; // break is not needed
+		case FEBRUARY -> year.isLeap() ? "29 days" : "28 days";
+		default -> "31 days";
+		};
+
+		int daysInMonth = switch (month) {
 		// default is not needed here as we wrote all the possible enum values for
 		// Month.
+		case JANUARY, MARCH, MAY, JULY, AUGUST, OCTOBER, DECEMBER -> 31;
+		case APRIL, JUNE, SEPTEMBER, NOVEMBER -> 30;
+		case FEBRUARY -> year.isLeap() ? 29 : 28;
 		};
+		System.out.println("Days in Month: " + daysInMonth);
 		System.out.println(result);
+
+		boolean isLeapYear = Year.isLeap(year.getValue()); // getValue()
+		System.out.println(isLeapYear ? year.getValue() + " is a leap year" : year.getValue() + " is Not a leap Year");
 	}
 
 	public void recordExample() {
