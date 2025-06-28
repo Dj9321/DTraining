@@ -4,6 +4,7 @@ import java.time.Month;
 import java.time.Year;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class NewFeatures {
 
@@ -122,6 +123,24 @@ public class NewFeatures {
 			// extra constructors or factory methods, as long as the "canonical constructor"
 			// that takes all of the record fields as arguments is called.
 			this(user, 0);
+
+		}
+
+		@Override
+		public final boolean equals(Object arg0) {
+			if (this == arg0)
+				return true;
+			if (!(arg0 instanceof User u2)) {
+				return false;
+			}
+			// here u2 is from above if condition. It should be arg0 but that's an object
+			return Objects.equals(name, u2.name);
+		}
+
+		@Override
+		public final int hashCode() {
+			// using Objects.hash and passing all the values.
+			return Objects.hash(name, age);
 		}
 	};
 
