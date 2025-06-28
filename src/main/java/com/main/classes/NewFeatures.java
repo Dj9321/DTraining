@@ -15,6 +15,7 @@ public class NewFeatures {
 		n.switchExampleE2(Month.FEBRUARY, Year.of(2024)); // Year of 2025
 		n.varExample();
 		n.recordExample();
+		n.switchOnAnyType(3);
 	}
 
 	public void textBlocksExample(String name) {
@@ -62,6 +63,18 @@ public class NewFeatures {
 		System.out.println(result);
 	}
 
+	public Object switchOnAnyType(Object o) {
+		Object d = switch (o) {
+		case Integer i -> i.doubleValue();
+		case Float f -> f.doubleValue();
+		case String s -> Double.parseDouble(s);
+		default -> 0d;
+
+		};
+		System.out.println("Switch on any Type: " + d);
+		return d;
+	}
+
 	public void switchExampleE2(Month month, Year year) {
 		String result = switch (month) {
 		// Java allows use of operator ->(arrow) instead of : (colon) to denote the
@@ -96,7 +109,7 @@ public class NewFeatures {
 		System.out.println(u);
 		User u1 = new User("Dheeraj");
 		System.out.println(u1);
-		EmployeeRecord e = new EmployeeRecord("", 33, "Electronics");
+		EmployeeRecord e = new EmployeeRecord("Jareehd", 33, "Electronics");
 		try {
 			System.out.println(e);
 		} catch (Exception ex) {
@@ -126,6 +139,8 @@ public class NewFeatures {
 
 		}
 
+		// overriding equals method to compare only name. Default one compares all
+		// arguments (name, age as in here)
 		@Override
 		public final boolean equals(Object arg0) {
 			if (this == arg0)
@@ -135,6 +150,7 @@ public class NewFeatures {
 			}
 			// here u2 is from above if condition. It should be arg0 but that's an object
 			return Objects.equals(name, u2.name);
+			// return Objects.equals(name, u2.name) && Objects.equals(age, u2.age);
 		}
 
 		@Override
@@ -142,6 +158,6 @@ public class NewFeatures {
 			// using Objects.hash and passing all the values.
 			return Objects.hash(name, age);
 		}
-	};
+	}
 
 }
