@@ -79,6 +79,20 @@ public class NewFeatures {
 		return d;
 	}
 
+	public String patternMatchingWithRecords(PersonInterface p) {
+		switch (p) {
+		// Here for records we can write parameters and use them 
+		case PersonDetails(String name, String age, String Dob) -> {
+			return name;
+		}
+		case null -> {
+		}
+		default -> {
+		}
+		}
+		return null;
+	}
+
 	public void switchExampleE2(Month month, Year year) {
 		String result = switch (month) {
 		// Java allows use of operator ->(arrow) instead of : (colon) to denote the
@@ -114,6 +128,9 @@ public class NewFeatures {
 		User u1 = new User("Dheeraj");
 		System.out.println(u1);
 		EmployeeRecord e = new EmployeeRecord("Jareehd", 33, "Electronics");
+
+		PersonDetails pd = new PersonDetails("Dheeraj", "33", "08-December");
+		System.out.println("PersonDetails Job Type: " + pd.getJobType());
 		try {
 			System.out.println(e);
 		} catch (Exception ex) {
