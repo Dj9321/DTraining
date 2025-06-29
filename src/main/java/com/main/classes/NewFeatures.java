@@ -15,7 +15,10 @@ public class NewFeatures {
 		n.switchExampleE2(Month.FEBRUARY, Year.of(2024)); // Year of 2025
 		n.varExample();
 		n.recordExample();
-		n.switchOnAnyType(3);
+		n.patternMatchingUsingSwitch(3);
+		n.sealedClassUsage();
+		n.patternMatchingOldStyle("Hello");
+		n.patternMatching("New Pattern Matching");
 	}
 
 	public void textBlocksExample(String name) {
@@ -52,7 +55,6 @@ public class NewFeatures {
 		case "T", "TH", "S" -> "Tuesday, Thursday or Saturday"; // break is not needed
 		default -> { // default is required. If multi line use {} and use yield to return value.
 			if (day.isEmpty())
-
 				yield "Please insert a valid day.";
 			else
 				yield "Looks like a Sunday.";
@@ -63,12 +65,14 @@ public class NewFeatures {
 		System.out.println(result);
 	}
 
-	public Object switchOnAnyType(Object o) {
+	public Object patternMatchingUsingSwitch(Object o) {
 		Object d = switch (o) {
+		// here i is binding variable
 		case Integer i -> i.doubleValue();
 		case Float f -> f.doubleValue();
 		case String s -> Double.parseDouble(s);
-		default -> 0d;
+		// default -> 0d; // for default case is not needed at the beginning.
+		case null, default -> 0d;
 
 		};
 		System.out.println("Switch on any Type: " + d);
@@ -158,6 +162,40 @@ public class NewFeatures {
 			// using Objects.hash and passing all the values.
 			return Objects.hash(name, age);
 		}
+	}
+
+	public void sealedClassUsage() {
+		// You can have sealed abstract class & Interface as well.
+		PersonJob job = new PersonJob();
+		job.setJobDesignation("Consultant");
+		job.setJobType("IT");
+		System.out.print(job.jobType());
+		System.out.println(job.jobDesignation());
+	}
+
+	public String patternMatchingOldStyle(Object o) {
+		if (o instanceof Integer) {
+			var i = (Integer) o;
+			System.out.println(i);
+			return "Integer" + i;
+		} else if (o instanceof String) {
+			var i = (String) o;
+			System.out.println(i);
+			return i;
+		}
+		return "Not a String or Integer";
+	}
+
+	public String patternMatching(Object o) {
+		// here you can write i as binding variable directly after instanceof
+		if (o instanceof Integer i) {
+			System.out.println(i);
+			return "Integer" + i;
+		} else if (o instanceof String i) {
+			System.out.println(i);
+			return i;
+		}
+		return "Not a String or Integer";
 	}
 
 }
