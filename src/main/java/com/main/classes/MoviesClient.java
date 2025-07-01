@@ -1,0 +1,48 @@
+package com.main.classes;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.main.records.Movie;
+
+public class MoviesClient {
+
+	HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build();
+
+	public static final String MOVIES_URL = "http://127.0.0.1:8000/MovieList.json";
+	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule())
+			.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+	public List<Movie> getMovies() {
+		var request = requestBuilder(MOVIES_URL);
+		// there is also sendAsync
+		try {
+			var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			// for list you can give TypReference for one single object you can just
+			// directly give Movie.class
+			List<Movie> movieList = objectMapper.readValue(response.body(), new TypeReference<List<Movie>>() {
+			});
+//			Movie movie1 = objectMapper.readValue(response.body(), Movie.class);
+			System.out.println("Printing movie class " + movieList);
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public static HttpRequest requestBuilder(String url) {
+		return HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
+
+	}
+
+}

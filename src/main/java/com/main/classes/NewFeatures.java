@@ -16,9 +16,12 @@ public class NewFeatures {
 		n.varExample();
 		n.recordExample();
 		n.patternMatchingUsingSwitch(3);
+		n.patternMatchingWithRecords(new PersonDetails(null, "33", "08-Dec"));
+		n.patternMatchingWithRecords(new PersonDetails("Dhj", "33", "08-Dec"));
 		n.sealedClassUsage();
 		n.patternMatchingOldStyle("Hello");
 		n.patternMatching("New Pattern Matching");
+		n.getMovies();
 	}
 
 	public void textBlocksExample(String name) {
@@ -81,14 +84,20 @@ public class NewFeatures {
 
 	public String patternMatchingWithRecords(PersonInterface p) {
 		switch (p) {
-		// Here for records we can write parameters and use them 
+		// Here for records we can write parameters and use them
+		case PersonDetails(String name, String age, String Dob) when name == null -> {
+			System.out.println("When name is null : " + age);
+			return age;
+		}
 		case PersonDetails(String name, String age, String Dob) -> {
+			System.out.println("In Record switch: " + name);
 			return name;
 		}
 		case null -> {
 		}
-		default -> {
-		}
+		// no need of default as records have limited classes and all are covered
+//		default -> {
+//		}
 		}
 		return null;
 	}
@@ -213,6 +222,11 @@ public class NewFeatures {
 			return i;
 		}
 		return "Not a String or Integer";
+	}
+	
+	public void getMovies() {
+		MoviesClient movieC = new MoviesClient();
+		movieC.getMovies();
 	}
 
 }
