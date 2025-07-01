@@ -18,7 +18,7 @@ public class MoviesClient {
 
 	HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build();
 
-	public static final String MOVIES_URL = "http://127.0.0.1:8000/MovieList.json";
+	public static final String MOVIES_URL = "http://127.0.0.1:8000/DTraining/src/main/resources/MovieList.json";
 	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule())
 			.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
