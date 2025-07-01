@@ -17,6 +17,7 @@ import com.main.records.Movie;
 public class MoviesClient {
 
 	HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build();
+//	HttpClient clientAsync = HttpClient.newHttpClient();
 
 	public static final String MOVIES_URL = "http://127.0.0.1:8000/DTraining/src/main/resources/MovieList.json";
 	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule())
@@ -38,6 +39,34 @@ public class MoviesClient {
 			e.printStackTrace();
 		}
 
+		return null;
+	}
+
+	public List<Movie> getMoviesAsync() {
+		var request = requestBuilder(MOVIES_URL);
+		// there is also sendAsync
+		try {
+			var response = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+//			System.out.println("Status Code: " + response.statusCode());
+			// for list you can give TypReference for one single object you can just
+			// directly give Movie.class
+			// Here join is used to wait to get the response.
+			var response1 = response.thenApply(HttpResponse::body).join();
+			var listOfMovies = objectMapper.readValue(response1, new TypeReference<List<Movie>>() {
+			});
+			System.out.println("Async Movies List: " + listOfMovies);
+			return listOfMovies;
+//			response.thenApply(httpResponse -> {
+//				System.out.println(httpResponse.statusCode());
+//				objectMapper.readValue(httpResponse.body(), new TypeReference<List<Movie>>() {
+//				});
+//			});
+
+//			Movie movie1 = objectMapper.readValue(response.body(), Movie.class);
+//			System.out.println("Printing movie class " + movieList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

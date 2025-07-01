@@ -22,6 +22,7 @@ public class NewFeatures {
 		n.patternMatchingOldStyle("Hello");
 		n.patternMatching("New Pattern Matching");
 		n.getMovies();
+		n.getMoviesAsync();
 	}
 
 	public void textBlocksExample(String name) {
@@ -223,10 +224,15 @@ public class NewFeatures {
 		}
 		return "Not a String or Integer";
 	}
-	
+
 	public void getMovies() {
 		MoviesClient movieC = new MoviesClient();
 		movieC.getMovies();
+	}
+
+	public void getMoviesAsync() {
+		MoviesClient movieC = new MoviesClient();
+		movieC.getMoviesAsync();
 	}
 
 }
