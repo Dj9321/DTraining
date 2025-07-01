@@ -27,6 +27,7 @@ public class MoviesClient {
 		// there is also sendAsync
 		try {
 			var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			System.out.println("Status Code: " + response.statusCode());
 			// for list you can give TypReference for one single object you can just
 			// directly give Movie.class
 			List<Movie> movieList = objectMapper.readValue(response.body(), new TypeReference<List<Movie>>() {
