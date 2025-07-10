@@ -1,6 +1,7 @@
 package com.main.imp;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import com.main.classes.PersonDetails;
@@ -27,10 +28,36 @@ public class Java8Features {
 		PersonDetails dheeraj = new PersonDetails("Dheeraj", "33", "08-December");
 		PersonDetails ravi = new PersonDetails("Ravi", "34", "10-January");
 		List<PersonDetails> personsList = List.of(dheeraj, ravi);
-		Consumer<PersonDetails> c1 = (s) -> System.out.print(s.name() + " ");
+		Consumer<PersonDetails> c1 = (s) -> System.out.println(s.name() + " ");
 		Consumer<PersonDetails> c2 = (s) -> System.out.print(s.age() + " ");
-		Consumer<PersonDetails> c3 = (s) -> System.out.print(s.Dob() + " ");
+		Consumer<PersonDetails> c3 = (s) -> System.out.println(s.Dob() + " ");
+
+		// You can call a consumer on any object so that the logic will be executed on
+		// that object
+		c1.accept(dheeraj);
+		Consumer<PersonDetails> c4 = c1.andThen(c2).andThen(c3);
 		// Consumer chaining
 		personsList.forEach(c1.andThen(c2).andThen(c3));
+
+		// filtering > Write .accept() at the end because we are passing consumer
+		// already and then passing a consumer implementation b -> {} to forEach()
+		personsList.forEach(b -> {
+			if (Integer.valueOf(b.age()) > 33) {
+//				c1.andThen(c2).andThen(c3).accept(b);
+				c4.accept(b);
+				System.out.println(b.name());
+			}
+		});
+		System.out.println("Chained consumer ");
+		personsList.forEach(c4);
+		System.out.println("Chained consumer end");
+		BiConsumer<PersonDetails, PersonDetails> b = (e, d) -> System.out
+				.println("Age : " + e.age() + " and " + d.age());
+		b.accept(dheeraj, ravi);
+
+		// Here we can't pass biconsumer directly to forEach so we pass as Consumer
+		// lambda
+		personsList.forEach(f -> b.accept(f, f));
+
 	}
 }
