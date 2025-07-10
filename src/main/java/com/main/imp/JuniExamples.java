@@ -1,7 +1,9 @@
-package com.main.classes;
+package com.main.imp;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.main.classes.Person;
 
 public class JuniExamples {
 

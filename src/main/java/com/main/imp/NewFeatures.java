@@ -1,10 +1,16 @@
-package com.main.classes;
+package com.main.imp;
 
 import java.time.Month;
 import java.time.Year;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import com.main.classes.EmployeeRecord;
+import com.main.classes.MoviesClient;
+import com.main.classes.PersonDetails;
+import com.main.classes.PersonInterface;
+import com.main.classes.PersonJob;
 
 public class NewFeatures {
 
@@ -23,6 +29,7 @@ public class NewFeatures {
 		n.patternMatching("New Pattern Matching");
 		n.getMovies();
 		n.getMoviesAsync();
+		System.out.println("Module name (default): " + NewFeatures.class.getModule());
 	}
 
 	public void textBlocksExample(String name) {

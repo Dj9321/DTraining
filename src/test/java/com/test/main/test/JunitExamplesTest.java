@@ -20,9 +20,9 @@ import org.mockito.Mock;
 
 import com.main.classes.EmployeeDetails;
 import com.main.classes.EmployeeSealedClass;
-import com.main.classes.JuniExamples;
-import com.main.classes.NewFeatures;
 import com.main.classes.Person;
+import com.main.imp.JuniExamples;
+import com.main.imp.NewFeatures;
 
 class JunitExamplesTest {
 

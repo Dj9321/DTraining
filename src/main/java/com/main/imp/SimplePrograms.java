@@ -1,4 +1,4 @@
-package com.main.classes;
+package com.main.imp;
 
 public class SimplePrograms {
 

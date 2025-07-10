@@ -1,4 +1,4 @@
-package com.main.classes;
+package com.main.imp;
 
 import java.util.Arrays;
 import java.util.Collection; // Required for flatMap
@@ -12,7 +12,10 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import com.main.classes.Person;
 
 public class JavaStreamExamples {
 
@@ -31,6 +34,7 @@ public class JavaStreamExamples {
 		examples.findExamples();
 		examples.streamCreationExamples(); // Call the new streamCreationExamples method
 		examples.collectingAndGrouping();
+		examples.intStreams();
 	}
 
 	List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
@@ -293,6 +297,12 @@ public class JavaStreamExamples {
 						Collectors.toMap(Function.identity(), String::length, (item, identicalItem) -> item),
 						Collections::unmodifiableMap));
 		System.out.println(resultMapForDuplicatesAndCollecting);
+	}
+	
+	public void intStreams() {
+		// rangeClosed includes 0 and 100 as well.
+		int sum = IntStream.rangeClosed(0,100).parallel().sum();
+		System.out.println(sum);
 	}
 
 }
