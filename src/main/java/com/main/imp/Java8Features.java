@@ -1,5 +1,7 @@
 package com.main.imp;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
@@ -93,6 +95,18 @@ public class Java8Features {
 		System.out.println("Bi Predicate: ");
 		personsList.forEach(bp -> {
 			if (bip.test(bp, 21)) {
+				c4.accept(bp);
+			}
+		});
+		
+		//removeIf() from Collection. List.of() is immutable so we can't remove.
+//		personsList.removeIf(pp);
+//		ArrayList<PersonDetails> personModifiableList = new ArrayList<> (List.of(personList));
+	}
+
+	public void predicateAsArgument(Predicate<PersonDetails> p) {
+		personsList.forEach(bp -> {
+			if (p.test(bp)) {
 				c4.accept(bp);
 			}
 		});
