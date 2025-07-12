@@ -118,7 +118,8 @@ public class Java8Features {
 		// Function<InputType, OutputType>
 		System.out.println("Function Interface: ***Starts***");
 		Function<String, String> a = f -> f.toUpperCase();
-		String b = a.apply("dheeraj");
+		Function<String, String> h = f -> f.toUpperCase();
+		String b = a.andThen(h).apply("dheeraj");
 		System.out.println(b);
 	}
 }

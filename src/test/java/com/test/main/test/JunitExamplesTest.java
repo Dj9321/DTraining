@@ -21,7 +21,7 @@ import org.mockito.Mock;
 import com.main.classes.EmployeeDetails;
 import com.main.classes.EmployeeSealedClass;
 import com.main.classes.Person;
-import com.main.imp.JuniExamples;
+import com.main.imp.JunitExamples;
 import com.main.imp.NewFeatures;
 
 class JunitExamplesTest {

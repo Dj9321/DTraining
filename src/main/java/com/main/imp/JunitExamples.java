@@ -7,6 +7,7 @@ import com.main.classes.Person;
 
 public class JunitExamples {
 
+		/// Check in TEST FOLDER
 	public void aStream(List<Person> personList) {
 		personList.stream().filter(a -> a.getName() != null).forEach(b -> System.out.println(b.getName()));
 	}
@@ -17,7 +18,7 @@ public class JunitExamples {
 		Person p1 = new Person("Siramdas", "2");
 		personList.add(p);
 		personList.add(p1);
-		JuniExamples j = new JuniExamples();
+		JunitExamples j = new JunitExamples();
 		j.aStream(personList);
 	}
 
