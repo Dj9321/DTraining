@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.main.classes.PersonDetails;
@@ -16,6 +17,7 @@ public class Java8Features {
 		Java8Features j = new Java8Features();
 		j.defaultFuntionalInterfaces();
 		j.defaultFuncIntPredicate();
+		j.funtionInterface();
 
 	}
 
@@ -35,6 +37,7 @@ public class Java8Features {
 		new Thread(() -> System.out.println("Thread running!")).start();
 
 		// Consumer accept(); forEach() has consumer argument
+		System.out.println("Consumer: ***Starts***");
 		Consumer<String> c = (s) -> System.out.println(s.toUpperCase());
 		c.accept("Hello Dheeraj");
 		// You can call a consumer on any object so that the logic will be executed on
@@ -66,7 +69,7 @@ public class Java8Features {
 
 	public void defaultFuncIntPredicate() {
 		// Predicate
-		System.out.println("Predicate: ");
+		System.out.println("Predicate: ***Starts***");
 		Predicate<Integer> p1 = p -> p % 2 == 0;
 		Predicate<Integer> p2 = p -> p % 5 == 0;
 
@@ -92,14 +95,14 @@ public class Java8Features {
 		});
 
 		BiPredicate<PersonDetails, Integer> bip = (g1, g2) -> Integer.valueOf(g1.age()) > g2;
-		System.out.println("Bi Predicate: ");
+		System.out.println("Bi Predicate: ***Starts*** ");
 		personsList.forEach(bp -> {
 			if (bip.test(bp, 21)) {
 				c4.accept(bp);
 			}
 		});
-		
-		//removeIf() from Collection. List.of() is immutable so we can't remove.
+
+		// removeIf() from Collection. List.of() is immutable so we can't remove.
 //		personsList.removeIf(pp);
 //		ArrayList<PersonDetails> personModifiableList = new ArrayList<> (List.of(personList));
 	}
@@ -110,5 +113,14 @@ public class Java8Features {
 				c4.accept(bp);
 			}
 		});
+	}
+
+	public void funtionInterface() {
+		// Function - BiFunction, UnaryOperator, BinaryOperator - apply() >
+		// Function<InputType, OutputType>
+		System.out.println("Function Interface: ***Starts***");
+		Function<String, String> a = f -> f.toUpperCase();
+		String b = a.apply("dheeraj");
+		System.out.println(b);
 	}
 }
