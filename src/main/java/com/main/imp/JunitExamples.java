@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.main.classes.Person;
 
-public class JuniExamples {
+public class JunitExamples {
 
 	public void aStream(List<Person> personList) {
 		personList.stream().filter(a -> a.getName() != null).forEach(b -> System.out.println(b.getName()));
