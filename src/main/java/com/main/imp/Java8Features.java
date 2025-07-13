@@ -118,8 +118,15 @@ public class Java8Features {
 		// Function<InputType, OutputType>
 		System.out.println("Function Interface: ***Starts***");
 		Function<String, String> a = f -> f.toUpperCase();
-		Function<String, String> h = f -> f.toUpperCase();
+		Function<String, String> h = f -> f.concat(" Siramdas");
 		String b = a.andThen(h).apply("dheeraj");
 		System.out.println(b);
+		// Returns a composed function that first applies the before function to its
+		// input, and then applies this function to the result.
+		String c = a.compose(h).apply("dheeraj");
+		System.out.println(c);
+		// we can use function in another claass as well
+		String h1 = NewFeatures.addingDefaultText.apply("Dheeraj");
+		System.out.println(h1);
 	}
 }

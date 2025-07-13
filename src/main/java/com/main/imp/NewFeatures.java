@@ -5,6 +5,7 @@ import java.time.Year;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 
 import com.main.classes.EmployeeRecord;
 import com.main.classes.MoviesClient;
@@ -13,6 +14,8 @@ import com.main.classes.PersonInterface;
 import com.main.classes.PersonJob;
 
 public class NewFeatures {
+
+	static Function<String, String> addingDefaultText = g -> "Default text ... here " + g;
 
 	public static void main(String[] args) {
 		NewFeatures n = new NewFeatures();
