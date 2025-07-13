@@ -1,6 +1,8 @@
 package com.main.imp;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
@@ -21,7 +23,9 @@ public class Java8Features {
 
 	PersonDetails dheeraj = new PersonDetails("Dheeraj", "33", "08-December");
 	PersonDetails ravi = new PersonDetails("Ravi", "34", "10-January");
-	List<PersonDetails> personsList = List.of(dheeraj, ravi);
+	PersonDetails sudheer = new PersonDetails("Sudheer", "30", "10-March");
+	PersonDetails mahesh = new PersonDetails("Mahesh", "28", "10-February");
+	List<PersonDetails> personsList = List.of(dheeraj, ravi, sudheer, mahesh);
 	Consumer<PersonDetails> c1 = (s) -> System.out.println(s.name() + " ");
 	Consumer<PersonDetails> c2 = (s) -> System.out.print(s.age() + " ");
 	Consumer<PersonDetails> c3 = (s) -> System.out.println(s.Dob() + " ");
@@ -128,5 +132,17 @@ public class Java8Features {
 		// we can use function in another claass as well
 		String h1 = NewFeatures.addingDefaultText.apply("Dheeraj");
 		System.out.println(h1);
+		// Creating a map with name and dob
+		Function<List<PersonDetails>, Map<String, String>> h2 = j1 -> {
+			Map<String, String> personAndDobMap = new HashMap<>();
+			j1.forEach(d1 -> {
+				personAndDobMap.put(d1.name(), d1.Dob());
+			});
+			return personAndDobMap;
+		};
+		
+		Map<String, String> personMap = h2.apply(personsList);
+		System.out.println(personMap);
+
 	}
 }
