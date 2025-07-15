@@ -3,7 +3,7 @@ package com.test.others;
 import com.test.others.Vehicle.Truck;
 
 public class Car {
-	
+
 	String st = "Car 1";
 
 	String protectedMethod() {

@@ -298,10 +298,10 @@ public class JavaStreamExamples {
 						Collections::unmodifiableMap));
 		System.out.println(resultMapForDuplicatesAndCollecting);
 	}
-	
+
 	public void intStreams() {
 		// rangeClosed includes 0 and 100 as well.
-		int sum = IntStream.rangeClosed(0,100).parallel().sum();
+		int sum = IntStream.rangeClosed(0, 100).parallel().sum();
 		System.out.println(sum);
 	}
 

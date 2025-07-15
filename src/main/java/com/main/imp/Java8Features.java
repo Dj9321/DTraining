@@ -167,7 +167,7 @@ public class Java8Features {
 		UnaryOperator<String> u = p -> p.strip();
 		String d = u.apply("    Dheeraj Siramdas ");
 		System.out.println(d);
-		BinaryOperator<String> bo = (x,y) -> x.concat(y).repeat(5);
+		BinaryOperator<String> bo = (x, y) -> x.concat(y).repeat(5);
 		String de = bo.apply("Siramdas ", "Elite ");
 		System.out.println(de);
 	}

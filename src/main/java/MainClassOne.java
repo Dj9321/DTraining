@@ -12,16 +12,13 @@ public class MainClassOne {
 		// Following line prints "false" because the whole
 		// text "geeksfor" doesn't match pattern "g*geeks*"
 		System.out.println(Pattern.matches("g*geeks*", "geeksfor"));
-		
+
 //		System.out.println(Pattern.matches("(\\\w+).* \\\"lastName\":\\\(\\\\w+).*", "abc lastName:abc"));
 		System.out.println("here: ");
 		System.out.println(Pattern.matches("(\\w+)(\\s)(\\w+)(\\s+).*", "ss ds aasdfasdf safd"));
 		System.out.println(Pattern.matches(".", " "));
 		System.out.println(Pattern.matches("g*geeks*", "geeksfor"));
-		
-		
+
 	}
-	
-	
 
 }

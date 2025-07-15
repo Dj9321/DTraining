@@ -7,7 +7,7 @@ import com.main.classes.Person;
 
 public class JunitExamples {
 
-		/// Check in TEST FOLDER
+	/// Check in TEST FOLDER
 	public void aStream(List<Person> personList) {
 		personList.stream().filter(a -> a.getName() != null).forEach(b -> System.out.println(b.getName()));
 	}

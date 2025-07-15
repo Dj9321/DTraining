@@ -12,10 +12,9 @@ public class Vehicle extends Car {
 			return 16;
 		}
 	}
-	
+
 //	final int ina;
-	
-	
+
 	public void methodA() {
 		final int a;
 		a = 10;
