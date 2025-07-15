@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 import com.main.classes.PersonDetails;
 
@@ -18,13 +21,13 @@ public class Java8Features {
 		j.defaultFuntionalInterfaces();
 		j.defaultFuncIntPredicate();
 		j.funtionInterface();
-
+		j.unaryBinaryOperators();
 	}
 
-	PersonDetails dheeraj = new PersonDetails("Dheeraj", "33", "08-December");
-	PersonDetails ravi = new PersonDetails("Ravi", "34", "10-January");
-	PersonDetails sudheer = new PersonDetails("Sudheer", "30", "10-March");
-	PersonDetails mahesh = new PersonDetails("Mahesh", "28", "10-February");
+	PersonDetails dheeraj = new PersonDetails("Dheeraj", 33, "08-December");
+	PersonDetails ravi = new PersonDetails("Ravi", 34, "10-January");
+	PersonDetails sudheer = new PersonDetails("Sudheer", 30, "10-March");
+	PersonDetails mahesh = new PersonDetails("Mahesh", 28, "10-February");
 	List<PersonDetails> personsList = List.of(dheeraj, ravi, sudheer, mahesh);
 	Consumer<PersonDetails> c1 = (s) -> System.out.println(s.name() + " ");
 	Consumer<PersonDetails> c2 = (s) -> System.out.print(s.age() + " ");
@@ -129,7 +132,7 @@ public class Java8Features {
 		// input, and then applies this function to the result.
 		String c = a.compose(h).apply("dheeraj");
 		System.out.println(c);
-		// we can use function in another claass as well
+		// we can use function in another class as well
 		String h1 = NewFeatures.addingDefaultText.apply("Dheeraj");
 		System.out.println(h1);
 		// Creating a map with name and dob
@@ -140,9 +143,32 @@ public class Java8Features {
 			});
 			return personAndDobMap;
 		};
-		
+
 		Map<String, String> personMap = h2.apply(personsList);
 		System.out.println(personMap);
 
+		// BiFunction<Input1, Input2, ReturnType>
+		BiFunction<List<PersonDetails>, Predicate<PersonDetails>, Map<String, Integer>> bifunc = (personList,
+				personCondition) -> {
+			Map<String, Integer> personMap1 = new HashMap<>();
+			personList.forEach(pl -> {
+				if (personCondition.test(pl)) {
+					personMap1.put(pl.name(), pl.age());
+				}
+			});
+			return personMap1;
+		};
+		Map<String, Integer> map = bifunc.apply(personsList, p -> p.age() > 33);
+		System.out.println("Persons with age greater than 33: " + map);
+	}
+
+	public void unaryBinaryOperators() {
+		System.out.println("Unary / Biinary operator ***Starts***");
+		UnaryOperator<String> u = p -> p.strip();
+		String d = u.apply("    Dheeraj Siramdas ");
+		System.out.println(d);
+		BinaryOperator<String> bo = (x,y) -> x.concat(y).repeat(5);
+		String de = bo.apply("Siramdas ", "Elite ");
+		System.out.println(de);
 	}
 }

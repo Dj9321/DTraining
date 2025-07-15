@@ -25,8 +25,8 @@ public class NewFeatures {
 		n.varExample();
 		n.recordExample();
 		n.patternMatchingUsingSwitch(3);
-		n.patternMatchingWithRecords(new PersonDetails(null, "33", "08-Dec"));
-		n.patternMatchingWithRecords(new PersonDetails("Dhj", "33", "08-Dec"));
+		n.patternMatchingWithRecords(new PersonDetails(null, 33, "08-Dec"));
+		n.patternMatchingWithRecords(new PersonDetails("Dhj", 33, "08-Dec"));
 		n.sealedClassUsage();
 		n.patternMatchingOldStyle("Hello");
 		n.patternMatching("New Pattern Matching");
@@ -96,11 +96,11 @@ public class NewFeatures {
 	public String patternMatchingWithRecords(PersonInterface p) {
 		switch (p) {
 		// Here for records we can write parameters and use them
-		case PersonDetails(String name, String age, String Dob) when name == null -> {
+		case PersonDetails(String name, int age, String Dob) when name == null -> {
 			System.out.println("When name is null : " + age);
-			return age;
+			return String.valueOf(age);
 		}
-		case PersonDetails(String name, String age, String Dob) -> {
+		case PersonDetails(String name, int age, String Dob) -> {
 			System.out.println("In Record switch: " + name);
 			return name;
 		}
@@ -149,7 +149,7 @@ public class NewFeatures {
 		System.out.println(u1);
 		EmployeeRecord e = new EmployeeRecord("Jareehd", 33, "Electronics");
 
-		PersonDetails pd = new PersonDetails("Dheeraj", "33", "08-December");
+		PersonDetails pd = new PersonDetails("Dheeraj", 33, "08-December");
 		System.out.println("PersonDetails Job Type: " + pd.getJobType());
 		try {
 			System.out.println(e);

@@ -1,6 +1,6 @@
 package com.main.classes;
 
-public record PersonDetails(String name, String age, String Dob) implements PersonInterface {
+public record PersonDetails(String name, int age, String Dob) implements PersonInterface {
 
 	@Override
 	public String getJobType() {
