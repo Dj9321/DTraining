@@ -148,8 +148,32 @@ public class JavaStreamExamples {
 
 		// 2. Concatenate strings
 		List<String> stringList = Arrays.asList("Java", " ", "Streams", " ", "are", " ", "powerful!");
-		String concatenatedString = stringList.stream().reduce("", (s1, s2) -> s1 + s2);
+		String concatenatedString = stringList.stream().reduce("Hello ! ", (s1, s2) -> s1 + "-" + s2);
 		System.out.println("Concatenated string: " + concatenatedString);
+
+		// 3. Optional without default value
+		// Without First default value, it will give Optional<String>
+		Optional<String> concatenatedString1 = stringList.stream().reduce((s1, s2) -> s1 + "-" + s2);
+		// we can use optional.isPresent() before calling optional.get() > if value
+		// isn't present you will get error: No value present
+
+		// 4. Getting highest value (marks or others) in Person object or Integers
+		var highest = numberList.stream().reduce((h1, h2) -> {
+			if (h1 > h2) {
+				return h1;
+			} else {
+				return h2;
+			}
+		});
+		var highest1 = numberList.stream().reduce((i1, i2) -> i1 > i2 ? i1 : i2);
+		var highest2 = numberList.stream().reduce((Integer::max));
+		var highest3 = numberList.stream().reduce((Integer::sum));
+		// you can simply write .reduce((h1,h2) -> h1>h2 ? h1 : h2;
+		System.out.println("Highest number using reduce is: " + highest.get());
+		System.out.println("Highest number using reduce is: " + highest1.get());
+		System.out.println("Sum of numbers using reduce is: " + highest2.get());
+		System.out.println("Sum of numbers using reduce is: " + highest3.get());
+
 	}
 
 	public void distinctExample() {
