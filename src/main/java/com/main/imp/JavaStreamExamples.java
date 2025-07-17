@@ -30,7 +30,7 @@ public class JavaStreamExamples {
 		examples.flatMapExample();
 		examples.reduceExample();
 		examples.distinctExample();
-		examples.sortedExample();
+		examples.sortedAndCountExample();
 		examples.matchExamples();
 		examples.findExamples();
 		examples.streamCreationExamples(); // Call the new streamCreationExamples method
@@ -166,7 +166,8 @@ public class JavaStreamExamples {
 		System.out.println("Distinct integers: " + distinctIntegers);
 	}
 
-	public void sortedExample() {
+	public void sortedAndCountExample() {
+		System.out.println("================================== Sorted & Count ==================================");
 		// 1. Sort strings alphabetically
 		List<String> unsortedStrings = Arrays.asList("banana", "apple", "cherry", "date", "blueberry");
 		List<String> sortedStringsNatural = unsortedStrings.stream().sorted().collect(Collectors.toList());
@@ -195,7 +196,11 @@ public class JavaStreamExamples {
 		// Sorting based on 3rd character String
 		List<Person> sortedBasedOnIdPersonList = personList.stream().sorted((a, b) -> a.getId().compareTo(b.getId()))
 				.toList();
+		var sortedBasedOnId = personList.stream().sorted(Comparator.comparing(Person::getName)).toList();
+		System.out.println("Same as above but simpler with Comparator.comparing: " + sortedBasedOnId);
 		System.out.println("Sorted Person List Based on Id: " + sortedBasedOnIdPersonList);
+		var count = personList.stream().sorted((a, b) -> a.getId().compareTo(b.getId())).count();
+		System.out.println("Count of personList is: " + count);
 	}
 
 	public void matchExamples() {
