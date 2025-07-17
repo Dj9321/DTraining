@@ -10,6 +10,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 import com.main.classes.PersonDetails;
@@ -22,6 +23,8 @@ public class Java8Features {
 		j.defaultFuncIntPredicate();
 		j.funtionInterface();
 		j.unaryBinaryOperators();
+		j.supplierFunction();
+		j.methodAndConstructorReferences();
 	}
 
 	PersonDetails dheeraj = new PersonDetails("Dheeraj", 33, "08-December");
@@ -167,8 +170,43 @@ public class Java8Features {
 		UnaryOperator<String> u = p -> p.strip();
 		String d = u.apply("    Dheeraj Siramdas ");
 		System.out.println(d);
+		// BinaryOperator has minBy() & maxBy() methods.
 		BinaryOperator<String> bo = (x, y) -> x.concat(y).repeat(5);
 		String de = bo.apply("Siramdas ", "Elite ");
 		System.out.println(de);
+		BinaryOperator<Double> intB = (w, e) -> Math.pow(w, e);
+		System.out.println(intB.apply(2.0, 4.0));
+		BinaryOperator<Integer> s = BinaryOperator.maxBy((s1, s2) -> s1.compareTo(s2));
+		Integer s3 = s.apply(15, 88);
+		System.out.println(s3);
+		PersonDetails pd = new PersonDetails("M", 40, null);
+		if (pd.Dob() == null) {
+			System.out.println("DOB is null ");
+		}
+	}
+
+	/**
+	 * Doesn’t take anything but returns an Object
+	 */
+	public void supplierFunction() {
+		Supplier<List<PersonDetails>> pd = () -> personsList;
+		List<PersonDetails> personListSame = pd.get();
+		personListSame.forEach(c1 -> System.out.print(c1.name()));
+	}
+
+	public void methodAndConstructorReferences() {
+		System.out.println("Method & Constructor References ***Starts***");
+		Consumer<String> c1 = System.out::println;
+		// instead of s -> s.toUpperCase() use below
+		Function<String, String> func = String::toUpperCase;
+		BiFunction<Double, Double, Double> max = Math::pow;
+		Double p1 = max.apply(3d, 5d);
+		c1.accept(p1.toString());
+		c1.accept(func.apply("dheeraj"));
+		// There is no no arg constructor. The Supplier doesn't give any argument
+//		Supplier<PersonDetails> newPerson = PersonDetails::new;
+		// still there is no constructor that takes one argument or 2 arguments as string
+//		BiFunction<String, String, PersonDetails> nPWithArgument = PersonDetails::new;
+		
 	}
 }
