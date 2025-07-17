@@ -25,6 +25,7 @@ public class Java8Features {
 		j.unaryBinaryOperators();
 		j.supplierFunction();
 		j.methodAndConstructorReferences();
+		j.lamdas();
 	}
 
 	PersonDetails dheeraj = new PersonDetails("Dheeraj", 33, "08-December");
@@ -36,6 +37,7 @@ public class Java8Features {
 	Consumer<PersonDetails> c2 = (s) -> System.out.print(s.age() + " ");
 	Consumer<PersonDetails> c3 = (s) -> System.out.println(s.Dob() + " ");
 	Consumer<PersonDetails> c4 = c1.andThen(c2).andThen(c3);
+	Integer fifty = 50;
 
 	public void defaultFuntionalInterfaces() {
 		Runnable r = () -> System.out.println("Thread running with lambda!");
@@ -205,8 +207,26 @@ public class Java8Features {
 		c1.accept(func.apply("dheeraj"));
 		// There is no no arg constructor. The Supplier doesn't give any argument
 //		Supplier<PersonDetails> newPerson = PersonDetails::new;
-		// still there is no constructor that takes one argument or 2 arguments as string
+		// still there is no constructor that takes one argument or 2 arguments as
+		// string
 //		BiFunction<String, String, PersonDetails> nPWithArgument = PersonDetails::new;
-		
+
 	}
+
+	public void lamdas() {
+		int a = 100;
+		Function<Integer, Integer> num = (b) -> {
+//			we can't do a++ or a = 55 > Local variable should be effectively final.
+//			a++; a= 55;
+			fifty++; // this is an instance variable so works fine.
+			if (a == 1000)
+				return b * b;
+			else
+				return b + a + fifty;
+		};
+		Integer c = num.apply(a);
+		System.out.println(c);
+		personsList.forEach((p) -> System.out.println(p));
+	}
+
 }

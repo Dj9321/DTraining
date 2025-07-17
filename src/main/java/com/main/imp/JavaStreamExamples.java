@@ -16,12 +16,13 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import com.main.classes.Person;
+import com.main.classes.PersonFullDetails;
 
 public class JavaStreamExamples {
 
 	public static void main(String[] args) {
 		JavaStreamExamples examples = new JavaStreamExamples();
-		examples.filterExample();
+		examples.filterAndPeekExample();
 		examples.evenNumbers();
 		examples.sortingList();
 		examples.mappingOrExtracting();
@@ -43,16 +44,25 @@ public class JavaStreamExamples {
 			"Kiran");
 	List<Person> personList = Arrays.asList(new Person("Dheeraj ", "1"), new Person("Evanshi ", "2"),
 			new Person("Malathi ", "3"), new Person("Siramdas ", "4"));
+	List<String> addresses = List.of("abc, area, pincode", "def, area, pincode2");
+	PersonFullDetails fullDetails1 = new PersonFullDetails("Dhj", 44, "01-01-2020", addresses);
+	PersonFullDetails fullDetails2 = new PersonFullDetails("SDj", 33, "01-01-1990", addresses);
+	List<PersonFullDetails> personListFull = Arrays.asList(fullDetails1, fullDetails2);
 
-	private void filterExample() {
+	private void filterAndPeekExample() {
+		System.out.println("Filter and Peek Example ***Starts***");
 		Stream<String> stringStream = namesList.parallelStream();
 		// Use toUpperCase to filter both small and capital letters (a or A)
 		stringStream.filter(a -> a.toUpperCase().startsWith("A")).forEach(System.out::println);
 		// same as .forEach(b -> System.out:println(b));
-
+//		we can write peek in between 2 filters (Multiple filters) or debugging what element is going next
+		List<String> names = namesList.stream().peek(a -> System.out.printf("%s ", a))
+				.filter(a -> a.toUpperCase().startsWith("A")).collect(Collectors.toList());
+//		System.out.println(names);
 	}
 
 	private void evenNumbers() {
+		System.out.println("Even Numbers ***Starts***");
 		// Using a Stream to filter even numbers and then double them
 		List<Integer> evenNumber = numbers.stream().filter(n -> n % 2 == 0).collect(Collectors.toList()); // Filter even
 																											// numbers
@@ -81,16 +91,18 @@ public class JavaStreamExamples {
 				.collect(Collectors.toList());
 		System.out.println(incrementNumebrs);
 
-		List<String> upperCaseNames = namesArrayList.stream().map(names -> names.toUpperCase())
-				.collect(Collectors.toList());
+		List<String> upperCaseNames = namesArrayList.stream().peek(System.out::println)
+				.map(names -> names.toUpperCase()).collect(Collectors.toList());
 		System.out.println(upperCaseNames);
-
 		List<String> numberConcatenateToString = numbers.stream().map(n -> "Number: " + n).collect(Collectors.toList()); // Filter
 		// even
 		System.out.println(numberConcatenateToString);
 
 		// Extracting only few fields from an object and pushing it to a list
-		List<String> personNames = personList.stream().map(a -> a.getName() + " " + a.getId()).toList();
+		// Input is person List > output is Name and id only. Transforming object
+		// You can even chain .map() methods
+		List<String> personNames = personList.stream().map(a -> a.getName() + " " + a.getId()).map(String::toUpperCase)
+				.toList();
 		System.out.println(personNames);
 
 		// Change only one field in an object and return the entire object using return
@@ -111,20 +123,27 @@ public class JavaStreamExamples {
 	}
 
 	public void flatMapExample() {
+		System.out.println("===================== Flat Map =====================");
 		List<List<String>> listOfLists = Arrays.asList(Arrays.asList("alpha", "beta", "gamma"),
 				Arrays.asList("delta", "epsilon"), Arrays.asList("zeta", "eta", "theta"));
 
 		List<String> flattenedList = listOfLists.stream().flatMap(Collection::stream) // or .flatMap(list ->
 																						// list.stream())
 				.collect(Collectors.toList());
-
 		System.out.println("Flattened list: " + flattenedList);
+//		We get Stream<List<String>> > only if we flatten all we can collect as List<String>
+		// because it is List we gave List::stream. If it was Set > Set::stream
+		var onlyAdd = personListFull.stream().map(f -> f.addresses()).flatMap(List::stream)
+				.collect(Collectors.toList());
+		System.out.println(onlyAdd);
 	}
 
 	public void reduceExample() {
+		System.out.println("===================== Reduce Example =====================");
 		// 1. Sum of integers
-		List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-		Integer sum = numberList.stream().reduce(0, (a, b) -> a + b);
+		System.out.println("reduce Example ***Starts***");
+		var numberList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+		Integer sum = numberList.stream().peek(System.out::print).reduce(0, (a, b) -> a + b);
 		System.out.println("Sum of integers: " + sum);
 
 		// 2. Concatenate strings
@@ -268,6 +287,7 @@ public class JavaStreamExamples {
 	}
 
 	private void collectingAndGrouping() {
+		System.out.println("Collecting and Grouping ***Starts***");
 		List<String> givenList = Arrays.asList("a", "bb", "ccc", "dd", "a");
 		// Collecting to a LinkedList
 		List<String> result = givenList.stream().collect(Collectors.toCollection(LinkedList::new));
