@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collection; // Required for flatMap
 import java.util.Collections;
 import java.util.Comparator; // Required for sorted
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,10 @@ public class JavaStreamExamples {
 		examples.intStreams();
 		examples.limitAndSkip();
 		examples.collectorUtilityMethods();
+		System.out.println(examples.checkPerformance(examples::sumSequentialStream, 20));
+		System.out.println(examples.checkPerformance(examples::sumParallelStream, 20));
+		System.out.println("Number of Processors on this Laptop are: " + Runtime.getRuntime().availableProcessors());
+		examples.optional();
 	}
 
 	List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
@@ -433,7 +438,7 @@ public class JavaStreamExamples {
 	}
 
 	public void collectorUtilityMethods() {
-		System.out.println("============= Joining & Others ==============");
+		System.out.println("============= Collector Utility methods ==============");
 		// 1. Joining Collector performs string concatenation on elements of stream.
 		// Three overloaded versions.
 		var p = personList.stream().map(a -> a.getName()).collect(Collectors.joining());
@@ -471,6 +476,67 @@ public class JavaStreamExamples {
 		Map<Object, List<Person>> partMap1 = newPersonList.stream()
 				.collect(Collectors.groupingBy(pn -> pn.getName().length() < 6 ? "Not OK" : "OK"));
 		System.out.println(partMap1);
+		// 7. Second level of grouping > can be Map of Map or just Map
+		// Sub dividing issues based on Department
+		var partMap3 = newPersonList.stream().collect(Collectors.groupingBy(Person::getDepartment,
+				Collectors.groupingBy(pn -> pn.getName().length() < 6 ? "Not OK" : "OK")));
+		System.out.println(partMap3);
+		// adds the name length of all names in a department
+		var partMap4 = newPersonList.stream().collect(
+				Collectors.groupingBy(Person::getDepartment, Collectors.summingInt(pn -> pn.getName().length())));
+		System.out.println(partMap4);
+		var partMap5 = newPersonList.stream()
+				.collect(Collectors.groupingBy(Person::getName, Collectors.summingInt(pn -> pn.getName().length())));
+		System.out.println(partMap5);
+
+		// first argument is the Key, 2nd argument: Return type 3rd argument: value
+		var partMap6 = newPersonList.stream()
+				.collect(Collectors.groupingBy(Person::getName, LinkedHashMap::new, Collectors.toSet()));
+		System.out.println(partMap6);
+		// get max length name in each department. Also using collectingAndThen()
+		var partMap7 = newPersonList.stream().collect(Collectors.groupingBy(Person::getDepartment, Collectors
+				.collectingAndThen(Collectors.maxBy(Comparator.comparing(c -> c.getName().length())), Optional::get)));
+		System.out.println(partMap7);
+		// partitioningBy() > gives Map<Boolean, List<>> > gives false as well as true
+		var partMap8 = newPersonList.stream()
+				.collect(Collectors.partitioningBy(c -> c.getName().length() > 6, Collectors.collectingAndThen(
+						Collectors.maxBy(Comparator.comparing(c -> c.getName().length())), Optional::get)));
+		System.out.println(partMap8);
+		// less than 6 Set, greater than 6 Set
+		var partMap9 = newPersonList.stream()
+				.collect(Collectors.partitioningBy(c -> c.getName().length() > 6, Collectors.toSet()));
+		System.out.println(partMap9);
 
 	}
+
+	public long checkPerformance(Supplier<Integer> supplier, int noOfTimes) {
+		long startTime = System.currentTimeMillis();
+		for (int i = 0; i < noOfTimes; i++) {
+			supplier.get();
+		}
+		long endTime = System.currentTimeMillis();
+		return endTime - startTime;
+	}
+
+	public int sumParallelStream() {
+		// .stream().parallel() OR .parallelStream()
+		return IntStream.rangeClosed(1, 100000).parallel().sum();
+	}
+
+	public int sumSequentialStream() {
+		return IntStream.rangeClosed(1, 100000).sum();
+	}
+
+	public void optional() {
+		// 1. Instead of adding multiple null checks > an object can have a list of
+		// another objects > we can't check the object null and then the list of null
+		// inside it
+		Optional<String> opt = Optional.ofNullable(personList.get(0).getDesignation());
+		if (opt.isPresent()) {
+			System.out.println(opt.get());
+		} else {
+			System.out.println("No designation assigned");
+		}
+	}
+
 }
