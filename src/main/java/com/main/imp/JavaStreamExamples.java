@@ -8,11 +8,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional; // Required for reduce, findFirst, findAny
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import com.main.classes.Person;
@@ -36,6 +40,7 @@ public class JavaStreamExamples {
 		examples.streamCreationExamples(); // Call the new streamCreationExamples method
 		examples.collectingAndGrouping();
 		examples.intStreams();
+		examples.limitAndSkip();
 	}
 
 	List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
@@ -158,6 +163,8 @@ public class JavaStreamExamples {
 		// isn't present you will get error: No value present
 
 		// 4. Getting highest value (marks or others) in Person object or Integers
+		// If we give default value, and don't pass anything we get default value as max
+		// value.
 		var highest = numberList.stream().reduce((h1, h2) -> {
 			if (h1 > h2) {
 				return h1;
@@ -228,6 +235,7 @@ public class JavaStreamExamples {
 	}
 
 	public void matchExamples() {
+		System.out.println("============= Match Examples ==============");
 		// 1. anyMatch: Check if any string contains 'a'
 		List<String> stringList = Arrays.asList("apple", "banana", "cherry", "date");
 		boolean anyMatchA = stringList.stream().anyMatch(s -> s.contains("a"));
@@ -258,7 +266,8 @@ public class JavaStreamExamples {
 
 	public void findExamples() {
 		System.out.println("============= Find first ==============");
-		// 1. findFirst: Find the first string starting with 'b'
+		// 1. findFirst: Find the first string starting with 'b'. As soon as it matches
+		// it stops
 		List<String> items = Arrays.asList("apple", "banana", "avocado", "blueberry", "cherry");
 		Optional<String> firstB = items.stream().filter(s -> s.startsWith("b")).findFirst();
 		System.out.println("findFirst Optional: " + firstB.get());
@@ -288,6 +297,7 @@ public class JavaStreamExamples {
 
 	// New method to demonstrate various ways to create streams
 	public void streamCreationExamples() {
+		System.out.println("============= Stream Creation ==============");
 		// 1. Stream from array
 		String[] array = { "one", "two", "three", "four", "five" };
 		List<String> listFromArray = Arrays.stream(array).collect(Collectors.toList());
@@ -298,6 +308,7 @@ public class JavaStreamExamples {
 		System.out.println("Stream.of(): " + listFromOf);
 
 		// 3. Stream.iterate() - first 5 powers of 2
+		// iterate() and generate() can create infinite elements
 		List<Integer> powersOfTwo = Stream.iterate(1, n -> n * 2).limit(10).collect(Collectors.toList());
 		// Integer.MAX_VALUE, which is 2,147,483,647
 		List<Integer> powersOfNumber = Stream.iterate(3, n -> new Double(Math.pow(n, 2)).intValue()).limit(10)
@@ -309,14 +320,22 @@ public class JavaStreamExamples {
 		List<Double> randomNumbers = Stream.generate(Math::random).limit(5).collect(Collectors.toList());
 		List<Integer> randomNumbersOne = Stream.generate(() -> 1 + 3).limit(5).collect(Collectors.toList());
 		AtomicInteger counter = new AtomicInteger(10);
-		Stream.generate(counter::getAndIncrement).limit(5).forEach(System.out::print); // Output: 0 1 2 3 4
+		Stream.generate(counter::getAndIncrement).limit(5).forEach(w -> System.out.print(w + " ")); // Output: 0 1 2 3 4
+		Supplier<Integer> randomNumbersThree = new Random()::nextInt;
+		Function<Integer, Integer> randomNumbersFour = new Random()::nextInt;
 		System.out.println();
 		System.out.println("Stream.generate() (random numbers): " + randomNumbers);
 		System.out.println("Stream.generate() (random numbers): " + randomNumbersOne);
+		System.out.println("Random Integer:  " + randomNumbersThree.get());
+		System.out.println("Random Integer:  " + randomNumbersFour.apply(5));
+		// 5. Generating random numbers in 0 to 5 using random
+		Stream.generate(() -> {
+			return randomNumbersFour.apply(5);
+		}).limit(6).forEach(System.out::println);
 	}
 
 	private void collectingAndGrouping() {
-		System.out.println("Collecting and Grouping ***Starts***");
+		System.out.println("============= Collecting and Grouping ============= ");
 		List<String> givenList = Arrays.asList("a", "bb", "ccc", "dd", "a");
 		// Collecting to a LinkedList
 		List<String> result = givenList.stream().collect(Collectors.toCollection(LinkedList::new));
@@ -349,9 +368,29 @@ public class JavaStreamExamples {
 	}
 
 	public void intStreams() {
+		System.out.println("============= Int Streams ============= ");
 		// rangeClosed includes 0 and 100 as well.
 		int sum = IntStream.rangeClosed(0, 100).parallel().sum();
 		System.out.println(sum);
+		List<Integer> integerList = List.of(1, 2, 3, 4, 5);
+		integerList.stream().reduce(0, (x, y) -> x + y);
+		// here if iIntegerList is List<Integer> then boxing and unboxing will happen.
+		// To avoid that you can use: IntStream.rangeClosed(0, 100)
+// 		rangeClosed already gives stream.
+		IntStream.range(1, 10).forEach(v -> System.out.print(v + ", ")); // Excludes 10
+		LongStream.range(1, 10).forEach(v -> System.out.print(v + ", "));
+//		DoubleStream doesn't have range or rangeClosed but we can use IntStream.range(1, 10).asDoubleStream
+	}
+
+	public void limitAndSkip() {
+		System.out.println("============= Limit & Skip ==============");
+		List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+		// 1. Limits to n numbers / objects
+		var first5 = nums.stream().limit(5).reduce(Integer::sum);
+		// 2. Skips first n numbers or objects
+		var skip5 = nums.stream().skip(5).reduce(Integer::sum);
+		System.out.println(first5);
+		System.out.println("Skip first 5 elements: " + skip5);
 	}
 
 }
