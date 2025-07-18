@@ -14,12 +14,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import com.main.classes.Person;
+import com.main.classes.PersonDetails;
 import com.main.classes.PersonFullDetails;
 
 public class JavaStreamExamples {
@@ -41,6 +41,7 @@ public class JavaStreamExamples {
 		examples.collectingAndGrouping();
 		examples.intStreams();
 		examples.limitAndSkip();
+		examples.collectorUtilityMethods();
 	}
 
 	List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
@@ -49,6 +50,15 @@ public class JavaStreamExamples {
 			"Kiran");
 	List<Person> personList = Arrays.asList(new Person("Dheeraj ", "1"), new Person("Evanshi ", "2"),
 			new Person("Malathi ", "3"), new Person("Siramdas ", "4"));
+
+	Person pn1 = new Person("Dheeraj", "1", "Banking", "Fresher");
+	Person pn2 = new Person("Avinash", "2", "Banking", "Fresher");
+	Person pn3 = new Person("Deepak", "3", "HR", "Senior Consultant");
+	Person pn4 = new Person("Sandeep", "4", "HR", "Fresher");
+	Person pn5 = new Person("Rohit", "5", "Automobile", "Fresher");
+	Person pn6 = new Person("Ravi", "6", "Automobile", "Senior Consultant");
+
+	List<Person> newPersonList = List.of(pn1, pn2, pn3, pn4, pn5, pn6);
 	List<String> addresses = List.of("abc, area, pincode", "def, area, pincode2");
 	PersonFullDetails fullDetails1 = new PersonFullDetails("Dhj", 44, "01-01-2020", addresses);
 	PersonFullDetails fullDetails2 = new PersonFullDetails("SDj", 33, "01-01-1990", addresses);
@@ -380,6 +390,35 @@ public class JavaStreamExamples {
 		IntStream.range(1, 10).forEach(v -> System.out.print(v + ", ")); // Excludes 10
 		LongStream.range(1, 10).forEach(v -> System.out.print(v + ", "));
 //		DoubleStream doesn't have range or rangeClosed but we can use IntStream.range(1, 10).asDoubleStream
+
+		// 2. Max / Min value & getAsInt()
+		var w = IntStream.rangeClosed(1, 100).max();
+		System.out.println(w);
+		var x = IntStream.of(2, 4, 5, 6, 101, 99).max();
+		var y = IntStream.of(2, 4, 5, 6, 101, 99).min();
+		System.out.println(x.isPresent() ? x.getAsInt() : 0);
+		System.out.println(y.isPresent() ? y.getAsInt() : 0);
+
+		// 3. average() & getAsDouble
+		var z = IntStream.of(2, 4, 5, 6, 101, 99).average();
+		System.out.println(z.isPresent() ? z.getAsDouble() : "Can't calculate average");
+
+		// 4. IntStream.rangeClosed(1,100) > gives int primitive.
+//		boxed() > Primitive to Wrapper
+		IntStream.rangeClosed(1, 100).boxed().collect(Collectors.toList());
+		// gives Integer (Wrapper class).
+		// the following doesn't work without boxed()
+//		IntStream.rangeClosed(1,100).collect(Collectors.toList());
+		// unboxing (Wrapper to primitive)
+		int sum1 = integerList.stream().mapToInt(Integer::intValue).sum();
+		System.out.println("Sum is " + sum1);
+
+		// 5. mapToObj() mapToDouble(), mapToLong()
+		var a1 = IntStream.rangeClosed(1, 100).mapToObj(i -> String.valueOf(i)).collect(Collectors.toList());
+		System.out.println(" Converting int to String " + a1);
+		var a2 = IntStream.rangeClosed(1, 100).mapToLong(i -> i).sum();
+		var a3 = IntStream.rangeClosed(1, 100).mapToDouble(i -> i).sum();
+		System.out.println(" Converting int to Long " + a2 + " Double: " + a3);
 	}
 
 	public void limitAndSkip() {
@@ -393,4 +432,45 @@ public class JavaStreamExamples {
 		System.out.println("Skip first 5 elements: " + skip5);
 	}
 
+	public void collectorUtilityMethods() {
+		System.out.println("============= Joining & Others ==============");
+		// 1. Joining Collector performs string concatenation on elements of stream.
+		// Three overloaded versions.
+		var p = personList.stream().map(a -> a.getName()).collect(Collectors.joining());
+		var p1 = personList.stream().map(a -> a.getName()).collect(Collectors.joining(" & "));
+		// delimeter, prefix, suffix
+		var p2 = personList.stream().map(a -> a.getName()).collect(Collectors.joining(" & ", "((( ", ")))"));
+
+		// 2. Counting > Collector returns total number of elements as result.
+		var p3 = personList.stream().map(a -> a.getName()).collect(Collectors.counting());
+		System.out.println(p);
+		System.out.println(p1);
+		System.out.println(p2);
+		System.out.println("Counting result: " + p3);
+
+		// 3. Mapping > Collector applies a transformation first and then collects.
+		var p4 = personList.stream().collect(Collectors.mapping(Person::getId, Collectors.toList()));
+		System.out.println(p4);
+		// 4. maxBy() minBy
+		var p5 = personList.stream().collect(Collectors.maxBy(Comparator.comparing(Person::getId)));
+		var p6 = personList.stream().collect(Collectors.minBy(Comparator.comparing(Person::getId)));
+		System.out.println(p5);
+		System.out.println(p6);
+
+		// 5. summingInt() averagingInt()
+		var p7 = personList.stream().collect(Collectors.summingInt(ps -> Integer.valueOf(ps.getId())));
+		var p8 = personList.stream().collect(Collectors.averagingInt(ps -> Integer.valueOf(ps.getId())));
+		System.out.println(p7);
+		System.out.println(p8);
+
+		// 6. GroupingBy by property or customized
+		Map<String, List<Person>> partMap = newPersonList.stream()
+				.collect(Collectors.groupingBy(Person::getDepartment));
+		System.out.println(partMap);
+		// customized grouping
+		Map<Object, List<Person>> partMap1 = newPersonList.stream()
+				.collect(Collectors.groupingBy(pn -> pn.getName().length() < 6 ? "Not OK" : "OK"));
+		System.out.println(partMap1);
+
+	}
 }
