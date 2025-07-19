@@ -537,6 +537,30 @@ public class JavaStreamExamples {
 		} else {
 			System.out.println("No designation assigned");
 		}
+		// Optional.of() > If you think you will always have value and not null.
+		// Otherwise use ofNullable()
+		// can give empty if we want optional as empty
+		Optional.empty();
+		// orElse orElseGet() > can use for default values and others
+		var opt1 = Optional.ofNullable(personList.get(0).getDesignation()).orElse("NO Designation");
+		System.out.println(opt1);
+		var opt2 = Optional.ofNullable(personList.get(0).getDesignation()).orElseGet(() -> "No designation");
+		System.out.println(opt2);
+		// orElseThrow throws an exception
+//		var opt3 = Optional.ofNullable(personList.get(0).getDesignation())
+//				.orElseThrow(() -> new RuntimeException("No designation"));
+//		System.out.println(opt3);
+		// ifPresent > if it is present it will execute Consumer (Takes but doesn't
+		// return anything)
+		var opt4 = Optional.ofNullable(newPersonList);
+		opt4.ifPresent((s) -> System.out.println(s));
+
+		// 2. Optional can also call filter. This filter is NOT forEach but for the
+		// whole List<Person>
+		// Here we are only printing first one from the list using map
+		opt4.filter(s -> s.size() > 0).map(k -> k.get(0)).ifPresent(System.out::println);
+		// studentOptional.filter(student -> student.getGpa >= 3.5)
+		// .flatMap(Student::getBike).map(Bike::getName);
 	}
 
 }
