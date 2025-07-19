@@ -491,7 +491,7 @@ public class JavaStreamExamples {
 
 		// first argument is the Key, 2nd argument: Return type 3rd argument: value
 		var partMap6 = newPersonList.stream()
-				.collect(Collectors.groupingBy(Person::getName, LinkedHashMap::new, Collectors.toSet()));
+				.collect(Collectors.groupingBy(Person::getDesignation, LinkedHashMap::new, Collectors.toSet()));
 		System.out.println(partMap6);
 		// get max length name in each department. Also using collectingAndThen()
 		var partMap7 = newPersonList.stream().collect(Collectors.groupingBy(Person::getDepartment, Collectors
@@ -510,6 +510,7 @@ public class JavaStreamExamples {
 	}
 
 	public long checkPerformance(Supplier<Integer> supplier, int noOfTimes) {
+		System.out.println("============= Check Performance ==============");
 		long startTime = System.currentTimeMillis();
 		for (int i = 0; i < noOfTimes; i++) {
 			supplier.get();
@@ -528,6 +529,7 @@ public class JavaStreamExamples {
 	}
 
 	public void optional() {
+		System.out.println("============= Optional class ==============");
 		// 1. Instead of adding multiple null checks > an object can have a list of
 		// another objects > we can't check the object null and then the list of null
 		// inside it

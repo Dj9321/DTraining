@@ -1,5 +1,8 @@
 package com.main.imp;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +15,13 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
+import com.main.classes.InterfaceA;
+import com.main.classes.Person;
 import com.main.classes.PersonDetails;
 
-public class Java8Features {
+public class Java8Features implements InterfaceA {
 
 	public static void main(String[] args) {
 		Java8Features j = new Java8Features();
@@ -26,6 +32,14 @@ public class Java8Features {
 		j.supplierFunction();
 		j.methodAndConstructorReferences();
 		j.lamdas();
+		Java8Features.abc();
+		InterfaceA.abc();
+		j.defaultAndComparatorMethods();
+	}
+
+	// similar method abc() in InterfaceA interface
+	static void abc() {
+		System.out.println("in the impelmented method Java8Features ");
 	}
 
 	PersonDetails dheeraj = new PersonDetails("Dheeraj", 33, "08-December");
@@ -38,8 +52,17 @@ public class Java8Features {
 	Consumer<PersonDetails> c3 = (s) -> System.out.println(s.Dob() + " ");
 	Consumer<PersonDetails> c4 = c1.andThen(c2).andThen(c3);
 	Integer fifty = 50;
+	Person pn1 = new Person("Dheeraj", "1", "Banking", "Fresher");
+	Person pn2 = new Person("Avinash", "2", "Banking", "Fresher");
+	Person pn3 = new Person("Deepak", "3", "HR", "Senior Consultant");
+	Person pn4 = new Person("Sandeep", "4", "HR", "Fresher");
+	Person pn5 = new Person("Rohit", "5", "Automobile", "Fresher");
+	Person pn6 = new Person("Ravi", "6", "Automobile", "Senior Consultant");
+
+	List<Person> newPersonList = Arrays.asList(pn1, pn2, pn3, pn4, pn5, pn6);
 
 	public void defaultFuntionalInterfaces() {
+		System.out.println("============= Funtional Interface ==============");
 		Runnable r = () -> System.out.println("Thread running with lambda!");
 		new Thread(r).start();
 
@@ -78,6 +101,7 @@ public class Java8Features {
 	}
 
 	public void defaultFuncIntPredicate() {
+		System.out.println("=============  Predicate Interface ==============");
 		// Predicate
 		System.out.println("Predicate: ***Starts***");
 		Predicate<Integer> p1 = p -> p % 2 == 0;
@@ -118,6 +142,7 @@ public class Java8Features {
 	}
 
 	public void predicateAsArgument(Predicate<PersonDetails> p) {
+		System.out.println("============= Predicate as Argument ==============");
 		personsList.forEach(bp -> {
 			if (p.test(bp)) {
 				c4.accept(bp);
@@ -126,6 +151,7 @@ public class Java8Features {
 	}
 
 	public void funtionInterface() {
+		System.out.println("============= Funtion Interface ==============");
 		// Function - BiFunction, UnaryOperator, BinaryOperator - apply() >
 		// Function<InputType, OutputType>
 		System.out.println("Function Interface: ***Starts***");
@@ -168,6 +194,7 @@ public class Java8Features {
 	}
 
 	public void unaryBinaryOperators() {
+		System.out.println("============= Unary Binary Operators ==============");
 		System.out.println("Unary / Biinary operator ***Starts***");
 		UnaryOperator<String> u = p -> p.strip();
 		String d = u.apply("    Dheeraj Siramdas ");
@@ -191,13 +218,14 @@ public class Java8Features {
 	 * Doesn’t take anything but returns an Object
 	 */
 	public void supplierFunction() {
+		System.out.println("============= Supplier function ==============");
 		Supplier<List<PersonDetails>> pd = () -> personsList;
 		List<PersonDetails> personListSame = pd.get();
 		personListSame.forEach(c1 -> System.out.print(c1.name()));
 	}
 
 	public void methodAndConstructorReferences() {
-		System.out.println("Method & Constructor References ***Starts***");
+		System.out.println("============= Method & Constructor References ==============");
 		Consumer<String> c1 = System.out::println;
 		// instead of s -> s.toUpperCase() use below
 		Function<String, String> func = String::toUpperCase;
@@ -214,6 +242,7 @@ public class Java8Features {
 	}
 
 	public void lamdas() {
+		System.out.println("============= Lambdas ==============");
 		int a = 100;
 		Function<Integer, Integer> num = (b) -> {
 //			we can't do a++ or a = 55 > Local variable should be effectively final.
@@ -227,6 +256,26 @@ public class Java8Features {
 		Integer c = num.apply(a);
 		System.out.println(c);
 		personsList.forEach((p) -> System.out.println(p));
+	}
+
+	public void defaultAndComparatorMethods() {
+		System.out.println("============= Default Methods ==============");
+		List<String> personList = Arrays.asList("Ravi", "Mahesh", "Santosh", "Rakesh", "Srikanth", "Kiran");
+		List<String> personList1 = Arrays.asList("Ravi", "Mahesh", "Santosh", "Rakesh", "Srikanth", "Kiran");
+		// 1. Natural order sorting
+		personList.sort(Comparator.naturalOrder());
+		System.out.println(personList);
+		// 2. reverse order
+		personList.sort(Comparator.reverseOrder());
+		System.out.println(personList);
+		// before java 8 we would have used Collections.sort()
+		Collections.sort(personList1);
+		System.out.println(personList1);
+		// 3. Comparator Chaining > thenComparing() > First sorts based on Designation,
+		// then if both have same designation sorts based on name
+		newPersonList.sort(
+				Comparator.comparing(Person::getDesignation).thenComparing(Comparator.comparing(Person::getName)));
+		System.out.println(newPersonList);
 	}
 
 }
