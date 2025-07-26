@@ -387,6 +387,9 @@ public class JavaStreamExamples {
 		// rangeClosed includes 0 and 100 as well.
 		int sum = IntStream.rangeClosed(0, 100).parallel().sum();
 		System.out.println(sum);
+		// 2. Int Summary Statistics
+		var intStatistics = IntStream.rangeClosed(0, 49).parallel().summaryStatistics();
+		System.out.println(intStatistics);
 		List<Integer> integerList = List.of(1, 2, 3, 4, 5);
 		integerList.stream().reduce(0, (x, y) -> x + y);
 		// here if iIntegerList is List<Integer> then boxing and unboxing will happen.
