@@ -36,6 +36,7 @@ public class Java8Features implements InterfaceA {
 		InterfaceA.abc();
 		j.defaultAndComparatorMethods();
 		j.forEachMethods();
+		j.lambdaExpressions(55);
 	}
 
 	// similar method abc() in InterfaceA interface
@@ -259,6 +260,20 @@ public class Java8Features implements InterfaceA {
 		personsList.forEach((p) -> System.out.println(p));
 	}
 
+	int instanceVariable = 44;
+	
+	public void lambdaExpressions(int parameter) {
+		instanceVariable = 33; // we can change this
+		int localVariable = 10;
+		final int finalVariable = 30;
+//		localVariable = 99; // we can't write this as local variable should be final or effectively final
+		BiFunction<Integer, Integer, Integer> testExpression = (x, y) -> {
+			return x + y + instanceVariable + parameter + localVariable + finalVariable;
+		};
+		Integer d = testExpression.apply(22, 33);
+		System.out.println(d);
+	}
+
 	public void defaultAndComparatorMethods() {
 		System.out.println("============= Default Methods ==============");
 		List<String> personList = Arrays.asList("Ravi", "Mahesh", "Santosh", "Rakesh", "Srikanth", "Kiran");
@@ -292,4 +307,5 @@ public class Java8Features implements InterfaceA {
 		// forEach for HashMap
 		scores.forEach((name, score) -> System.out.println(name + " scored " + score));
 	}
+
 }
