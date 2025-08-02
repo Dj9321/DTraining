@@ -35,6 +35,7 @@ public class Java8Features implements InterfaceA {
 		Java8Features.abc();
 		InterfaceA.abc();
 		j.defaultAndComparatorMethods();
+		j.forEachMethods();
 	}
 
 	// similar method abc() in InterfaceA interface
@@ -278,4 +279,17 @@ public class Java8Features implements InterfaceA {
 		System.out.println(newPersonList);
 	}
 
+	/**
+	 * forEachMethods
+	 */
+	public void forEachMethods() {
+		System.out.println("============= forEach Methods ==============");
+		Map<String, Integer> scores = new HashMap<>();
+		scores.put("Alice", 90);
+		scores.put("Bob", 85);
+		scores.put("Charlie", 95);
+
+		// forEach for HashMap
+		scores.forEach((name, score) -> System.out.println(name + " scored " + score));
+	}
 }
