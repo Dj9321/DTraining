@@ -6,6 +6,23 @@ public class SimplePrograms {
 		SimplePrograms s = new SimplePrograms();
 		String reverse = s.reverseOfString("DHJ");
 		System.out.println(reverse);
+		s.forLoop();
+	}
+
+	public void forLoop() {
+		for (int i = 0; i < 10; i++) {
+			if (i == 8) {
+				// returning without completing the loop. Nothing will run after this.
+//				return;
+			}
+			System.out.println("I value is " + i);
+		}
+
+		// Enhanced for loop
+		int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		for (int a : arr) {
+			System.out.print(a);
+		}
 	}
 
 	public String reverseOfString(final String input) {
