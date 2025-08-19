@@ -1,5 +1,8 @@
 package com.main.imp;
 
+import com.main.classes.Animal;
+import com.main.classes.Dog;
+
 public class SimplePrograms {
 
 	public static void main(String[] args) {
@@ -7,6 +10,7 @@ public class SimplePrograms {
 		String reverse = s.reverseOfString("DHJ");
 		System.out.println(reverse);
 		s.forLoop();
+		s.inheritanceExamples();
 	}
 
 	public void forLoop() {
@@ -21,8 +25,12 @@ public class SimplePrograms {
 		// Enhanced for loop
 		int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 		for (int a : arr) {
-			System.out.print(a);
+			System.out.print(a + " ");
 		}
+		// infinite loop
+//		for (int j = 0; j > -1; j++) {
+//			System.out.println(j);
+//		}
 	}
 
 	public String reverseOfString(final String input) {
@@ -35,6 +43,16 @@ public class SimplePrograms {
 		String remaining = input.substring(1);
 		// recursive descent
 		return reverseOfString(remaining) + firstChar;
+	}
+
+	public void inheritanceExamples() {
+		// if we have same method eat() in Animal & Dog but reference of a is Animal,
+		// then Dog eat() will be called and not Animal
+		Animal a = new Dog();
+		a.eat();
+//		a.super.eat(); // Not allowed
+		Animal an = new Animal();
+		an .eat();
 	}
 
 }
