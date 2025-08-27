@@ -11,6 +11,7 @@ public class SimplePrograms {
 		System.out.println(reverse);
 		s.forLoop();
 		s.inheritanceExamples();
+		s.stringExample();
 	}
 
 	public void forLoop() {
@@ -52,7 +53,14 @@ public class SimplePrograms {
 		a.eat();
 //		a.super.eat(); // Not allowed
 		Animal an = new Animal();
-		an .eat();
+		an.eat();
+	}
+
+	public void stringExample() {
+		System.out.println("============== String Examples ================");
+		String a = "abcdef a";
+		String b = a.replace("a", "z");
+		System.out.println(b);
 	}
 
 }

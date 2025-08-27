@@ -32,6 +32,7 @@ public class NewFeatures {
 		n.getMovies();
 		n.getMoviesAsync();
 		System.out.println("Module name (default): " + NewFeatures.class.getModule());
+		// Virtual threads > Check
 	}
 
 	public void textBlocksExample(String name) {
