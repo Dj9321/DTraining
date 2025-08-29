@@ -1,5 +1,8 @@
 package com.main.imp;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.main.classes.Animal;
 import com.main.classes.Dog;
 
@@ -12,6 +15,7 @@ public class SimplePrograms {
 		s.forLoop();
 		s.inheritanceExamples();
 		s.stringExample();
+		s.printDuplicateCharactersInString("Dheeeraj");
 	}
 
 	public void forLoop() {
@@ -39,7 +43,7 @@ public class SimplePrograms {
 		if (input.length() <= 1) {
 			return input;
 		}
-		// seperating first character and remaining characters
+		// Separating first character and remaining characters
 		char firstChar = input.charAt(0);
 		String remaining = input.substring(1);
 		// recursive descent
@@ -61,6 +65,25 @@ public class SimplePrograms {
 		String a = "abcdef a";
 		String b = a.replace("a", "z");
 		System.out.println(b);
+	}
+
+	public void printDuplicateCharactersInString(String a) {
+		System.out.println("============== Program: Duplicater characters ================");
+		// put characters in Map > key: character, value: Default 1, next time get the
+		// value and increase 1 (count)
+		Map<Character, Integer> charCountMap = new HashMap<>();
+		// Count characters
+		for (char c : a.toCharArray()) {
+			// gets the value and adds 1
+			charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+		}
+
+		// Print characters
+		for (Map.Entry<Character, Integer> entry : charCountMap.entrySet()) {
+			if (entry.getValue() > 1) {
+				System.out.println(entry.getKey() + " : " + entry.getValue());
+			}
+		}
 	}
 
 }
