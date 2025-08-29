@@ -1,7 +1,13 @@
 package com.main.imp;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import com.main.classes.Animal;
 import com.main.classes.Dog;
@@ -16,6 +22,7 @@ public class SimplePrograms {
 		s.inheritanceExamples();
 		s.stringExample();
 		s.printDuplicateCharactersInString("Dheeeraj");
+		s.readAndPrintAFile();
 	}
 
 	public void forLoop() {
@@ -83,6 +90,29 @@ public class SimplePrograms {
 			if (entry.getValue() > 1) {
 				System.out.println(entry.getKey() + " : " + entry.getValue());
 			}
+		}
+	}
+
+	public void readAndPrintAFile() {
+//		File f = new File("abc");
+		// 1. BufferedReader. try with resources: Automatically closes the resources (No
+		// need of reader.close() below)
+		// By default it will check file in the home folder (not where this .java file is there)
+		try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/MovieList.json"))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				System.out.println(line);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// 2. Using Scanner
+		try (Scanner scanner = new Scanner(new File("src/main/resources/MovieList.json"))) {
+			while (scanner.hasNextLine()) {
+				System.out.println(scanner.nextLine());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 
