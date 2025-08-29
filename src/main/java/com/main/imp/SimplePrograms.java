@@ -122,6 +122,8 @@ public class SimplePrograms {
 
 		// 3. Using Java NIO (New Input/Output) Advanced
 		// Path, Paths, Files are from NIO
+		// Files createDirectory(), createLink(), createSymbolicLink(), createFile(),
+		// createTempFile(), copy()
 		Path path = Paths.get("src/main/resources/MovieList.json");
 		try {
 			List<String> lines = Files.readAllLines(path);
