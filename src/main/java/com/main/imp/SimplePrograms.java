@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -97,7 +101,8 @@ public class SimplePrograms {
 //		File f = new File("abc");
 		// 1. BufferedReader. try with resources: Automatically closes the resources (No
 		// need of reader.close() below)
-		// By default it will check file in the home folder (not where this .java file is there)
+		// By default it will check file in the home folder (not where this .java file
+		// is there)
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/MovieList.json"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -112,6 +117,18 @@ public class SimplePrograms {
 				System.out.println(scanner.nextLine());
 			}
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		// 3. Using Java NIO (New Input/Output) Advanced
+		// Path, Paths, Files are from NIO
+		Path path = Paths.get("src/main/resources/MovieList.json");
+		try {
+			List<String> lines = Files.readAllLines(path);
+			for (String line : lines) {
+				System.out.println(line);
+			}
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
