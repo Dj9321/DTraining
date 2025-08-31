@@ -16,9 +16,9 @@ import com.main.records.Movie;
 
 public class MoviesClient {
 
-	HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build();
+	HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(20)).build();
 //	HttpClient clientAsync = HttpClient.newHttpClient();
-
+	// Use jwebserver --directory /home/Dheeraj/git for the following url to run
 	public static final String MOVIES_URL = "http://127.0.0.1:8000/DTraining/src/main/resources/MovieList.json";
 	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule())
 			.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
@@ -48,7 +48,7 @@ public class MoviesClient {
 		try {
 			var response = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
 //			System.out.println("Status Code: " + response.statusCode());
-			// for list you can give TypReference for one single object you can just
+			// for list you can give TypReference. for one single object you can just
 			// directly give Movie.class
 			// Here join is used to wait to get the response.
 			var response1 = response.thenApply(HttpResponse::body).join();

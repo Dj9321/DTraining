@@ -236,6 +236,7 @@ public class NewFeatures {
 	}
 
 	public void getMovies() {
+		System.out.println("================ Get Movies ==================");
 		MoviesClient movieC = new MoviesClient();
 		movieC.getMovies();
 	}

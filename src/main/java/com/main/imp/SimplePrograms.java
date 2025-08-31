@@ -103,6 +103,7 @@ public class SimplePrograms {
 		// need of reader.close() below)
 		// By default it will check file in the home folder (not where this .java file
 		// is there)
+		
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/MovieList.json"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
