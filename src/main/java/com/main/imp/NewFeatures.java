@@ -242,6 +242,7 @@ public class NewFeatures {
 	}
 
 	public void getMoviesAsync() {
+		System.out.println("================ Get Movies Async ==================");
 		MoviesClient movieC = new MoviesClient();
 		movieC.getMoviesAsync();
 	}
