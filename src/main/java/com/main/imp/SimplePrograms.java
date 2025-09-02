@@ -27,6 +27,7 @@ public class SimplePrograms {
 		s.stringExample();
 		s.printDuplicateCharactersInString("Dheeeraj");
 		s.readAndPrintAFile();
+		s.stringFormatting();
 	}
 
 	public void forLoop() {
@@ -134,6 +135,13 @@ public class SimplePrograms {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void stringFormatting() {
+		// 1. String.format %s, %d
+		String formatted = String.format("Name: %s, Age: %d", "Alice", 30);
+		System.out.println(formatted);
+
 	}
 
 }
