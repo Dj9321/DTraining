@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collection; // Required for flatMap
 import java.util.Collections;
 import java.util.Comparator; // Required for sorted
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,6 +48,14 @@ public class JavaStreamExamples {
 		System.out.println(examples.checkPerformance(examples::sumParallelStream, 20));
 		System.out.println("Number of Processors on this Laptop are: " + Runtime.getRuntime().availableProcessors());
 		examples.optional();
+		HashMap<String, Integer> unsortedMap = new HashMap<>();
+		unsortedMap.put("Math", 98);
+		unsortedMap.put("Data Structure", 85);
+		unsortedMap.put("Database", 91);
+		unsortedMap.put("Java", 95);
+		unsortedMap.put("Operating System", 79);
+		unsortedMap.put("Networking", 80);
+		examples.sortHashMapByValue(unsortedMap);
 	}
 
 	List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
@@ -249,6 +258,14 @@ public class JavaStreamExamples {
 		System.out.println("Count of personList is: " + count);
 	}
 
+	public Map<String, Integer> sortHashMapByValue(HashMap<String, Integer> hm) {
+		System.out.println("============= Sorted By HashMap Value ============= ");
+		LinkedHashMap lm = hm.entrySet().stream().sorted(Map.Entry.comparingByValue())
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+		System.out.println(lm);
+		return null;
+	}
+
 	public void matchExamples() {
 		System.out.println("============= Match Examples ==============");
 		// 1. anyMatch: Check if any string contains 'a'
@@ -369,7 +386,7 @@ public class JavaStreamExamples {
 		// (Binary operator). as both are equal we can pick any one.
 		Map<String, Integer> resultMapForDuplicates = givenList.stream()
 				.collect(Collectors.toMap(Function.identity(), String::length, (item, identicalItem) -> item));
-		System.out.println(resultMapForDuplicates);
+		System.out.println("resultMapForDuplicates:  " + resultMapForDuplicates);
 		// collectingAndThen > after collecting converting to unmodifiable list
 		// similarly you can use Collections::unmodifiableSet, unmodifiableMap
 		List<String> resultImmutable = givenList.stream()
