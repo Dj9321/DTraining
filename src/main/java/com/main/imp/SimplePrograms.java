@@ -18,6 +18,10 @@ import java.util.Scanner;
 import com.main.classes.Animal;
 import com.main.classes.Dog;
 
+/**
+ * While writing programs: 1. Understand the output we want. Check how we can
+ * put that output > In a list or List of Lists or Map of lists etc
+ */
 public class SimplePrograms {
 
 	public static void main(String[] args) {
@@ -174,6 +178,7 @@ public class SimplePrograms {
 		return reverseOfString(remaining) + firstChar;
 	}
 
+	// Using Arrays.asList(), Arrays.sort(), map.computeIfAbsent()
 	public void anagramsExample() {
 		System.out.println("============== anagrams Example ================");
 		// Arrays.asList()
@@ -187,14 +192,16 @@ public class SimplePrograms {
 			char[] charArr = word.toCharArray();
 			Arrays.sort(charArr);
 			String sortedWord = new String(charArr);
+			System.out.println(sortedWord);
 
 			// Group words by the sorted sequence
 			anagramMap.computeIfAbsent(sortedWord, k -> new ArrayList<>()).add(word);
+			System.out.println(anagramMap);
 		}
 
 		// Print groups of words that have the same letters
 		for (List<String> group : anagramMap.values()) {
-			if (group.size() > 1) {
+			if (group.size() > 0) {
 				System.out.println(group);
 			}
 		}
