@@ -28,6 +28,13 @@ public class SimplePrograms {
 		s.printDuplicateCharactersInString("Dheeeraj");
 		s.readAndPrintAFile();
 		s.stringFormatting();
+		s.lastValueinAlphabets();
+		s.maxOccurrenceinCharacterArray();
+		s.convertStringToNumber();
+//		s.maxPrefixInStringArray();
+		String[] words = {"flower", "flower", "flow", "flee", "flowers"};
+		String longestPrefix = findLongestCommonPrefix(words, 0, words.length - 1);
+        System.out.println("Longest Common Prefix: " + longestPrefix);
 	}
 
 	public void forLoop() {
@@ -50,7 +57,109 @@ public class SimplePrograms {
 //		}
 	}
 
+	// Get last value or ending value in alphabets. For finding max by ASCII value
+	public void lastValueinAlphabets() {
+		System.out.println("============== lastValueinAlphabets ================");
+		char[] arr = { 'A', 'E', 'I', 'O', 'U' };
+		char max = arr[0];
+		for (char c : arr) {
+			if (c > max) {
+				max = c;
+			}
+		}
+		System.out.println("Maximum character is: " + max);
+	}
+
+	// Get count of max alphabets in array
+	public void maxOccurrenceinCharacterArray() {
+		System.out.println("============== maxOccurrenceinCharacterArray ================");
+		char[] arr = { 'a', 'b', 'c', 'a', 'a', 'b' };
+		int[] freq = new int[256]; // Assuming ASCII input. Covers all ASCII characters
+		for (char c : arr) {
+			freq[c]++;
+			System.out.println(freq[c]);
+		}
+		int maxCount = 0;
+		char maxChar = ' ';
+		for (char c : arr) {
+			if (freq[c] > maxCount) {
+				maxCount = freq[c];
+				maxChar = c;
+			}
+		}
+		System.out.println("Maximum occurring character: " + maxChar + " (Count: " + maxCount + ")");
+	}
+
+	public void convertStringToNumber() {
+		System.out.println("============== convertStringToNumber ================");
+		String raw = "1233983543587325318";
+		int[] num = new int[raw.length()];
+
+		for (int i = 0; i < raw.length(); i++) {
+			// - '0'
+			num[i] = raw.charAt(i) - '0';
+//            num[i] = raw.charAt(i) // save ASCII value
+			System.out.println(num[i]);
+		}
+
+//        for (int i : num) {
+//            System.out.println(i);
+//        }
+	}
+
+	// get max prefix in a set of strings
+	public void maxPrefixInStringArray() {
+		System.out.println("============== maxPrefixInStringArray ================");
+		String[] sArray = { "flower", "flowers", "flower" };
+		int prefixCount = 0;
+		int smallestWordLength = sArray[0].length();
+//		for (int i = 0; i < sArray.length; i++) {
+//			if (sArray[i].length() <= smallestWordLength) {
+//				smallestWordLength = sArray[i].length();
+//			}
+//		}
+//			int counter = sArray[i].length();
+//			String word = sArray[i];
+		// 0 letter with words
+//		for (int k = 0; k < smallestWordLength; k++) {
+//			char f = sArray[k].charAt(k);
+//			for (int j = 0; j < sArray.length;) {
+//				if (sArray[k].charAt(j) == sArray[j].charAt(j)) {
+//					prefixCount++;
+//				}
+//			}
+//
+//		}
+		System.out.println("P: " + prefixCount);
+	}
+
+	public static String findCommonPrefix(String str1, String str2) {
+		StringBuilder result = new StringBuilder();
+		int length1 = str1.length(), length2 = str2.length();
+		for (int i = 0; i < length1 && i < length2; i++) {
+			if (str1.charAt(i) != str2.charAt(i)) {
+				break;
+			}
+			result.append(str1.charAt(i));
+		}
+		return result.toString();
+	}
+
+	public static String findLongestCommonPrefix(String[] strings, int start, int end) {
+		if (start == end) {
+			return strings[start];
+		}
+		if (end > start) {
+			int mid = start + (end - start) / 2;
+			String prefix1 = findLongestCommonPrefix(strings, start, mid);
+			String prefix2 = findLongestCommonPrefix(strings, mid + 1, end);
+			return findCommonPrefix(prefix1, prefix2);
+		}
+		return null;
+	}
+
 	public String reverseOfString(final String input) {
+		System.out.println("============== reverseOfString ================");
 		// recursive termination
 		if (input.length() <= 1) {
 			return input;
@@ -104,7 +213,7 @@ public class SimplePrograms {
 		// need of reader.close() below)
 		// By default it will check file in the home folder (not where this .java file
 		// is there)
-		
+
 		try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/MovieList.json"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -136,7 +245,7 @@ public class SimplePrograms {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void stringFormatting() {
 		// 1. String.format %s, %d
 		String formatted = String.format("Name: %s, Age: %d", "Alice", 30);
