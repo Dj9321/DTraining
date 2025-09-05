@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +34,10 @@ public class SimplePrograms {
 		s.maxOccurrenceinCharacterArray();
 		s.convertStringToNumber();
 //		s.maxPrefixInStringArray();
-		String[] words = {"flower", "flower", "flow", "flee", "flowers"};
+		String[] words = { "flower", "flower", "flow", "flee", "flowers" };
 		String longestPrefix = findLongestCommonPrefix(words, 0, words.length - 1);
-        System.out.println("Longest Common Prefix: " + longestPrefix);
+		System.out.println("Longest Common Prefix: " + longestPrefix);
+		s.anagramsExample();
 	}
 
 	public void forLoop() {
@@ -169,6 +172,32 @@ public class SimplePrograms {
 		String remaining = input.substring(1);
 		// recursive descent
 		return reverseOfString(remaining) + firstChar;
+	}
+
+	public void anagramsExample() {
+		System.out.println("============== anagrams Example ================");
+		// Arrays.asList()
+		List<String> words = Arrays.asList("eat", "tea", "tan", "at", "nat", "bat");
+
+		// Map from sorted word to list of words with those letters
+		Map<String, List<String>> anagramMap = new HashMap<>();
+
+		for (String word : words) {
+			// Convert word to char array, sort it, and convert back to String
+			char[] charArr = word.toCharArray();
+			Arrays.sort(charArr);
+			String sortedWord = new String(charArr);
+
+			// Group words by the sorted sequence
+			anagramMap.computeIfAbsent(sortedWord, k -> new ArrayList<>()).add(word);
+		}
+
+		// Print groups of words that have the same letters
+		for (List<String> group : anagramMap.values()) {
+			if (group.size() > 1) {
+				System.out.println(group);
+			}
+		}
 	}
 
 	public void inheritanceExamples() {
