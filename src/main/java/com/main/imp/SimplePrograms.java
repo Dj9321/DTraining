@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import com.main.classes.Animal;
 import com.main.classes.Dog;
@@ -205,6 +206,17 @@ public class SimplePrograms {
 				System.out.println(group);
 			}
 		}
+
+		// SAME Using Streams:
+		System.out.println("Same using Streams");
+		Map<String, List<String>> grouped = words.stream().collect(Collectors.groupingBy(word -> {
+			char[] chars = word.toCharArray();
+			Arrays.sort(chars);
+			return new String(chars);
+		}));
+
+		// Print only groups with more than one word (anagrams)
+		grouped.values().stream().filter(group -> group.size() > 0).forEach(System.out::println);
 	}
 
 	public void inheritanceExamples() {
