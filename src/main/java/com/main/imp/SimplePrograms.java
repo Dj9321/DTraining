@@ -260,6 +260,7 @@ public class SimplePrograms {
 	}
 
 	public void readAndPrintAFile() {
+		System.out.println("============== Read & Print a file ================");
 //		File f = new File("abc");
 		// 1. BufferedReader. try with resources: Automatically closes the resources (No
 		// need of reader.close() below)
@@ -299,6 +300,7 @@ public class SimplePrograms {
 	}
 
 	public void stringFormatting() {
+		System.out.println("============== String format ================");
 		// 1. String.format %s, %d
 		String formatted = String.format("Name: %s, Age: %d", "Alice", 30);
 		System.out.println(formatted);
@@ -306,6 +308,7 @@ public class SimplePrograms {
 
 	// Uses String > split() StringBuilder > reverse()
 	public void printReverseOfEachWord(String reverse) {
+		System.out.println("============== Reverse of Each Word ================");
 		String str = "Java Programming Language";
 		String[] words = str.split(" ");
 		StringBuilder result = new StringBuilder();
@@ -321,6 +324,7 @@ public class SimplePrograms {
 	}
 
 	public void reverseLettersOfAWord(String word) {
+		System.out.println("============== String reverse letters of word ================");
 		StringBuilder s = new StringBuilder();
 		char[] letterArray = word.toCharArray();
 		for (int i = letterArray.length - 1; i >= 0; i--) {
@@ -330,6 +334,7 @@ public class SimplePrograms {
 	}
 
 	public int tryExample() {
+		System.out.println("============== Try Example ================");
 		try {
 			System.out.println("In Try block");
 			return 1;
