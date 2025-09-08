@@ -16,6 +16,13 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Tag;
+import org.jsoup.select.Elements;
+
 import com.main.classes.Animal;
 import com.main.classes.Dog;
 
@@ -25,7 +32,7 @@ import com.main.classes.Dog;
  */
 public class SimplePrograms {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		SimplePrograms s = new SimplePrograms();
 		String reverse = s.reverseOfString("DHJ");
 		System.out.println(reverse);
@@ -47,6 +54,7 @@ public class SimplePrograms {
 		s.reverseLettersOfAWord("Hello Java Programming Langauge");
 		int d = s.tryExample();
 		System.out.println(d);
+		s.parseHTML();
 	}
 
 	public void forLoop() {
@@ -348,6 +356,51 @@ public class SimplePrograms {
 		}
 		// we need to add return here or in finally even after adding in try
 		return 0;
+	}
+
+	public void parseHTML() {
+		System.out.println("============== HTML Parsing > takes bit time ================");
+
+		Document doc;
+		try {
+			// get call
+			doc = Jsoup.connect("https://example.com").get();
+			doc.select("p").forEach(System.out::println);
+
+			// More precise
+			String blogUrl = "https://spring.io/blog";
+			Connection connection = Jsoup.connect(blogUrl);
+			connection.userAgent("Mozilla");
+			connection.timeout(5000);
+			connection.cookie("cookiename", "val234");
+			connection.cookie("cookiename", "val234");
+			connection.referrer("http://google.com");
+			connection.header("headersecurity", "xyz123");
+			Document docCustomConn = connection.get();
+
+			// Since the connection follows a fluent interface, you can chain these methods
+			// before calling the desired HTTP method:
+			Document docCustomConn1 = Jsoup.connect(blogUrl).userAgent("Mozilla").timeout(5000)
+					.cookie("cookiename", "val234").cookie("anothercookie", "ilovejsoup").referrer("http://google.com")
+					.header("headersecurity", "xyz123").get();
+
+			Elements links = doc.select("a");
+			Element pag = doc.getElementById("pagination_control");
+			Elements desktopOnly = doc.getElementsByClass("desktopOnly");
+//			Element firstArticle = articles.first();
+			Element firstArticle = doc.select("article").first();
+//			Element titleElement= firstArticle.select("h1 a").first();
+			// creating and appending elements
+//			Element link = new Element(Tag.valueOf("a"), "")
+//					  .text("Checkout this amazing website!")
+//					  .attr("href", "http://baeldung.com")
+//					  .attr("target", "_blank");
+//					firstArticle.appendChild(link);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
