@@ -331,10 +331,14 @@ public class SimplePrograms {
 
 	public int tryExample() {
 		try {
+			System.out.println("In Try block");
 			return 1;
 		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
-			System.out.println("In Finally block");
+			System.out.println("In Finally block.. this will run just before returning the value");
+			// if we write return here, it says finally block doesn't run normally. So the
+			// return 1 in try block doesn't work as the value is already returned here.
 //			return 2;
 		}
 		// we need to add return here or in finally even after adding in try
