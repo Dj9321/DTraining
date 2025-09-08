@@ -9,6 +9,7 @@ public class SimpleIntegerJavaPrograms {
 		int[] iA = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 		int[][] b = intPrograms.spiralFill(3, 3, iA);
 		System.out.println(Arrays.deepToString(b));
+		intPrograms.checkI();
 
 	}
 
@@ -34,9 +35,9 @@ public class SimpleIntegerJavaPrograms {
 			// here we are setting the value > first will be 00
 			res[r][c] = arr[idx++];
 			// going to the next element 01, 02, 03 then nc = m(3) > dir is reset
-			int nr = r + dr[dir]; 
+			int nr = r + dr[dir];
 			int nc = c + dc[dir];
-			
+
 			if (nr < 0 || nr == n || nc < 0 || nc == m || res[nr][nc] != -1) {
 				dir = (dir + 1) % 4;
 				nr = r + dr[dir]; // 13, 23, 33
@@ -70,11 +71,28 @@ public class SimpleIntegerJavaPrograms {
 				dir = (dir + 1) % 4;
 				nr = r + dr[dir];
 				nc = c + dc[dir];
+				dir++;
 			}
 			r = nr;
 			c = nc;
 		}
 		return res;
+	}
+
+	// pick one of 4 predefined numbers
+	public void checkI() {
+		int[] dr = { 0, 1, 0, -1 }; // rows: right, down, left, up
+		int[] dc = { 1, 0, -1, 0 }; // cols: right, down, left, up
+		int nr = 0, nc = 0, r = 0, c = 0, dir = 0, i = 0;
+		while (i < 20) {
+			dir = (dir) % 4;
+			nr = r + dr[dir];
+			nc = c + dc[dir];
+			System.out.println("nr: " + nr);
+			System.out.println("nc: " + nc);
+			dir++;
+			i++;
+		}
 	}
 
 }

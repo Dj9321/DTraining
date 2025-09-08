@@ -43,6 +43,8 @@ public class SimplePrograms {
 		String longestPrefix = findLongestCommonPrefix(words, 0, words.length - 1);
 		System.out.println("Longest Common Prefix: " + longestPrefix);
 		s.anagramsExample();
+		s.printReverseOfEachWord("Hello Java Programming Language");
+		s.reverseLettersOfAWord("Hello Java Programming Langauge");
 	}
 
 	public void forLoop() {
@@ -298,7 +300,31 @@ public class SimplePrograms {
 		// 1. String.format %s, %d
 		String formatted = String.format("Name: %s, Age: %d", "Alice", 30);
 		System.out.println(formatted);
+	}
 
+	// Uses String > split() StringBuilder > reverse()
+	public void printReverseOfEachWord(String reverse) {
+		String str = "Java Programming Language";
+		String[] words = str.split(" ");
+		StringBuilder result = new StringBuilder();
+
+		for (String word : words) {
+			StringBuilder reverseWord = new StringBuilder(word);
+			result.append(reverseWord.reverse()).append(" ");
+//			or use reverseLettersOfAWord() and use another for loop
+		}
+
+		// Trim to remove trailing space
+		System.out.println(result.toString().trim());
+	}
+
+	public void reverseLettersOfAWord(String word) {
+		StringBuilder s = new StringBuilder();
+		char[] letterArray = word.toCharArray();
+		for (int i = letterArray.length - 1; i >= 0; i--) {
+			s.append(letterArray[i]);
+		}
+		System.out.println(s);
 	}
 
 }
