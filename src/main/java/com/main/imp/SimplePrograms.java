@@ -45,6 +45,8 @@ public class SimplePrograms {
 		s.anagramsExample();
 		s.printReverseOfEachWord("Hello Java Programming Language");
 		s.reverseLettersOfAWord("Hello Java Programming Langauge");
+		int d = s.tryExample();
+		System.out.println(d);
 	}
 
 	public void forLoop() {
@@ -325,6 +327,18 @@ public class SimplePrograms {
 			s.append(letterArray[i]);
 		}
 		System.out.println(s);
+	}
+
+	public int tryExample() {
+		try {
+			return 1;
+		} catch (Exception e) {
+		} finally {
+			System.out.println("In Finally block");
+//			return 2;
+		}
+		// we need to add return here or in finally even after adding in try
+		return 0;
 	}
 
 }
