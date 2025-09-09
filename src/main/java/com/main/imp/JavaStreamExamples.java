@@ -56,6 +56,8 @@ public class JavaStreamExamples {
 		unsortedMap.put("Operating System", 79);
 		unsortedMap.put("Networking", 80);
 		examples.sortHashMapByValue(unsortedMap);
+		examples.countLetters();
+		examples.countLetters1();
 	}
 
 	List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
@@ -583,6 +585,47 @@ public class JavaStreamExamples {
 		opt4.filter(s -> s.size() > 0).map(k -> k.get(0)).ifPresent(System.out::println);
 		// studentOptional.filter(student -> student.getGpa >= 3.5)
 		// .flatMap(Student::getBike).map(Bike::getName);
+	}
+
+	public void countLetters() {
+		System.out.println("============= Count Letters ==============");
+		String word = "AABBBCCDDD";
+		String[] d = word.split("");
+		System.out.println(d[6]);
+		Map<Character, Long> charCountMap = word.chars().mapToObj(c -> (char) c)
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		// gives 65, 66, for a, b
+		word.chars().mapToObj(c -> (char) c).forEach(System.out::println);
+
+//		Map<char[], Long> charCountMap1 = word.toCharArray().stream()
+//				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+//		char[] charArray = word.toCharArray();
+//		Stream<Character> charStream = IntStream.range(0, charArray.length)
+//			    .mapToObj(i -> charArray[i]);
+//		charStream.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		Map<String, Long> charCountMap1 = Arrays.stream(word.split(""))
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		System.out.println(charCountMap);
+		System.out.println(charCountMap1);
+	}
+
+	public void countLetters1() {
+		StringBuilder s = new StringBuilder();
+		String word = "ABBCCCSSAAAB";
+		// adding space to check the last letter and compare it with space 
+		word = word + " ";
+		int count = 1;
+		char[] wordChars = word.toCharArray();
+		for (int i = 0; i < wordChars.length - 1; i++) {
+			if (wordChars[i] == wordChars[i + 1]) {
+				count++;
+			} else {
+				s.append(wordChars[i] + String.valueOf(count));
+				count = 1;
+			}
+
+		}
+		System.out.println(s);
 	}
 
 }
