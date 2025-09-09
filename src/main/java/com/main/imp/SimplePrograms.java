@@ -360,7 +360,7 @@ public class SimplePrograms {
 
 	public void parseHTML() {
 		System.out.println("============== HTML Parsing > takes bit time ================");
-
+		// 1. Using Jsoup
 		Document doc;
 		try {
 			// get call
@@ -397,6 +397,27 @@ public class SimplePrograms {
 //					  .attr("target", "_blank");
 //					firstArticle.appendChild(link);
 
+			// 2. Using plain Java code ONLY
+			String htmlString = "<html><head><title>Example Title</title></head><body><p>Hello</p></body></html>";
+//			String htmlString = "<title>Example Title</title></head><body><p>Hello</p></body></html>";
+
+			String startTag = "<title>";
+			String endTag = "</title>";
+
+			// adding title length as well. For end not needed.
+			int startIndex = htmlString.indexOf(startTag) + startTag.length();
+			int endIndex = htmlString.indexOf(endTag);
+			System.out.println(startIndex);
+			System.out.println(endIndex);
+
+			// Ensures that there is something after <title> startIndex >= 7
+//			(<title> length = 7)
+			if (startIndex >= startTag.length() && endIndex > startIndex) {
+				String title = htmlString.substring(startIndex, endIndex);
+				System.out.println("Title: " + title);
+			} else {
+				System.out.println("Title tag not found");
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
