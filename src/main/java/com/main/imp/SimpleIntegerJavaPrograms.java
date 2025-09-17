@@ -1,8 +1,15 @@
 package com.main.imp;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SimpleIntegerJavaPrograms {
+	// System.out.println("============== ================");
 
 	public static void main(String[] args) {
 		SimpleIntegerJavaPrograms intPrograms = new SimpleIntegerJavaPrograms();
@@ -10,6 +17,7 @@ public class SimpleIntegerJavaPrograms {
 		int[][] b = intPrograms.spiralFill(3, 3, iA);
 		System.out.println(Arrays.deepToString(b));
 		intPrograms.checkI();
+		intPrograms.printDuplicateIntegers();
 
 	}
 
@@ -93,6 +101,35 @@ public class SimpleIntegerJavaPrograms {
 			dir++;
 			i++;
 		}
+	}
+
+	public void printDuplicateIntegers() {
+		System.out.println("============== Program: Print Duplicate Integers ================");
+
+		// 1. Using Map
+		int[] numbers = { 1, 2, 3, 4, 5, 5, 6 };
+		Map<Integer, Integer> map = new HashMap<>();
+
+		for (int i : numbers) {
+			map.put(i, map.getOrDefault(i, 0) + 1);
+		}
+
+		System.out.println(map);
+
+		// 2. Using Streams > using Set and filter (in stream) but fails for more than 2
+		// duplicates
+		List<Integer> numberList = Arrays.asList(5, 3, 4, 1, 3, 3, 7, 2, 9, 9, 4, 9);
+
+		Set<Integer> numberSet = new HashSet<>();
+		Set<Integer> duplicateNumbersSet = new HashSet<>();
+		// add returns false if element already in set
+		duplicateNumbersSet = numberList.stream().filter(n -> !(numberSet.add(n))).collect(Collectors.toSet());
+//				.forEach(System.out::println); // print duplicates
+		System.out.println("Duplicate numbers: " + duplicateNumbersSet);
+//		for (int j : numberList) {
+//			System.out.println(numberSet1.add(j));
+//		}
+		System.out.println(numberSet);
 	}
 
 }
