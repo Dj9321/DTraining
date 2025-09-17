@@ -359,7 +359,7 @@ public class SimplePrograms {
 	}
 
 	public void parseHTML() {
-		System.out.println("============== HTML Parsing > takes bit time ================");
+		System.out.println("============== HTML Parsing JSoup > takes bit time ================");
 		// 1. Using Jsoup
 		Document doc;
 		try {
