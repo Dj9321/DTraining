@@ -612,7 +612,7 @@ public class JavaStreamExamples {
 	public void countLetters1() {
 		StringBuilder s = new StringBuilder();
 		String word = "ABBCCCSSAAAB";
-		// adding space to check the last letter and compare it with space 
+		// adding space to check the last letter and compare it with space
 		word = word + " ";
 		int count = 1;
 		char[] wordChars = word.toCharArray();
