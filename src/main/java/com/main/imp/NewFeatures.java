@@ -13,10 +13,11 @@ import com.main.classes.PersonInterface;
 import com.main.classes.PersonJob;
 
 public class NewFeatures {
-
+	// System.out.println("============== ================");
 	static Function<String, String> addingDefaultText = g -> "Default text ... here " + g;
 
-	public static void main(String[] args) {
+	// we can write main like this without the public static
+	void main(String[] args) {
 		NewFeatures n = new NewFeatures();
 		n.textBlocksExample("Dheeraj");
 		n.switchExample("S");
@@ -147,7 +148,7 @@ public class NewFeatures {
 		System.out.println(u);
 		User u1 = new User("Dheeraj");
 		System.out.println(u1);
-		EmployeeRecord e = new EmployeeRecord("Jareehd", 33, "Electronics");
+		EmployeeRecord e = new EmployeeRecord("Jareehd", 33, "Electronics", 1000);
 
 		PersonDetails pd = new PersonDetails("Dheeraj", 33, "08-December");
 		System.out.println("PersonDetails Job Type: " + pd.getJobType());
@@ -246,5 +247,7 @@ public class NewFeatures {
 		MoviesClient movieC = new MoviesClient();
 		movieC.getMoviesAsync();
 	}
+
+	// Flexible Constructor Bodies > Check in
 
 }

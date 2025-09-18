@@ -1,6 +1,6 @@
 package com.main.classes;
 
-public record EmployeeRecord(String name, int age, String department) {
+public record EmployeeRecord(String name, int age, String department, int salary) {
 
 	public EmployeeRecord {
 		if (name.isBlank()) {

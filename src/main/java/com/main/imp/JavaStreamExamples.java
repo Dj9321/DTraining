@@ -1,5 +1,6 @@
 package com.main.imp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection; // Required for flatMap
 import java.util.Collections;
@@ -20,12 +21,13 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
+import com.main.classes.EmployeeRecord;
 import com.main.classes.Person;
 import com.main.classes.PersonDetails;
 import com.main.classes.PersonFullDetails;
 
 public class JavaStreamExamples {
-
+	// System.out.println("============== ================");
 	public static void main(String[] args) {
 		JavaStreamExamples examples = new JavaStreamExamples();
 		examples.filterAndPeekExample();
@@ -58,6 +60,7 @@ public class JavaStreamExamples {
 		examples.sortHashMapByValue(unsortedMap);
 		examples.countLetters();
 		examples.countLetters1();
+		examples.employeeDepartmentSalary();
 	}
 
 	List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
@@ -626,6 +629,26 @@ public class JavaStreamExamples {
 
 		}
 		System.out.println(s);
+	}
+
+	public void employeeDepartmentSalary() {
+		System.out.println("============== Employee Department Salary ================");
+		EmployeeRecord e1 = new EmployeeRecord("Jareehd", 33, "Electronics", 9900);
+		EmployeeRecord e2 = new EmployeeRecord("Jareehd", 33, "Electronics", 1000);
+		EmployeeRecord e3 = new EmployeeRecord("Jareehd", 33, "IT", 1000);
+		EmployeeRecord e4 = new EmployeeRecord("Jareehd", 33, "IT", 9000);
+
+		List<EmployeeRecord> empList = new ArrayList<>();
+		empList.add(e1);
+		empList.add(e2);
+		empList.add(e3);
+		empList.add(e4);
+		// collect(Collector), 
+		// collect(supplier, BiConsumer accumulator, BiConsumercombiner)
+		var highestSalaryMap = empList.stream().collect(Collectors.groupingBy(EmployeeRecord::department,
+				Collectors.maxBy(Comparator.comparingInt(EmployeeRecord::salary))));
+		IO.println(highestSalaryMap);
+		IO.println(highestSalaryMap.get("IT"));
 	}
 
 }
