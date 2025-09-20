@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.jsoup.Connection;
@@ -32,6 +33,7 @@ import com.main.classes.Dog;
  */
 public class SimplePrograms {
 
+//	System.out.println("==============  ================");
 	public static void main(String[] args) throws IOException {
 		SimplePrograms s = new SimplePrograms();
 		String reverse = s.reverseOfString("DHJ");
@@ -55,6 +57,7 @@ public class SimplePrograms {
 		int d = s.tryExample();
 		System.out.println(d);
 		s.parseHTML();
+		s.printUUID();
 	}
 
 	public void forLoop() {
@@ -422,6 +425,12 @@ public class SimplePrograms {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void printUUID() {
+		System.out.println("============== Print Random UUID ================");
+		System.out.println(UUID.randomUUID());
+		System.out.println(UUID.randomUUID().toString());
 	}
 
 }
