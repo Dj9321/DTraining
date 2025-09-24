@@ -60,6 +60,7 @@ public class SimplePrograms {
 //		s.parseHTML(); // commenting as this is taking time 
 		s.printUUID();
 		s.decodeToken();
+		s.computeIfAbsentExample();
 	}
 
 	public void forLoop() {
@@ -212,7 +213,9 @@ public class SimplePrograms {
 			String sortedWord = new String(charArr);
 			System.out.println(sortedWord);
 
-			// Group words by the sorted sequence
+			// Group words by the sorted sequence > Computes only if same key is absent.
+			// Here .add() function adds to value Even though the function is not
+			// calculated. (Only first time it is calculated.)
 			anagramMap.computeIfAbsent(sortedWord, k -> new ArrayList<>()).add(word);
 			System.out.println(anagramMap);
 		}
@@ -428,19 +431,35 @@ public class SimplePrograms {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void printUUID() {
 		System.out.println("============== Print Random UUID ================");
 		System.out.println(UUID.randomUUID());
 		System.out.println(UUID.randomUUID().toString());
 	}
-	
+
 	public void decodeToken() {
 		System.out.println("============== Decode Token ================");
 		String token1 = "ZGhqOmRq";
 		int d = token1.indexOf(":");
 		System.out.println(d);
 		System.out.println(Base64.getUrlDecoder().decode(token1.getBytes(StandardCharsets.UTF_8)));
+	}
+
+	public void computeIfAbsentExample() {
+		Map<String, List<String>> anagramMap = new HashMap<>();
+		anagramMap.computeIfAbsent("abc", k -> new ArrayList<>()).add("DD");
+		anagramMap.computeIfAbsent("abc", k -> new ArrayList<>()).add("ghi");
+//		anagramMap.computeIfPresent("abc", new ArrayList<>()).add("hhi");
+		System.out.println(anagramMap);
+
+		Map<String, List<Integer>> stringLength = new HashMap<>();
+//		stringLength.put("John", );
+		stringLength.computeIfAbsent("John", s -> new ArrayList<>()).add(3);
+		stringLength.computeIfAbsent("JohnDeer", s -> new ArrayList<>());
+		stringLength.computeIfAbsent("JohnDeer", s -> new ArrayList<>()).add(2);
+		stringLength.computeIfAbsent("JohnDeer", s -> new ArrayList<>()).add(3);
+		System.out.println(stringLength);
 	}
 
 }
