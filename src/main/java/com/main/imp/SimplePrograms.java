@@ -5,11 +5,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,6 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
 import com.main.classes.Animal;
@@ -56,8 +57,9 @@ public class SimplePrograms {
 		s.reverseLettersOfAWord("Hello Java Programming Langauge");
 		int d = s.tryExample();
 		System.out.println(d);
-		s.parseHTML();
+//		s.parseHTML(); // commenting as this is taking time 
 		s.printUUID();
+		s.decodeToken();
 	}
 
 	public void forLoop() {
@@ -431,6 +433,14 @@ public class SimplePrograms {
 		System.out.println("============== Print Random UUID ================");
 		System.out.println(UUID.randomUUID());
 		System.out.println(UUID.randomUUID().toString());
+	}
+	
+	public void decodeToken() {
+		System.out.println("============== Decode Token ================");
+		String token1 = "ZGhqOmRq";
+		int d = token1.indexOf(":");
+		System.out.println(d);
+		System.out.println(Base64.getUrlDecoder().decode(token1.getBytes(StandardCharsets.UTF_8)));
 	}
 
 }
