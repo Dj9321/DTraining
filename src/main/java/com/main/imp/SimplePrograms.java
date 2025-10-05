@@ -263,7 +263,8 @@ public class SimplePrograms {
 		Map<Character, Integer> charCountMap = new HashMap<>();
 		// Count characters
 		for (char c : a.toCharArray()) {
-			// gets the value and adds 1
+			// gets the value and adds 1 > If we keep same key again it will try to replace
+			// the value. Here we are appending the value.
 			charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
 		}
 
@@ -453,13 +454,45 @@ public class SimplePrograms {
 //		anagramMap.computeIfPresent("abc", new ArrayList<>()).add("hhi");
 		System.out.println(anagramMap);
 
-		Map<String, List<Integer>> stringLength = new HashMap<>();
-//		stringLength.put("John", );
-		stringLength.computeIfAbsent("John", s -> new ArrayList<>()).add(3);
-		stringLength.computeIfAbsent("JohnDeer", s -> new ArrayList<>());
-		stringLength.computeIfAbsent("JohnDeer", s -> new ArrayList<>()).add(2);
-		stringLength.computeIfAbsent("JohnDeer", s -> new ArrayList<>()).add(3);
-		System.out.println(stringLength);
+		// 1. HashMap get() gets the value and if value is List<> then we can call
+		// get().add() > It adds to value directly
+		Map<String, List<Integer>> stringMap = new HashMap<>();
+//		stringMap.put("John", 3);
+		stringMap.computeIfAbsent("John", s -> new ArrayList<>()).add(3);
+		stringMap.get("John").add(4);
+		stringMap.computeIfAbsent("JohnDeer", s -> new ArrayList<>());
+		stringMap.computeIfAbsent("JohnDeer", s -> new ArrayList<>()).add(2);
+		stringMap.computeIfAbsent("JohnDeer", s -> new ArrayList<>()).add(3);
+		System.out.println(stringMap);
+
+		// 2. Compute if value is null
+		// For ArrayList we can have one null key
+		Map<String, List<String>> mapOfStringList = new HashMap<>();
+		List<String> d = new ArrayList<>();
+		d.add("Hello");
+		List<String> e = new ArrayList<>();
+		e.add("EEE");
+		mapOfStringList.put("D", null);
+		mapOfStringList.put("E", null);
+		mapOfStringList.put("F", null);
+		mapOfStringList.put(null, d);
+		// if key is same > it will replace the value
+		mapOfStringList.put(null, e);
+		mapOfStringList.computeIfAbsent("D", s -> new ArrayList<>()).add("Dheeraj");
+		System.out.println(mapOfStringList);
+
+		// 3.
+		Map<String, String> mapOfString = new HashMap<>();
+		mapOfString.put("D", "Dheeraj");
+		mapOfString.put("S", "Siramdas");
+		// here the same doesn't work for String but it did work for List<String>
+		mapOfString.get("S").concat(" Siramdas Dheeraj ");
+		// we can do like this
+		mapOfString.put("S", mapOfString.get("S") + " DJ");
+		mapOfString.put("S", mapOfString.getOrDefault("S", " Siramdas Dheeraj ") + " DJ");
+		// we can do cross things > like adding some other value to this > It replaces
+		mapOfString.put("S", mapOfString.get("D") + " DJ");
+		System.out.println(mapOfString);
 	}
 
 }
