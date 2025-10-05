@@ -61,6 +61,7 @@ public class SimplePrograms {
 		s.printUUID();
 		s.decodeToken();
 		s.computeIfAbsentExample();
+		s.validCapitalLetters();
 	}
 
 	public void forLoop() {
@@ -448,6 +449,7 @@ public class SimplePrograms {
 	}
 
 	public void computeIfAbsentExample() {
+		System.out.println("==============  Computer if Absent ================");
 		Map<String, List<String>> anagramMap = new HashMap<>();
 		anagramMap.computeIfAbsent("abc", k -> new ArrayList<>()).add("DD");
 		anagramMap.computeIfAbsent("abc", k -> new ArrayList<>()).add("ghi");
@@ -495,4 +497,28 @@ public class SimplePrograms {
 		System.out.println(mapOfString);
 	}
 
+	// get valid capital letter count
+	// capital letters are from 65 to 90 & small from 97 to 122
+	public void validCapitalLetters() {
+		System.out.println("============== Valid Capital Letters ================");
+		String str = "abcde BDE cdef CDE";
+		StringBuffer sb = new StringBuffer();
+		char[] cArray = str.toCharArray();
+		int d = cArray[7];
+		int d1 = 'a';
+		int d2 = 'z';
+		int d3 = 'A';
+		int d4 = 'Z';
+		System.out.println(d1);
+		System.out.println(d2);
+		System.out.println(d3);
+		System.out.println(d4);
+
+		for (char e : cArray) {
+			if (e < 90 && e > 65) { // if e < 90 also has space > so use 65 to 90
+				sb.append(e);
+			}
+		}
+		System.out.println(sb);
+	}
 }
