@@ -4,9 +4,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.main.classes.AbstractClassA;
+import com.main.classes.InterfaceA;
 import com.main.classes.TProduct;
 
-public class TrickyJavaCode {
+public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
+	
+	// we can have same variable name as in super class 
+	public double price;
 
 	public static void main(String[] args) {
 		// 1. update by value
@@ -50,6 +55,15 @@ public class TrickyJavaCode {
 		System.out.println("Sum is " + s5);
 		System.out.println("Sum is " + s7);
 		System.out.println("Sum is " + l1);
+	}
+
+	// We can keep protected from default if the calls is in the same package.
+	// default > package level to protected = package + subclasses
+	// If it is in different package then it doesn't work as it is private to a
+	// different package > so only option is to make it either public or protected
+	// to access in another package.
+	public void abstractMethod() {
+
 	}
 
 	public void updatePrice(TProduct product, double price, String e) {
