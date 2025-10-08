@@ -249,6 +249,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			ex.printStackTrace(); // doesn't come here as well.
 		}
 
+		// 25: sysout
 		System.out.println("5 + 3 = " + 5 + 3); // here it prints 53 and not 8 
 		System.out.println("5 + 3 = " + (5 + 3));
 	}
