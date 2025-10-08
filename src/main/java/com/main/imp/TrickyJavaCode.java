@@ -3,8 +3,11 @@ package com.main.imp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.main.classes.AbstractClassA;
+import com.main.classes.Car;
 import com.main.classes.InterfaceA;
 import com.main.classes.TProduct;
 
@@ -31,18 +34,25 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// Unsupported field: HourOfDay
 		// because formatting date and time but we are passing only date > so use
 		// ISO_DATE instead of ISO_DATE_TIME
+		IO.println("*** Local date ***");
 		String date = LocalDate.parse("2014-05-04").format(DateTimeFormatter.ISO_DATE);
 		// if you are using date and time use LocalDateTime and not just LocalDate
 		String date1 = LocalDateTime.parse("2014-05-04T00:00:00").format(DateTimeFormatter.ISO_DATE_TIME);
 		System.out.println(date);
 		System.out.println(date1);
 
+		LocalDate ld1 = LocalDate.now();
+		LocalDate ld2 = LocalDate.of(2014, 06, 20); // yyyy-mm-dd
+		System.out.println(ld1);
+		System.out.println(ld2);
+
 		// 3. short, Short, int, Integer, long, Long
 //		The maximum value of the Java short data type is 32,767
 		Short s1 = 32700; // Object Short
 		short s6 = 32700;
 		Integer s2 = 400;
-		Long s3 = (long) s1 + s2; // line n1 // its deducting 600 here. Same with short or Object Short
+		Long s3 = (long) s1 + s2; // line n1 // its deducting 600 here if more than 32767.
+//		Same with short or Object Short
 //		Integer s5 = (Integer) s1 + s2; // Can't cast from short to Integer. 
 		Integer s5 = (int) s1 + s2; // But we can cast from short to int
 //		String s4 = (String) (s3 * s2); // line n2 // Cannot cast from long to String
@@ -55,6 +65,8 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println("Sum is " + s5);
 		System.out.println("Sum is " + s7);
 		System.out.println("Sum is " + l1);
+		double do1 = 100; // can keep as 100.0 as well
+		System.out.println(do1); // prints as 100.0
 
 		// 4 See Car class in another package. Child class constructor calling parent
 
@@ -62,6 +74,14 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		StringBuffer sb = new StringBuffer("Java");
 		String s = "Java";
+		String sbs = sb.toString();
+		String sbs1 = sbs;
+		if (sbs == sbs1) {
+			System.out.println("String buffer toString and assigning to String");
+		}
+		if (sb.toString() == s) {
+			System.out.println("Doesn't reach here");
+		}
 		if (sb.equals(s)) {
 			System.out.println("StringBuffer matched s");
 		} else if (sb.toString().equals(s)) {
@@ -143,7 +163,98 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// a1 = 100 b1 = 102; c1 = 102; d1 = 100
 		System.out.println("D1: " + d1);
 		System.out.println(x1); // here with ++ x value changes gradually
+
+		// 17: list.remove() removes only first occurrence. Use removeAll() for all
+		IO.println("*** 17 ***");
+		List<String> names = new ArrayList<>();
+		names.add("S");
+		names.add("D");
+		names.add("D"); // D added twice
+		names.add("J");
+		if (names.remove("D")) { // removes first occurrence & not all
+			names.remove("J");
+		}
+		System.out.println(names);
+
+		// 18: if C extends B and B extends A and all constructors have sysout with
+		// letter A or B or C then A B C will be printed in order
+
+		// 19: static variable will be replaced if 2 statements write to it in different
+		// instances
+		c.st1 = 5;
+		TrickyJavaCode tricky1 = new TrickyJavaCode();
+		tricky1.st1 = 6;
+		System.out.println(c.st1); // Prints 6 and not 5 as another instance changed this static instance
+
+		// 20
+		int array[] = new int[5];
+		int array1[] = { 1, 2, 4, 5 }; // just in time array
+
+		System.out.println("Hello " + args[0]); // Run configurations > Pass arguments
+		// with javac abc.java (you have to mention .java) with java abc (no .java)
+
+		// 21: for loop not initializing
+		int i8 = 0, j8 = 7; // we can club same types
+		for (i8 = 0; i8 < j8; i8 = i8 + 2) { // here we are initializing i8 but not declaring type int i8
+			System.out.println(i8 + " ");
+		}
+
+		// 22: qty > 90 discount: 0.5 qut between 80 to 90: discount 0.2
+		double qty = 0;
+		// even though it is > 80 already > 90 condition is crossed so that won't come
+		// > so effectively its 80 to 90
+		TrickyJavaCode.discount = qty >= 90 ? 0.5 : qty > 80 ? 0.2 : 0;
+
+		// 23
+		if ("S".equals("S") ? true : false) {
+			System.out.println("conditional > Tertiary");
+		}
+		// Objects can share behaviors with other objects. > Polymorphism
+
+		String[] planets = { "Mercury", "Venus", "Earth", "Mars" };
+		System.out.println(planets.length); // length is variable here and not method. So no ()
+		System.out.println(planets[1].length()); // this is 2nd String length
+
+		StringBuffer sb2 = new StringBuffer("234-S5678-9101-1121");
+		String x3 = "XXXX-XXXX-XXXX-";
+		System.out.println(x3 + sb2.substring(15, 19));
+		StringBuffer x4 = new StringBuffer(x3);
+		System.out.println(x4.append(sb2, 15, 19)); // String buffer append also has start, end
+
+		// 24: public class MarutiCar extends Car > You can extend Car class in another
+		// package, but if it doesn't have default constructor, then you have to write
+		// argument constructor in MarutiCar Class (again super class argument
+		// constructor should be protected or public and NOT default)
+
+		// We can't call protected variable (or protected method) in superclass if type
+		// of object is
+		// superclass type. It should be subclass type only > See MarutiCar.java
+
+		// An object of one type referenced to super type. The object is still subtype
+		// so that class methods only will be called > see MarutiCar.java for more
+		// Casting doesn't change object itself.
+
+		ArrayList<String> myList = new ArrayList<>();
+		String[] sArray;
+
+		try {
+			// commented below line as it takes lot of time
+//			while (true) { 
+//				myList.add("hello"); // "main" java.lang.OutOfMemoryError: Java heap space > This is Runtime Exception
+//			}
+		} catch (RuntimeException e) {
+			System.out.println("Runtime exception caught"); // It doesn't come here
+			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace(); // doesn't come here as well.
+		}
+
+		System.out.println("5 + 3 = " + 5 + 3); // here it prints 53 and not 8 
+		System.out.println("5 + 3 = " + (5 + 3));
 	}
+
+	static int st1;
+	static double discount = 0;
 
 	public static boolean isAvailable(int x) {
 //		if(x-- > 0) {

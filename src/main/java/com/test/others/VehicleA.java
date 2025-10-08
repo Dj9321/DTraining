@@ -1,6 +1,6 @@
 package com.test.others;
 
-public class Vehicle extends Car {
+public class VehicleA extends Car {
 
 	static class Truck {
 

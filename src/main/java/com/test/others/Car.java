@@ -1,6 +1,6 @@
 package com.test.others;
 
-import com.test.others.Vehicle.Truck;
+import com.test.others.VehicleA.Truck;
 
 public class Car {
 
@@ -14,7 +14,7 @@ public class Car {
 //		Truck v = new Vehicle.Truck();
 //		v.getTruckMileage();
 		Truck.getTyresForTrailerTruck();
-		Truck tr = new Vehicle.Truck();
+		Truck tr = new VehicleA.Truck();
 		tr.getTruckMileage();
 
 	}

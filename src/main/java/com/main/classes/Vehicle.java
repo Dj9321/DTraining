@@ -2,7 +2,7 @@ package com.main.classes;
 
 public class Vehicle {
 	public double price;
-	String type = "4W";
+	protected String type = "4W";
 	int maxSpeed = 200;
 
 	Vehicle(String type, int maxSpeed) {
@@ -11,5 +11,9 @@ public class Vehicle {
 	}
 
 	Vehicle() {
+	}
+
+	public void test() {
+		System.out.println("Vehicle");
 	}
 }
