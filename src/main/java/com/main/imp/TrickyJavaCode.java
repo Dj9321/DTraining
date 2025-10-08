@@ -9,8 +9,8 @@ import com.main.classes.InterfaceA;
 import com.main.classes.TProduct;
 
 public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
-	
-	// we can have same variable name as in super class 
+
+	// we can have same variable name as in super class
 	public double price;
 
 	public static void main(String[] args) {
@@ -55,6 +55,40 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println("Sum is " + s5);
 		System.out.println("Sum is " + s7);
 		System.out.println("Sum is " + l1);
+
+		// 4 See Car class in another package. Child class constructor calling parent
+
+		// 5 StringBuffer and String
+
+		StringBuffer sb = new StringBuffer("Java");
+		String s = "Java";
+		if (sb.equals(s)) {
+			System.out.println("StringBuffer matched s");
+		} else if (sb.toString().equals(s)) {
+			System.out.println("StringBuffer converted to string matched string");
+		}
+
+		// 6: Abstract class need not implement methods in an Interface.
+
+		// 7: concat
+		String ta = "A ";
+		ta = ta.concat("B ");
+		String tb = "C ";
+		ta = ta.concat(tb);
+		ta.replace('C', 'D'); // this line does nothing as ta = is not there (assignment)
+		ta = ta.concat(tb);
+		System.out.println(ta);
+
+		// 8: for loop to skip numbers
+		int in[] = { 1, 2, 3, 4, 5 };
+		for (int k = 0; k < 5; k += 2) { // we can write like this as well k+=2 > increases k by 2
+			System.out.print(in[k]);
+		}
+
+		// 9: import a.* doesn't import a.b.* (b is a subfolder)
+		
+		// 10:
+		
 	}
 
 	// We can keep protected from default if the calls is in the same package.
