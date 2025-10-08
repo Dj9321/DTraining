@@ -86,9 +86,84 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		}
 
 		// 9: import a.* doesn't import a.b.* (b is a subfolder)
-		
+
 		// 10:
-		
+		TProduct t = new TProduct();
+		t.price = 100; // we can also set like this also without calling the setter method.
+		IO.println();
+		System.out.println("Price: " + t.price);
+
+		// 11. 2D array
+		String[][] twoDArray = new String[2][2];
+		twoDArray[0][0] = "red";
+		twoDArray[0][1] = "blue";
+		twoDArray[1][0] = "small";
+		twoDArray[1][1] = "medium";
+
+		for (String[] array1 : twoDArray) { // first x = 0, then x=1
+			for (String str : array1) { // iterates: y=0,1
+				System.out.println(str);
+			}
+			System.out.println("End of a loop");
+		}
+
+		// 12: for Runtime exceptions no try-catch or throws is needed. Only for compile
+		// time it is needed.
+		try {
+			c.abc();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		c.def();
+
+		// 13. x-- in another method doesn't work here
+		int x = 5;
+		while (isAvailable(x)) {
+			System.out.println(x);
+			x--;
+		}
+		// 14. boolean true in switch-case
+		boolean opt = true;
+//		Cannot switch on a value of type boolean. Only convertible int values, strings or enum variables are permitted
+//		switch(opt) {}
+
+		// 15 do-while > do works in the first iteration before it reaches while
+		// condition (if it fails)
+		int num = 5;
+		do {
+			System.out.println(num-- + " ");
+		} while (num == 0);
+
+		// 16: x value increases on ++
+		int x1 = 100;
+		int a1 = x1++;
+		int b1 = ++x1;
+		int c1 = x1++;
+		int d1 = (a1 < b1) ? (a1 < c1) ? a1 : (b1 < c1) ? b1 : c1 : x1;
+		// a1 = 100 b1 = 102; c1 = 102; d1 = 100
+		System.out.println("D1: " + d1);
+		System.out.println(x1); // here with ++ x value changes gradually
+	}
+
+	public static boolean isAvailable(int x) {
+//		if(x-- > 0) {
+//			System.out.println(x);
+//			return true;
+//		} else {
+//			System.out.println(x);
+//			return false;
+//		}
+		// here even though it reduces x after the statement, it is pass by value so x
+		// in the calling method doesn't change.
+		return x-- > 0 ? true : false;
+	}
+
+	void abc() throws Exception {
+		System.out.println("abc method");
+	}
+
+	void def() throws RuntimeException {
+		System.out.println("def method");
 	}
 
 	// We can keep protected from default if the calls is in the same package.
