@@ -4,6 +4,7 @@ public class Vehicle {
 	public double price;
 	protected String type = "4W";
 	int maxSpeed = 200;
+	int y;
 
 	Vehicle(String type, int maxSpeed) {
 		this.type = type;
@@ -11,6 +12,10 @@ public class Vehicle {
 	}
 
 	Vehicle() {
+	}
+
+	Vehicle(int y){
+		this.y = y;
 	}
 
 	public void test() {

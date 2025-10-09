@@ -5,12 +5,26 @@ public class Car extends Vehicle {
 	String transmission;
 	private String engineType;
 	protected String lightsType;
+	int x;
 
 	protected Car(String transmission) {
 		this.transmission = transmission;
 	}
 
 	public Car() {
+		super();
+//		this(10);// Constructor cannot have more than one explicit constructor call
+	}
+
+	@Override
+	public String toString() {
+		return "Price" + price + " Transmission: " + transmission + " Engine type: " + engineType + " Lights Type: "
+				+ lightsType + " X: " + x;
+	}
+
+	public Car(int x) {
+		this.x = x;
+		System.out.println("Car int constrcutor: " + x);
 	}
 
 	Car(String type, int maxSpeed, String transamission) {

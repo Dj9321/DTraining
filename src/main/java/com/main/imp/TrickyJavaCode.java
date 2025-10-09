@@ -17,6 +17,9 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 	public double price;
 
 	public static void main(String[] args) {
+
+		// Mostly from: https://www.examtopics.com/exams/oracle/1z0-808/
+
 		// 1. update by value
 		TrickyJavaCode c = new TrickyJavaCode();
 		TProduct prt = new TProduct();
@@ -249,9 +252,76 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			ex.printStackTrace(); // doesn't come here as well.
 		}
 
-		// 25: sysout
-		System.out.println("5 + 3 = " + 5 + 3); // here it prints 53 and not 8 
+		// 25: sysout String
+		System.out.println("5 + 3 = " + 5 + 3); // here it prints 53 and not 8
 		System.out.println("5 + 3 = " + (5 + 3));
+
+		// 26: for loop
+		String[][] arr = { { "A", "B", "C" }, { "D", "E" } }; // even if you have more elements in 2nd element (sub
+																// array) that prints that as well
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++) {
+				System.out.print(arr[i][j] + " ");
+				if (arr[i][j].equals("B")) {
+					break; // breaks from this inner loop and goes to outer loop > i will be 1 (next)
+				}
+			}
+			continue; // doesn't matter if we keep this or not as it is at the last line
+		}
+
+		// 27: String
+		String str1 = " ";
+		str1 = str1.trim();
+		// for boolean return you can just concatenate with +
+		System.out.println(str1.equals("") + "" + str1.isBlank() + str1.isEmpty());
+
+		String[] str2 = new String[2];
+		int[] kI = new int[2];
+		short[] kS = new short[2];
+		long[] kL = new long[2];
+		double[] kD = new double[2];
+
+		for (int iStr = 0; iStr < str2.length; iStr++) {
+			System.out.println(str2[iStr]); // if we print elements without initializing it just prints null
+			IO.println(kI[iStr]); // where as int prints 0 when not initialized
+			IO.println(kS[iStr]); // prints 0
+			IO.println(kL[iStr]); // prints 0
+			IO.println(kD[iStr]); // prints 0.0
+		}
+
+		// 28: constructor: see Car.java
+
+//		public Car() {
+//			super();
+//			this(10);// Constructor cannot have more than one explicit constructor call
+//		}
+
+		System.out.println(new Car(10)); // it will print toString() if we implemented else it will print Car@hashCode
+		System.out.println(new TrickyJavaCode()); // prints : com.main.imp.TrickyJavaCode@7b23ec81
+
+		// 29: Numbers: putting values in another types
+		int iVar = 100;
+		float fVar = 100.100f;
+		double dVar = 123;
+		fVar = iVar;
+//		iVar = fVar; // Type mismatch: cannot convert from float to int
+//		fVar = dVar;
+		dVar = fVar;
+//		iVar = dVar;
+		dVar = iVar;
+
+		// 30: Overloading main methods don't have any effect when we run the program >
+		// only String[] will be considered > see main(int[] args) and Object[] in this
+		// file
+
+	}
+
+	public static void main(int[] args) {
+		System.out.println("Int main " + args[0]);
+	}
+
+	public static void main(Object[] args) {
+		System.out.println("Object main " + args[0]);
 	}
 
 	static int st1;
