@@ -9,6 +9,7 @@ import java.util.List;
 import com.main.classes.AbstractClassA;
 import com.main.classes.Car;
 import com.main.classes.InterfaceA;
+import com.main.classes.Planet;
 import com.main.classes.TProduct;
 
 public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
@@ -312,8 +313,25 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		// 30: Overloading main methods don't have any effect when we run the program >
 		// only String[] will be considered > see main(int[] args) and Object[] in this
-		// file
+		// file. 
+		// abstract methods don't have {} just ; abstract methodA();
 
+		// 31: arrays are like dimensions: 2D [1][3] means 1 row, 3 columns
+		int[][] numA = new int[1][3]; // 0 1, 0 2, 0 3
+		for (int i = 0; i < numA.length; i++) {
+			for (int j = 0; j < numA[i].length; j++) {
+				numA[i][j] = 10;
+			}
+		}
+		System.out.println(numA[0][1]);
+
+		// 31
+		Planet[] planets1 = { new Planet("Mercury", 0), new Planet("Venus", 0), new Planet("Earth", 1),
+				new Planet("Mars", 2) };
+		System.out.println(planets1);
+		System.out.println(planets1[2].name); // even though it doesn't have setters or getters > we are setting
+												// directly
+		System.out.println(planets1[2].moons);
 	}
 
 	public static void main(int[] args) {
