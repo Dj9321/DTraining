@@ -1,5 +1,6 @@
 package com.main.imp;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -313,7 +314,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		// 30: Overloading main methods don't have any effect when we run the program >
 		// only String[] will be considered > see main(int[] args) and Object[] in this
-		// file. 
+		// file.
 		// abstract methods don't have {} just ; abstract methodA();
 
 		// 31: arrays are like dimensions: 2D [1][3] means 1 row, 3 columns
@@ -332,6 +333,57 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(planets1[2].name); // even though it doesn't have setters or getters > we are setting
 												// directly
 		System.out.println(planets1[2].moons);
+
+		// 32: private is not allowed for local variable. Only final
+		System.out.println(c.doStuff());
+
+		// 33: package declaration should be the first line in the file
+
+		// 34: double comparision with == 0 works
+		c.methodA();
+
+		// 35: byte, short, char, int, enums, and since Java 7, also String and wrapper
+		// classes like Byte, Short, Integer, and Character.
+		float fl = 3;
+		// if we don't keep f in 2.0 > says cannot convert from double to float. double
+		// is default here.
+		float y = 2.0f; // here f is mandatory if we keep .0 or other decimals
+		float fl1 = (float) 2.0; // converts from double to float
+		long ln = 3L;
+		c.methodB();
+	}
+
+	public void main(String fileName) throws IOException {
+	}
+
+	double area;
+
+	void methodA() {
+		double p, b, h;
+		if (area == 0) {
+			System.out.println("Double value comparision == with 0");
+		}
+	}
+
+	void methodB() {
+//		byte x = 1; // works for int 
+//		String x = "1";
+		int x = 1; // works
+//		long x = 1;
+		float y = 2.0f;
+//		Long x = 1L;
+		switch (x) {
+		case 1:
+			System.out.println("Integer");
+			break;
+		default:
+			System.out.println("Nothing");
+		}
+	}
+
+	int doStuff() {
+		int x = 100;
+		return x++;
 	}
 
 	public static void main(int[] args) {
