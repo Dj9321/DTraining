@@ -351,6 +351,41 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		float fl1 = (float) 2.0; // converts from double to float
 		long ln = 3L;
 		c.methodB();
+
+		// 36: Boolean
+		Boolean[] bol = new Boolean[2]; // no need of brackets () here
+//		Boolean bb = new Boolean; // can't write like this without ()
+		bol[0] = Boolean.parseBoolean("true");
+		bol[1] = new Boolean(null); // gives false
+		bol[1] = Boolean.valueOf(null); // gives false
+		System.out.println(bol[0] + " " + bol[1]);
+//		System.out.println(bol[0] + bol[1]); // can't write like this
+		try {
+			System.out.println(Math.random());
+			// method1() catches the exception so it doesn't need to go to catch block here
+			method1();
+		} catch (Exception e) {
+			System.out.println("A");
+		}
+
+		// Polymorphism: More efficient code at runtime and more flexible & reusable
+		// code. NOT: More dynamic code at runtime
+
+	}
+
+	public static void method1() {
+		try {
+			// here throw > throws > doesn't actually calculate Math.random() or a > 2
+			// No exception of type Object can be thrown; an exception type must be a
+			// subclass of Throwable
+//			throw Math.random() > 0.5 ? new TrickyJavaCode() : new RuntimeException();  
+//			throw Math.random() > 0.5 ? new Exception() : new RuntimeException();
+			int a = 0;
+			throw a > 2 ? new Exception() : new RuntimeException();
+
+		} catch (Exception e) {
+			System.out.println("B");
+		}
 	}
 
 	public void main(String fileName) throws IOException {
@@ -369,8 +404,12 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 //		byte x = 1; // works for int 
 //		String x = "1";
 		int x = 1; // works
+		// The constructor Integer(int) is deprecated since version
+		Integer integer = Integer.valueOf(10); // Preferred to ensure better performance and efficient memory
+												// utilization.
+//		Integer x = new Integer(1); // works but new Integer() is deprecated
 //		long x = 1;
-		float y = 2.0f;
+		float y = 1.0f; // switch doesn't work for float
 //		Long x = 1L;
 		switch (x) {
 		case 1:
