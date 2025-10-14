@@ -10,7 +10,7 @@ public class Person {
 		this.department = department;
 	}
 
-	String name;
+	public String name;
 	String id;
 	String department;
 	String designation;

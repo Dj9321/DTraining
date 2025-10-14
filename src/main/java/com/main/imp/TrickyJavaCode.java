@@ -10,6 +10,7 @@ import java.util.List;
 import com.main.classes.AbstractClassA;
 import com.main.classes.Car;
 import com.main.classes.InterfaceA;
+import com.main.classes.Person;
 import com.main.classes.Planet;
 import com.main.classes.TProduct;
 
@@ -401,6 +402,18 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			System.out.println("Invalid calculation");
 		}
 //		System.out.printIn("Answer = " + ans); // ans cannot be resolved to a variable
+
+		// 40:
+		// In a method: if arg = arg; it has no effect as this.arg is not used
+		// Also, arg = this.arg; may be this.arg is already 0 for int so arg will also
+		// be 0. Hence we have to use this.a = a;
+
+		// 41:
+		Person p1 = new Person("D", "DS");
+		Person p2 = p1;
+		p1.name = "S";
+		p2.name = "Sir"; // this will replace above
+		System.out.println(p1.name + " p2: " + p2.name); // both point to same object
 
 	}
 
