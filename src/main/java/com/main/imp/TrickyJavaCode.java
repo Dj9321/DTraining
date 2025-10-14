@@ -358,6 +358,8 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		bol[0] = Boolean.parseBoolean("true");
 		bol[1] = new Boolean(null); // gives false
 		bol[1] = Boolean.valueOf(null); // gives false
+		boolean bol2 = Boolean.valueOf(null); // even valueOf(null) gives false
+		System.out.println("valueOf null " + bol2);
 		System.out.println(bol[0] + " " + bol[1]);
 //		System.out.println(bol[0] + bol[1]); // can't write like this
 		try {
@@ -370,6 +372,35 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		// Polymorphism: More efficient code at runtime and more flexible & reusable
 		// code. NOT: More dynamic code at runtime
+
+		// 37:
+		int[] nums1 = { 1, 2, 3 };
+		int[] nums2 = { 1, 2, 3, 4, 5, 6 };
+		nums2 = nums1; // array will get replaced
+		for (int k1 : nums2) {
+			System.out.println(" X after changing nums: " + k1);
+		}
+
+		// 38:
+		int n[][] = { { 1, 3 }, { 2, 4 } };
+		for (int i = n.length - 1; i >= 0; i--) {
+			for (int ya1 : n[i]) {
+				System.out.println(ya1);
+			}
+		}
+
+		// 39:
+		try {
+			int na1 = 10;
+			int div = 0;
+			int ans = num / div;
+		} catch (ArithmeticException ae) {
+//			ans = 0; // ans cannot be resolved to a variable
+			System.out.println("Number can't be divided by 0");
+		} catch (Exception e) {
+			System.out.println("Invalid calculation");
+		}
+//		System.out.printIn("Answer = " + ans); // ans cannot be resolved to a variable
 
 	}
 
