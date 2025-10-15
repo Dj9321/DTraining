@@ -335,7 +335,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 												// directly
 		System.out.println(planets1[2].moons);
 
-		// 32: private is not allowed for local variable. Only final
+		// 32: private is not allowed for local variable. No Static. Only final
 		System.out.println(c.doStuff());
 
 		// 33: package declaration should be the first line in the file
@@ -352,6 +352,16 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		float fl1 = (float) 2.0; // converts from double to float
 		long ln = 3L;
 		c.methodB();
+
+		float flt = 100.00F; // Ok
+		// You can place underscores between digits in a numeric literal, including for
+		// float, double, int, and long types.
+		float flt1 = (float) 1_11.00; // Ok
+//		Float flt2 = 100.00; // Error - need cast to Float.
+		double y1 = 203.22;
+//		float flt = y1; // Error - need cast to float.
+		int y2 = 100;
+		float flt3 = (float) y2; // Ok
 
 		// 36: Boolean
 		Boolean[] bol = new Boolean[2]; // no need of brackets () here
@@ -463,6 +473,105 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// 47: Constructors
 		// in a class Person you have 1 & 2 arg constructors. You call in 2 arg
 		// constructor as: Person(name) > Wrong as we have to call this(name)
+
+		// 48: static changes from 2 objects
+		TrickyJavaCode c2 = new TrickyJavaCode();
+		c.changeCount();
+		c2.changeCount();
+		System.out.println(c.count + " " + c2.count); // c2.changeCount());
+		// gives 10 10 > as count is static and is increased in 2 objects twice
+
+		ArrayList<Integer> points = new ArrayList<>();
+		points.add(1);
+		points.add(2);
+		points.add(3);
+		points.add(4);
+		points.add(null);
+		points.remove(1); // removes element at position 1
+//		points.remove(null); // removes null 
+		System.out.println(points);
+
+		// 49: Array of Numbers
+
+		int[] numbers1 = new int[2];
+		numbers1[0] = 1;
+		numbers1[1] = 2;
+
+		numbers1 = new int[4]; // here we are initializing again so all will be empty from starting
+		numbers1[2] = 3;
+		numbers1[3] = 4;
+
+		for (int k : numbers1) {
+			System.out.println("Numbers: " + k); // first 2 numbers will be 0
+		}
+
+		// 50:
+		c.printAll();
+
+		// 51:
+		// The parameter in a catch block is of Throwable type.
+		// All subclasses of the RuntimeException class are not recoverable.
+		// Error is extendable & throwable > It is not a RuntimeException or Exception
+
+		String str4 = "Hello World ";
+		str4.trim();
+		System.out.println(str4.length());
+		str4 = str4.trim();
+		System.out.println(str4.length());
+		System.out.println(str4.indexOf(" ")); // gives first index of space
+
+		String a = "hello" + " world!";
+		String b = "hello world!";
+		boolean compare2 = (a == b); // This return true
+		System.out.println(compare2);
+
+		String st1 = "Java";
+		String[] st2 = { "J", "a", "v", "a" };
+		String str3 = "";
+		for (String str : st2) {
+			str3 = str3 + str;
+		}
+		boolean ba1 = (st1.equals(str3));
+		boolean b2 = (st1 == str3); // here comparision fails
+		System.out.println(ba1 + ", " + b2);
+		System.out.println(st1 + " " + str3); // here st1 + str3 works
+
+		String g1 = "Java";
+		String g2 = "" + "Java";
+		if (g1 == g2) {
+			System.out.println("Both equal"); // still equal
+		}
+
+		// 52: Date
+		LocalDateTime dt = LocalDateTime.of(2014, 7, 31, 1, 1);
+		dt = dt.plusDays(30); // you need to reassign else it won't change > dt =
+		dt = dt.plusMonths(1);
+		System.out.print(dt.format(DateTimeFormatter.ISO_DATE));
+
+	}
+
+	char c;
+	boolean b;
+	float f;
+
+	void printAll() {
+//		char c; // if we give here, it says local variable is not initialized
+//		boolean b;
+//		float f;
+		System.out.println("c = " + c); // blank
+		System.out.println("b = " + b); /// false
+		System.out.println("f = " + f); // 0.0
+	}
+
+	private static int count = 0;
+	int i = 0;
+
+	void changeCount() {
+		while (i < 5) {
+			i++;
+			count++;
+		}
+
 	}
 
 	public static void method1() {
