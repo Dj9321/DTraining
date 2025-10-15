@@ -361,6 +361,8 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		bol[1] = Boolean.valueOf(null); // gives false
 		boolean bol2 = Boolean.valueOf(null); // even valueOf(null) gives false
 		System.out.println("valueOf null " + bol2);
+		boolean bol3 = Boolean.valueOf(args[0]); // all other string values are false
+		System.out.println("Value of 1: " + bol3);
 		System.out.println(bol[0] + " " + bol[1]);
 //		System.out.println(bol[0] + bol[1]); // can't write like this
 		try {
@@ -415,6 +417,52 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		p2.name = "Sir"; // this will replace above
 		System.out.println(p1.name + " p2: " + p2.name); // both point to same object
 
+		// 42:
+		int aVar = 9;
+		if (aVar++ < 10) { // works as it will increase after this statement
+			System.out.println(aVar + " Hello Universe!");
+		} else {
+			System.out.println(aVar + " Hello World!");
+		}
+
+		String sa1 = "Java SE 8 1";
+		int len = sa1.trim().length();
+		System.out.println(len);
+
+		// 43:
+		int[][] arr1 = new int[2][4];
+		arr1[0] = new int[] { 1, 3, 5, 7 };
+		arr1[1] = new int[] { 1, 3 };
+		for (int[] a : arr1) {
+			for (int i : a) {
+				System.out.print(i + "");
+			}
+			System.out.println();
+		}
+
+		// 44:
+		StringBuilder sb1 = new StringBuilder();
+		sb1.append("SDJ");
+//		sb.deleteAll(); // no such method
+//		sb.removeAll(); // no such method
+		sb1.delete(0, sb1.length());
+		System.out.println("Sb1 value: " + sb1); // gives blank
+
+		// 45: String and tertiary operators
+		int aa1 = 1;
+		String sas1 = "H";
+		String sas2 = ""; // should initialize this for sysout
+		sas1 = aa1 > 0 ? sas2 = "D" : "E"; // here still sas1 will be D even though we have another statement
+		System.out.println(sas1 + " " + sas2);
+
+		// 46:
+		System.out.println("Result A: " + 1 + 1); // gives 01
+		System.out.println("Result A: " + (1 + 1)); // gives 1 (addition)
+		System.out.println("Result A: " + (0) + (1));
+
+		// 47: Constructors
+		// in a class Person you have 1 & 2 arg constructors. You call in 2 arg
+		// constructor as: Person(name) > Wrong as we have to call this(name)
 	}
 
 	public static void method1() {
@@ -455,13 +503,29 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 //		long x = 1;
 		float y = 1.0f; // switch doesn't work for float
 //		Long x = 1L;
+		//
 		switch (x) {
 		case 1:
 			System.out.println("Integer");
-			break;
-		default:
+			break; // not mandatory > it will continue below code as well
+		default: // not mandatory
 			System.out.println("Nothing");
 		}
+
+		// A switch expression yields a value for each possible selector (input value)
+		// using either arrow cases (case L -> V;) or by using a yield statement if the
+		// case uses a block.
+		String day = "Monday";
+		int result = switch (day) {
+		case "MONDAY" -> {
+			System.out.println("Monday");
+			yield 1; // yield is compulsory here
+		} // no ; is needed here
+		case "TUESDAY" -> 2;
+		default -> 0;
+		};
+		System.out.println("Result: " + result);
+
 	}
 
 	int doStuff() {

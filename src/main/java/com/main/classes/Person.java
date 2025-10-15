@@ -2,6 +2,25 @@ package com.main.classes;
 
 public class Person {
 
+	public String name;
+	String id;
+	String department;
+	String designation;
+
+	public Person(String name, String id) {
+		this.name = name;
+		this.id = id;
+	}
+
+	public Person(String name, String id, String department, String designation) {
+//		this.name = name;
+//		this.id = id;
+		this(name, id); // you can call like this as well
+//		Person(name, id); // CAN'T call like this
+		this.department = department;
+		this.designation = designation;
+	}
+
 	public String getDepartment() {
 		return department;
 	}
@@ -10,28 +29,11 @@ public class Person {
 		this.department = department;
 	}
 
-	public String name;
-	String id;
-	String department;
-	String designation;
-
 	public String getDesignation() {
 		return designation;
 	}
 
 	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
-
-	public Person(String name, String id) {
-		this.name = name;
-		this.id = id;
-	}
-
-	public Person(String name, String id, String department, String designation) {
-		this.name = name;
-		this.id = id;
-		this.department = department;
 		this.designation = designation;
 	}
 
