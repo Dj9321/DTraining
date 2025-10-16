@@ -7,8 +7,8 @@ public class Person {
 	String department;
 	String designation;
 
-	public Person(String name, String id) {
-		this.name = name;
+	public Person(String n, String id) {
+		name = n;
 		this.id = id;
 	}
 

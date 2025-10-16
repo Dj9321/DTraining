@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.main.classes.AbstractClassA;
@@ -13,6 +14,9 @@ import com.main.classes.InterfaceA;
 import com.main.classes.Person;
 import com.main.classes.Planet;
 import com.main.classes.TProduct;
+import com.main.classes.Transport;
+import com.main.classes.Transport2;
+import com.main.classes.Vehicle;
 
 public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
@@ -546,8 +550,110 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		LocalDateTime dt = LocalDateTime.of(2014, 7, 31, 1, 1);
 		dt = dt.plusDays(30); // you need to reassign else it won't change > dt =
 		dt = dt.plusMonths(1);
-		System.out.print(dt.format(DateTimeFormatter.ISO_DATE));
+		System.out.println(dt.format(DateTimeFormatter.ISO_DATE));
 
+		// 53: we keep this. only when the names are same else we don't need it
+//		public Person(String n, String id) {
+//			name = n;
+//		}
+
+		// 54:
+		float var11 = (12345.01 <= 12345.00) ? 12.456f : 124_56.02f; // shows dead code as they are constants and it
+																		// evaluates already
+		double var12 = (0.1 > 0.0) ? 1f : 2f;
+		System.out.println(var12);
+		int cc = (1 > 2) ? 1 : 2;
+		System.out.println(cc);
+		float var22 = var11 + 1024;
+		System.out.println("54: " + var22);
+
+		if (0.1 > 0.0) {
+			System.out.println(" 0.1 > 0.0");
+		}
+
+		// 55: Interfaces
+		Transport tt = new Vehicle(); // even thought we kept of type interface > the new Vehicle will be called as
+										// there is overridden method
+		tt.transport();
+
+		// 56: static imports
+		// with static imports you import till the ClassA.staticMethod() > in code you
+		// directly use staticMethod()
+
+		System.out.println("57: missing break");
+
+		int wd = 0;
+		String days[] = { "sun", "mon", "wed", "sat" };
+		for (String ss1 : days) {
+			switch (ss1) {
+			case "sat":
+			case "sun":
+				wd--;
+				System.out.println(wd + "sun ");
+				break;
+			case "mon":
+				wd++;
+				System.out.println(wd + " mon "); // here there is no break, so ti will continue below
+			case "wed":
+				wd += 2;
+				System.out.println(wd + " wed ");
+			}
+		}
+		System.out.println(wd + "");
+
+		// 58:
+//		LocalDate dated1 = LocalDate.of(2012, 12, 32); // DateTimeException is throw at Runtime and not compile time
+//		System.out.println(dated1);
+
+		System.out.println("59: ");
+		int j = 20;
+		int kk1 = (j += 10) / 5; // evaluates and keeps 30
+		System.out.println(kk1);
+
+		// 60:
+		// abstract class need NOT implement all methods in interface.
+		// Also if same method is there in multiple interfaces and then it is
+		// implemented once it is fine or if it extends a class that implements the
+		// method, then also it is fine
+		// See > public abstract class FourWheeler extends Vehicle implements Transport,
+		// Transport2
+
+		// interfaces extend other interfaces > they DON't implement other interface (s)
+
+		// abstract classes MUST declare methods as abstract if they are abstract else
+		// add body {} for non abstract methods
+
+		List<String> colors = new ArrayList();
+		colors.add("Green");
+		colors.add("Blue");
+		colors.add("Red");
+		colors.add("Yelow");
+		colors.remove(2);
+//		colors.add(4, "Cyan"); // you can't add 4th element with index like this > array size is 3 now
+		colors.add(3, "orange");
+		colors.add(4, "orange"); // here it works adding next element
+		colors.add(5, "orange");
+		System.out.println(colors);
+
+		System.out.println("61: looping array");
+		int[] xa = { 10, 20, 30, 40, 50 };
+		int xaL = xa.length;
+		while (xaL > 0) { // > 0 so it will be 5, 4, 3, 2, 1
+//			xaL--; // this works if we remove --xaL in below line
+			System.out.println(xa[--xaL]);
+//			xaL--; // this doesn't work if we don't keep --xaL above because xa[5] isn't there max is xa[4]
+		}
+
+		System.out.println("62: array removeIf");
+		String[] arn = { "Hi", "How", "Are", "You" };
+		List<String> arrList = new ArrayList<>(Arrays.asList(arn));
+//		arrList.removeIf(sas -> sas.length() <= 2);
+		if (arrList.removeIf((String ssa) -> {
+			return ssa.length() <= 2;
+		})) {
+			System.out.println(arrList); // [How, Are, You]
+			System.out.println(s + "removed"); // s cannot be resolved to a variable
+		}
 	}
 
 	char c;

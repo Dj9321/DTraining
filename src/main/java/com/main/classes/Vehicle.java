@@ -1,6 +1,6 @@
 package com.main.classes;
 
-public class Vehicle {
+public class Vehicle implements Transport {
 	public double price;
 	protected String type = "4W";
 	int maxSpeed = 200;
@@ -11,14 +11,19 @@ public class Vehicle {
 		this.maxSpeed = maxSpeed;
 	}
 
-	Vehicle() {
+	public Vehicle() {
 	}
 
-	Vehicle(int y){
+	Vehicle(int y) {
 		this.y = y;
 	}
 
 	public void test() {
 		System.out.println("Vehicle");
+	}
+
+	@Override
+	public void transport() {
+		System.out.println("Transporting in Vehicle ... ");
 	}
 }
