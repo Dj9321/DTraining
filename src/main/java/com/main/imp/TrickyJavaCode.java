@@ -321,6 +321,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// only String[] will be considered > see main(int[] args) and Object[] in this
 		// file.
 		// abstract methods don't have {} just ; abstract methodA();
+		// abstract classes can have constructors
 
 		// 31: arrays are like dimensions: 2D [1][3] means 1 row, 3 columns
 		int[][] numA = new int[1][3]; // 0 1, 0 2, 0 3
@@ -622,6 +623,11 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		// abstract classes MUST declare methods as abstract if they are abstract else
 		// add body {} for non abstract methods
+		// class can be abstract or final > NOT BOTH
+		// Always think that a Father can be a son but a son cannot be a father.
+		// we cannot reduce the visibility from interface to a class. However public is
+		// allowed from default (as in interface by default it is public)
+		// we can also use super.instanceVariable to print or use for others
 
 		List<String> colors = new ArrayList();
 		colors.add("Green");
@@ -652,10 +658,71 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			return ssa.length() <= 2;
 		})) {
 			System.out.println(arrList); // [How, Are, You]
-			System.out.println(s + "removed"); // s cannot be resolved to a variable
+//			System.out.println(ssa + "removed"); // ssa cannot be resolved to a variable as it is in removeIf predicate
+			// scope
+		}
+
+		System.out.println("63: protected static final can be used in instance variable");
+
+		System.out.println("64: try-catch");
+		c.throwingException(); // no need of throws here as try-catch is already there
+
+		try {
+			c.throwingException1(); // you need try-catch here as the method throws exception (as in method
+									// signature) and doesn't handle it
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("65: int array");
+		int[][] arr2 = new int[2][4];
+//		arr2[0]={1,2,3}; // can't write like this > Array constants can only be used in initializers
+		arr2[0] = new int[] { 1, 2, 3 };
+		arr2[1] = new int[] { 4, 5, 6 };
+//		arr2[2] = new int[] { 4, 5, 6 }; // Index 2 out of bounds for length 2
+		for (int[] aa2 : arr2) {
+			for (int ii1 = 0; ii1 < arr2.length; ii1++) { // here used arr2 instead of aa2 (TRICK)
+				System.out.println(aa2[ii1]);
+			}
+			System.out.println();
+		}
+
+		int[][] arr3 = { { 1, 2 }, { 3, 4 } };
+		for (int ai = arr3.length - 1; ai >= 0; ai--) {
+			for (int aj = arr3[ai].length - 1; aj >= 0; aj--) { // here length - 1 is important. Even in above line as
+																// well
+				System.out.println(arr3[ai][aj]);
+			}
+		}
+
+		System.out.println("66: String array");
+		String[] arr4 = { "Hi", "How", "Are", "You" };
+		List<String> arrList1 = new ArrayList<>(Arrays.asList(arr4));
+		if (arrList1.removeIf(ss1 -> {
+			System.out.print(ss1);
+			// if none satisfy this condition, then removeIf() finally gives false. Even if
+			// one satisfies it gives true > true if any elements were removed
+			return ss1.length() <= 2; // this true is only for removing elements. First all elements go to this.
+		})) {
+			System.out.println(" removed");
+		}
+
+	}
+
+	public void throwingException() {
+		try {
+			System.out.println("try code");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
+	public void throwingException1() throws IOException {
+		System.out.println("try code");
+		throw new IOException();
+	}
+
+	protected static final int ii1 = 10;
 	char c;
 	boolean b;
 	float f;
