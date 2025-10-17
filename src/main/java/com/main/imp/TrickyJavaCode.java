@@ -628,6 +628,8 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// we cannot reduce the visibility from interface to a class. However public is
 		// allowed from default (as in interface by default it is public)
 		// we can also use super.instanceVariable to print or use for others
+		// if you create a class > its constructor calls super() > its extended class
+		// constructor
 
 		List<String> colors = new ArrayList();
 		colors.add("Green");
@@ -707,6 +709,89 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			System.out.println(" removed");
 		}
 
+		System.out.println("67: try-catch");
+		try {
+			throw 3 < 10 ? new IOException() : new Exception();
+		} catch (IOException e) {
+			System.out.println("IOException ");
+		} catch (Exception e) { // you have to write this catch also as we wrote new Exception above
+			e.printStackTrace();
+		}
+
+		System.out.println("68: Character default value is null; char default value is blank");
+
+		System.out.println("69: String Array");
+		String[][] chs = new String[5][2]; // length is always first one > like row > {} in main {}
+		chs[0] = new String[2];
+		chs[1] = new String[2];
+		int i = 97;
+		System.out.println(chs.length);
+		for (int aa2 = 0; aa2 < chs.length; aa2++) {
+			for (int bb = 0; bb < chs[aa2].length; bb++) {
+				chs[aa2][bb] = "" + i;
+				i++;
+			}
+		}
+		for (String[] ca : chs) {
+			for (String c3 : ca) {
+				System.out.print(c3 + " ");
+			}
+			System.out.println();
+		}
+
+		System.out.println("70: LocalDateTime");
+		LocalDateTime dt1 = LocalDateTime.of(2014, 7, 31, 1, 1, 2); // even if we don't keep 2 (seconds it works)
+		System.out.println(dt1);
+
+		System.out.println("71: Float & Double");
+		c.doSum(3, 4); // by default it takes int > goes to float for next closest thing
+		c.doSum(3.0, 4.0); // by default it is double
+
+		System.out.println("71: Hello : " + new Person("D", "J").name); // we can directly call instance variable like
+																		// this
+		System.out.println("72: x++ inside while");
+		int xb = 0;
+		do {
+			System.out.print("*"); // prints 4 stars because xb++ increases in the next iteration
+		} while (xb++ < 3);
+
+		System.out.print("73: bitwise |");
+		int xc = 10;
+		int yb = ++xc; // 11
+		int z = 0;
+		System.out.println(xc); // the value of xc changes even though it is not assigned back to xc > because
+								// of ++xc
+		if (yb >= 10 | yb <= ++xc) { // evaluates both
+			z = xc;
+		} else {
+			z = xc++;
+		}
+		System.out.println(z);
+
+		System.out.println("73: Order (Multiplication, Division, additiona) of numbes");
+		// Parentheses: () are always evaluated first and can be used to override the
+		// default order.
+		// Multiplication, Division, Modulus: ∗,/ are next, evaluated from left to
+		// right.
+		// Addition and Subtraction: +,−+,− are lower, also evaluated from left to right
+		// if appearing together.
+		int ac = 3;
+		int bc = 2;
+		int cc1 = 1;
+		int r1 = ac * bc / cc1 + 1; // 3 * 2/1 + 1 = 6+1 = 7
+		int r2 = ac / bc * cc1 + 1; // 3/2 * 1 + 1 = 1.5*1 + 1 = 1 + 1 = 2 >(1.5 gives 1 in int)
+		int r3 = ac * (bc / (cc1 + 1)); // 3 * (2/2) = 3 *1 = 3
+		System.out.println(r1 + ":" + r2 + ":" + r3);
+
+		System.out.println(3 / 2); // Gives 1 & NOT 1.5
+	}
+
+	public void doSum(float a, float b) {
+		System.out.println("Float sum is : " + (a + b));
+	}
+
+	public void doSum(double a, double b) {
+		System.out.println("Double sum is : " + (a + b));
 	}
 
 	public void throwingException() {
@@ -722,7 +807,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		throw new IOException();
 	}
 
-	protected static final int ii1 = 10;
+	protected static final int ii1 = 10; // can have final static variable
 	char c;
 	boolean b;
 	float f;
