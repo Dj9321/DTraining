@@ -15,7 +15,6 @@ import com.main.classes.Person;
 import com.main.classes.Planet;
 import com.main.classes.TProduct;
 import com.main.classes.Transport;
-import com.main.classes.Transport2;
 import com.main.classes.Vehicle;
 
 public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
@@ -784,6 +783,8 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(r1 + ":" + r2 + ":" + r3);
 
 		System.out.println(3 / 2); // Gives 1 & NOT 1.5
+
+		System.out.println("74:");
 	}
 
 	public void doSum(float a, float b) {
