@@ -49,8 +49,10 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		String date = LocalDate.parse("2014-05-04").format(DateTimeFormatter.ISO_DATE);
 		// if you are using date and time use LocalDateTime and not just LocalDate
 		String date1 = LocalDateTime.parse("2014-05-04T00:00:00").format(DateTimeFormatter.ISO_DATE_TIME);
+		LocalDate date3 = LocalDate.now();
 		System.out.println(date);
 		System.out.println(date1);
+		System.out.println(date3);
 
 		LocalDate ld1 = LocalDate.now();
 		LocalDate ld2 = LocalDate.of(2014, 06, 20); // yyyy-mm-dd
@@ -899,7 +901,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 	public void doStuff(String str) {
 		int myNum = 0;
 		try {
-			String myStr = str; // this can't be accessed outside try 
+			String myStr = str; // this can't be accessed outside try
 			myNum = Integer.parseInt(myStr);
 		} catch (NumberFormatException n) {
 //			System.out.println(myStr); // NOT even here
