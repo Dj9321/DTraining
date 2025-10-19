@@ -784,11 +784,84 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		System.out.println(3 / 2); // Gives 1 & NOT 1.5
 
-		System.out.println("74:");
+		System.out.println("74: Static instance variables also get default values: " + ss);
+//		int arrayl] = new int[3] {1, 2, 3}; // You can't put like this > initialize and then set size (Both > WRONG)
+//		int array[3] = new int[] {1, 2, 3}; // left side you CAN'T Keep size
+		int array4[] = new int[] { 1, 2, 3 }; // this is fine
+		System.out.println(array4); // prints object > if we want values we need to iterate
+
+		System.out.println("74: Local variable can't be accessed outside");
+		int sum = 0;
+		for (int xa1 = 1; xa1 <= 5; xa1++) {
+			sum = sum + xa1;
+		}
+//		System.out.println("The sum of " + xa1 + " numbers is: " + sum); // here xa1 can't be accessed outside the for loop
+
+		List<String> arrayList = new ArrayList<>();
+		arrayList.add("Tech");
+		arrayList.add("Expert");
+		arrayList.set(0, "Java");
+		System.out.println(arrayList);
+		arrayList.forEach(aa3 -> aa3.concat("Forum")); // this line has not impact as we are not collecting
+		System.out.println(arrayList);
+		arrayList.replaceAll(sa3 -> sa3.concat("Group")); // this works > Replaces each element
+		System.out.println(arrayList);
+
+		System.out.println("75: Boolean");
+		Boolean ba = true; // this works > directly initializing
+		Boolean ba2 = Boolean.valueOf("True"); // WORKS
+		System.out.println(ba2);
+//		Boolean ba3 = "true"; // DOESN"T WORK > cannot convert from String to Boolean
+
+		System.out.println(
+				"76: Methods no need to be static in order to use static variables. However, static methods cannot use instance variables.");
+		System.out.println("77: subclass having same method as super class");
+		c.displayOnTv(10);
+//		super.displayonTv(); // Cannot use super in a static context
+		// You can call super.displayOnTv() for super class method
+
+		System.out.println("78: class A extends B implements I");
+		// A a = new A(); B b = new B(); a instanceof B > true a instance of I > True
+		InterfaceA ia = new TrickyJavaCode();
+		boolean bl1 = ia instanceof InterfaceA;
+		boolean bl2 = c instanceof InterfaceA;
+		System.out.println(bl1 + " " + bl2);
+
+		System.out.println("79: Overriding in a constructor: ");
+		System.out.println(c.greet);
+		
+		System.out.println("80: equals");
+		c.greet = "Hello";
+		System.out.println(c.equals("Hello")); // false 
+		System.out.println("Hello".equals(c.greet)); // 
+
 	}
+
+	public boolean equals(TrickyJavaCode tc) {
+		return this.greet.equals(tc.greet);
+	}
+
+	String greet = "instance varaible";
+
+	TrickyJavaCode() {
+		String greet = "Inside constructor"; // here it is a local variable
+	}
+
+	public void displayOnTv(int x) {
+		super.displayOnTv();
+		displayOnTv(); // calls child class method as it is overridden
+		this.displayOnTv(); // calls child class method as it is overridden
+	}
+
+	public void displayOnTv() {
+		System.out.println("Displaying on TV in Subclass");
+	}
+
+	static int ss;
 
 	public void doSum(float a, float b) {
 		System.out.println("Float sum is : " + (a + b));
+		System.out.println(++ss); // we can access static variable in a non static method
 	}
 
 	public void doSum(double a, double b) {
@@ -879,6 +952,22 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		default: // not mandatory
 			System.out.println("Nothing");
 		}
+
+		char colorCode = 'y';
+		switch (colorCode) {
+		case 'y':
+			int color = 10; // we can declare new variable int here as well but scope will be inside switch
+							// only
+			System.out.println(color);
+			break;
+		case 'z':
+			color = 11; // we can use color in the same scope of swith here as well
+			break;
+		case 'x':
+			color = 12;
+			break;
+		}
+//		System.out.println(color); // color cannot be resolved to a variable
 
 		// A switch expression yields a value for each possible selector (input value)
 		// using either arrow cases (case L -> V;) or by using a yield statement if the
