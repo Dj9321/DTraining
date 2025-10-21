@@ -27,7 +27,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// Mostly from: https://www.examtopics.com/exams/oracle/1z0-808/
 
 		// 1. update by value
-		System.out.println("1: ");
+		System.out.println("\n 1: ");
 		TrickyJavaCode c = new TrickyJavaCode();
 		TProduct prt = new TProduct();
 		prt.price = 200;
@@ -44,8 +44,8 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// Unsupported field: HourOfDay
 		// because formatting date and time but we are passing only date > so use
 		// ISO_DATE instead of ISO_DATE_TIME
-		System.out.println("2: ");
-		IO.println("*** Local date ***");
+		System.out.println("\n 2: ");
+		IO.println("\n *** Local date ***");
 		String date = LocalDate.parse("2014-05-04").format(DateTimeFormatter.ISO_DATE);
 		// if you are using date and time use LocalDateTime and not just LocalDate
 		String date1 = LocalDateTime.parse("2014-05-04T00:00:00").format(DateTimeFormatter.ISO_DATE_TIME);
@@ -60,7 +60,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(ld2);
 
 		// 3. short, Short, int, Integer, long, Long
-		System.out.println("3: ");
+		System.out.println("\n 3: ");
 //		The maximum value of the Java short data type is 32,767
 		Short s1 = 32700; // Object Short
 		short s6 = 32700;
@@ -75,37 +75,37 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		Long l1 = (s3 * s2); // Integer * Long works
 //		Integer i1 = (s3 * s2); // Cannot convert from long to Integer (C: Compilation issue)
 //		Double d1 = (s3* s2); // Cannot convert from long to Double (C: Compilation issue)
-		System.out.println("Sum is " + s3);
-		System.out.println("Sum is " + s5);
-		System.out.println("Sum is " + s7);
-		System.out.println("Sum is " + l1);
+		System.out.println("\n Sum is " + s3);
+		System.out.println("\n Sum is " + s5);
+		System.out.println("\n Sum is " + s7);
+		System.out.println("\n Sum is " + l1);
 		double do1 = 100; // can keep as 100.0 as well
 		System.out.println(do1); // prints as 100.0
 
 		// 4 See Car class in another package. Child class constructor calling parent
 
 		// 5 StringBuffer and String
-		System.out.println("5: ");
+		System.out.println("\n 5: ");
 		StringBuffer sb = new StringBuffer("Java");
 		String s = "Java";
 		String sbs = sb.toString();
 		String sbs1 = sbs;
 		if (sbs == sbs1) {
-			System.out.println("String buffer toString and assigning to String");
+			System.out.println("\n String buffer toString and assigning to String");
 		}
 		if (sb.toString() == s) {
-			System.out.println("Doesn't reach here");
+			System.out.println("\n Doesn't reach here");
 		}
 		if (sb.equals(s)) {
-			System.out.println("StringBuffer matched s");
+			System.out.println("\n StringBuffer matched s");
 		} else if (sb.toString().equals(s)) {
-			System.out.println("StringBuffer converted to string matched string");
+			System.out.println("\n StringBuffer converted to string matched string");
 		}
 
 		// 6: Abstract class need not implement methods in an Interface.
 
 		// 7: concat
-		System.out.println("7: ");
+		System.out.println("\n 7: ");
 		String ta = "A ";
 		ta = ta.concat("B ");
 		String tb = "C ";
@@ -115,7 +115,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(ta);
 
 		// 8: for loop to skip numbers
-		System.out.println("8: ");
+		System.out.println("\n 8: ");
 		int in[] = { 1, 2, 3, 4, 5 };
 		for (int k = 0; k < 5; k += 2) { // we can write like this as well k+=2 > increases k by 2
 			System.out.print(in[k]);
@@ -124,14 +124,14 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// 9: import a.* doesn't import a.b.* (b is a subfolder)
 
 		// 10:
-		System.out.println("10: ");
+		System.out.println("\n 10: ");
 		TProduct t = new TProduct();
 		t.price = 100; // we can also set like this also without calling the setter method.
 		IO.println();
-		System.out.println("Price: " + t.price);
+		System.out.println("\n Price: " + t.price);
 
 		// 11. 2D array
-		System.out.println("11: ");
+		System.out.println("\n 11: ");
 		String[][] twoDArray = new String[2][2];
 		twoDArray[0][0] = "red";
 		twoDArray[0][1] = "blue";
@@ -142,12 +142,12 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			for (String str : array1) { // iterates: y=0,1
 				System.out.println(str);
 			}
-			System.out.println("End of a loop");
+			System.out.println("\n End of a loop");
 		}
 
 		// 12: for Runtime exceptions no try-catch or throws is needed. Only for compile
 		// time it is needed.
-		System.out.println("12: ");
+		System.out.println("\n 12: ");
 		try {
 			c.abc();
 		} catch (Exception e) {
@@ -156,40 +156,40 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		c.def();
 
 		// 13. x-- in another method doesn't work here
-		System.out.println("13: ");
+		System.out.println("\n 13: ");
 		int x = 5;
 		while (isAvailable(x)) {
 			System.out.println(x);
 			x--;
 		}
 		// 14. boolean true in switch-case
-		System.out.println("14: ");
+		System.out.println("\n 14: ");
 		boolean opt = true;
 //		Cannot switch on a value of type boolean. Only convertible int values, strings or enum variables are permitted
 //		switch(opt) {}
 
 		// 15 do-while > do works in the first iteration before it reaches while
 		// condition (if it fails)
-		System.out.println("15: ");
+		System.out.println("\n 15: ");
 		int num = 5;
 		do {
 			System.out.println(num-- + " ");
 		} while (num == 0);
 
 		// 16: x value increases on ++
-		System.out.println("16: ");
+		System.out.println("\n 16: ");
 		int x1 = 100;
 		int a1 = x1++;
 		int b1 = ++x1;
 		int c1 = x1++;
 		int d1 = (a1 < b1) ? (a1 < c1) ? a1 : (b1 < c1) ? b1 : c1 : x1;
 		// a1 = 100 b1 = 102; c1 = 102; d1 = 100
-		System.out.println("D1: " + d1);
+		System.out.println("\n D1: " + d1);
 		System.out.println(x1); // here with ++ x value changes gradually
 
 		// 17: list.remove() removes only first occurrence. Use removeAll() for all
-		System.out.println("17: ");
-		IO.println("*** 17 ***");
+		System.out.println("\n 17: ");
+		IO.println("\n *** 17 ***");
 		List<String> names = new ArrayList<>();
 		names.add("S");
 		names.add("D");
@@ -205,38 +205,38 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		// 19: static variable will be replaced if 2 statements write to it in different
 		// instances
-		System.out.println("19: ");
+		System.out.println("\n 19: ");
 		c.st1 = 5;
 		TrickyJavaCode tricky1 = new TrickyJavaCode();
 		tricky1.st1 = 6;
 		System.out.println(c.st1); // Prints 6 and not 5 as another instance changed this static instance
 
 		// 20
-		System.out.println("20: ");
+		System.out.println("\n 20: ");
 		int array[] = new int[5];
 		int array1[] = { 1, 2, 4, 5 }; // just in time array
 
-		System.out.println("Hello " + args[0]); // Run configurations > Pass arguments
+		System.out.println("\n Hello " + args[0]); // Run configurations > Pass arguments
 		// with javac abc.java (you have to mention .java) with java abc (no .java)
 
 		// 21: for loop not initializing
-		System.out.println("21: ");
+		System.out.println("\n 21: ");
 		int i8 = 0, j8 = 7; // we can club same types
 		for (i8 = 0; i8 < j8; i8 = i8 + 2) { // here we are initializing i8 but not declaring type int i8
 			System.out.println(i8 + " ");
 		}
 
 		// 22: qty > 90 discount: 0.5 qut between 80 to 90: discount 0.2
-		System.out.println("22: ");
+		System.out.println("\n 22: ");
 		double qty = 0;
 		// even though it is > 80 already > 90 condition is crossed so that won't come
 		// > so effectively its 80 to 90
 		TrickyJavaCode.discount = qty >= 90 ? 0.5 : qty > 80 ? 0.2 : 0;
 
 		// 23
-		System.out.println("23: ");
+		System.out.println("\n 23: ");
 		if ("S".equals("S") ? true : false) {
-			System.out.println("conditional > Tertiary");
+			System.out.println("\n conditional > Tertiary");
 		}
 		// Objects can share behaviors with other objects. > Polymorphism
 
@@ -262,7 +262,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// An object of one type referenced to super type. The object is still subtype
 		// so that class methods only will be called > see MarutiCar.java for more
 		// Casting doesn't change object itself.
-		System.out.println("24: ");
+		System.out.println("\n 24: ");
 		ArrayList<String> myList = new ArrayList<>();
 		String[] sArray;
 
@@ -272,19 +272,19 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 //				myList.add("hello"); // "main" java.lang.OutOfMemoryError: Java heap space > This is Runtime Exception
 //			}
 		} catch (RuntimeException e) {
-			System.out.println("Runtime exception caught"); // It doesn't come here
+			System.out.println("\n Runtime exception caught"); // It doesn't come here
 			e.printStackTrace();
 		} catch (Exception ex) {
 			ex.printStackTrace(); // doesn't come here as well.
 		}
 
 		// 25: sysout String
-		System.out.println("25: ");
-		System.out.println("5 + 3 = " + 5 + 3); // here it prints 53 and not 8
-		System.out.println("5 + 3 = " + (5 + 3));
+		System.out.println("\n 25: ");
+		System.out.println("\n 5 + 3 = " + 5 + 3); // here it prints 53 and not 8
+		System.out.println("\n 5 + 3 = " + (5 + 3));
 
 		// 26: for loop
-		System.out.println("26: ");
+		System.out.println("\n 26: ");
 		String[][] arr = { { "A", "B", "C" }, { "D", "E" } }; // even if you have more elements in 2nd element (sub
 																// array) that prints that as well
 		for (int i = 0; i < arr.length; i++) {
@@ -298,7 +298,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		}
 
 		// 27: String
-		System.out.println("27: ");
+		System.out.println("\n 27: ");
 		String str1 = " ";
 		str1 = str1.trim();
 		// for boolean return you can just concatenate with +
@@ -319,7 +319,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		}
 
 		// 28: constructor: see Car.java
-		System.out.println("28: ");
+		System.out.println("\n 28: ");
 
 //		public Car() {
 //			super();
@@ -330,7 +330,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(new TrickyJavaCode()); // prints : com.main.imp.TrickyJavaCode@7b23ec81
 
 		// 29: Numbers: putting values in another types
-		System.out.println("29: ");
+		System.out.println("\n 29: ");
 		int iVar = 100;
 		float fVar = 100.100f;
 		double dVar = 123;
@@ -357,7 +357,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(numA[0][1]);
 
 		// 31
-		System.out.println("31: ");
+		System.out.println("\n 31: ");
 		Planet[] planets1 = { new Planet("Mercury", 0), new Planet("Venus", 0), new Planet("Earth", 1),
 				new Planet("Mars", 2) };
 		System.out.println(planets1);
@@ -366,18 +366,18 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(planets1[2].moons);
 
 		// 32: private is not allowed for local variable. No Static. Only final
-		System.out.println("32: ");
+		System.out.println("\n 32: ");
 		System.out.println(c.doStuff());
 
 		// 33: package declaration should be the first line in the file
 
 		// 34: double comparision with == 0 works
-		System.out.println("34: ");
+		System.out.println("\n 34: ");
 		c.methodA();
 
 		// 35: byte, short, char, int, enums, and since Java 7, also String and wrapper
 		// classes like Byte, Short, Integer, and Character.
-		System.out.println("35: ");
+		System.out.println("\n 35: ");
 		float fl = 3;
 		// if we don't keep f in 2.0 > says cannot convert from double to float. double
 		// is default here.
@@ -397,16 +397,16 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		float flt3 = (float) y2; // Ok
 
 		// 36: Boolean
-		System.out.println("36: ");
+		System.out.println("\n 36: ");
 		Boolean[] bol = new Boolean[2]; // no need of brackets () here
 //		Boolean bb = new Boolean; // can't write like this without ()
 		bol[0] = Boolean.parseBoolean("true");
 		bol[1] = new Boolean(null); // gives false
 		bol[1] = Boolean.valueOf(null); // gives false
 		boolean bol2 = Boolean.valueOf(null); // even valueOf(null) gives false
-		System.out.println("valueOf null " + bol2);
+		System.out.println("\n valueOf null " + bol2);
 		boolean bol3 = Boolean.valueOf(args[0]); // all other string values are false
-		System.out.println("Value of 1: " + bol3);
+		System.out.println("\n Value of 1: " + bol3);
 		System.out.println(bol[0] + " " + bol[1]);
 //		System.out.println(bol[0] + bol[1]); // can't write like this
 		try {
@@ -414,23 +414,23 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			// method1() catches the exception so it doesn't need to go to catch block here
 			method1();
 		} catch (Exception e) {
-			System.out.println("A");
+			System.out.println("\n A");
 		}
 
 		// Polymorphism: More efficient code at runtime and more flexible & reusable
 		// code. NOT: More dynamic code at runtime
 
 		// 37:
-		System.out.println("37: ");
+		System.out.println("\n 37: ");
 		int[] nums1 = { 1, 2, 3 };
 		int[] nums2 = { 1, 2, 3, 4, 5, 6 };
 		nums2 = nums1; // array will get replaced
 		for (int k1 : nums2) {
-			System.out.println(" X after changing nums: " + k1);
+			System.out.println("\n  X after changing nums: " + k1);
 		}
 
 		// 38:
-		System.out.println("38: ");
+		System.out.println("\n 38: ");
 		int n[][] = { { 1, 3 }, { 2, 4 } };
 		for (int i = n.length - 1; i >= 0; i--) {
 			for (int ya1 : n[i]) {
@@ -439,27 +439,27 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		}
 
 		// 39:
-		System.out.println("39: ");
+		System.out.println("\n 39: ");
 		try {
 			int na1 = 10;
 			int div = 0;
 			int ans = num / div;
 		} catch (ArithmeticException ae) {
 //			ans = 0; // ans cannot be resolved to a variable
-			System.out.println("Number can't be divided by 0");
+			System.out.println("\n Number can't be divided by 0");
 		} catch (Exception e) {
-			System.out.println("Invalid calculation");
+			System.out.println("\n Invalid calculation");
 		}
 //		System.out.printIn("Answer = " + ans); // ans cannot be resolved to a variable
 
 		// 40:
-		System.out.println("40: ");
+		System.out.println("\n 40: ");
 		// In a method: if arg = arg; it has no effect as this.arg is not used
 		// Also, arg = this.arg; may be this.arg is already 0 for int so arg will also
 		// be 0. Hence we have to use this.a = a;
 
 		// 41:
-		System.out.println("41: ");
+		System.out.println("\n 41: ");
 		Person p1 = new Person("D", "DS");
 		Person p2 = p1;
 		p1.name = "S";
@@ -467,7 +467,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(p1.name + " p2: " + p2.name); // both point to same object
 
 		// 42:
-		System.out.println("42: ");
+		System.out.println("\n 42: ");
 		int aVar = 9;
 		if (aVar++ < 10) { // works as it will increase after this statement
 			System.out.println(aVar + " Hello Universe!");
@@ -480,7 +480,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(len);
 
 		// 43:
-		System.out.println("43: ");
+		System.out.println("\n 43: ");
 		int[][] arr1 = new int[2][4];
 		arr1[0] = new int[] { 1, 3, 5, 7 };
 		arr1[1] = new int[] { 1, 3 };
@@ -492,15 +492,15 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		}
 
 		// 44:
-		System.out.println("44: ");
+		System.out.println("\n 44: ");
 		StringBuilder sb1 = new StringBuilder();
 		sb1.append("SDJ");
 //		sb.deleteAll(); // no such method
 //		sb.removeAll(); // no such method
 		sb1.delete(0, sb1.length());
-		System.out.println("Sb1 value: " + sb1); // gives blank
+		System.out.println("\n Sb1 value: " + sb1); // gives blank
 
-		System.out.println("45: String and tertiary operators");
+		System.out.println("\n 45: String and tertiary operators");
 		int aa1 = 1;
 		String sas1 = "H";
 		String sas2 = ""; // should initialize this for sysout
@@ -508,18 +508,18 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(sas1 + " " + sas2);
 
 		// 46:
-		System.out.println("46: ");
-		System.out.println("Result A: " + 1 + 1); // gives 01
-		System.out.println("Result A: " + (1 + 1)); // gives 1 (addition)
-		System.out.println("Result A: " + (0) + (1));
+		System.out.println("\n 46: ");
+		System.out.println("\n Result A: " + 1 + 1); // gives 01
+		System.out.println("\n Result A: " + (1 + 1)); // gives 1 (addition)
+		System.out.println("\n Result A: " + (0) + (1));
 
 		// 47: Constructors
-		System.out.println("47: ");
+		System.out.println("\n 47: ");
 		// in a class Person you have 1 & 2 arg constructors. You call in 2 arg
 		// constructor as: Person(name) > Wrong as we have to call this(name)
 
 		// 48: static changes from 2 objects
-		System.out.println("48: ");
+		System.out.println("\n 48: ");
 		TrickyJavaCode c2 = new TrickyJavaCode();
 		c.changeCount();
 		c2.changeCount();
@@ -537,7 +537,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(points);
 
 		// 49: Array of Numbers
-		System.out.println("49: ");
+		System.out.println("\n 49: ");
 		int[] numbers1 = new int[2];
 		numbers1[0] = 1;
 		numbers1[1] = 2;
@@ -547,15 +547,15 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		numbers1[3] = 4;
 
 		for (int k : numbers1) {
-			System.out.println("Numbers: " + k); // first 2 numbers will be 0
+			System.out.println("\n Numbers: " + k); // first 2 numbers will be 0
 		}
 
 		// 50:
-		System.out.println("50: ");
+		System.out.println("\n 50: ");
 		c.printAll();
 
 		// 51:
-		System.out.println("51: ");
+		System.out.println("\n 51: ");
 		// The parameter in a catch block is of Throwable type.
 		// All subclasses of the RuntimeException class are not recoverable.
 		// Error is extendable & throwable > It is not a RuntimeException or Exception
@@ -586,11 +586,11 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		String g1 = "Java";
 		String g2 = "" + "Java";
 		if (g1 == g2) {
-			System.out.println("Both equal"); // still equal
+			System.out.println("\n Both equal"); // still equal
 		}
 
 		// 52: Date
-		System.out.println("52: ");
+		System.out.println("\n 52: ");
 		LocalDateTime dt = LocalDateTime.of(2014, 7, 31, 1, 1);
 		dt = dt.plusDays(30); // you need to reassign else it won't change > dt =
 		dt = dt.plusMonths(1);
@@ -609,10 +609,10 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		int cc = (1 > 2) ? 1 : 2;
 		System.out.println(cc);
 		float var22 = var11 + 1024;
-		System.out.println("54: " + var22);
+		System.out.println("\n 54: " + var22);
 
 		if (0.1 > 0.0) {
-			System.out.println(" 0.1 > 0.0");
+			System.out.println("\n  0.1 > 0.0");
 		}
 
 		// 55: Interfaces
@@ -624,7 +624,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// with static imports you import till the ClassA.staticMethod() > in code you
 		// directly use staticMethod()
 
-		System.out.println("57: missing break");
+		System.out.println("\n 57: missing break");
 
 		int wd = 0;
 		String days[] = { "sun", "mon", "wed", "sat" };
@@ -649,7 +649,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 //		LocalDate dated1 = LocalDate.of(2012, 12, 32); // DateTimeException is throw at Runtime and not compile time
 //		System.out.println(dated1);
 
-		System.out.println("59: ");
+		System.out.println("\n 59: ");
 		int j = 20;
 		int kk1 = (j += 10) / 5; // evaluates and keeps 30
 		System.out.println(kk1);
@@ -686,7 +686,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		colors.add(5, "orange");
 		System.out.println(colors);
 
-		System.out.println("61: looping array");
+		System.out.println("\n 61: looping array");
 		int[] xa = { 10, 20, 30, 40, 50 };
 		int xaL = xa.length;
 		while (xaL > 0) { // > 0 so it will be 5, 4, 3, 2, 1
@@ -695,7 +695,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 //			xaL--; // this doesn't work if we don't keep --xaL above because xa[5] isn't there max is xa[4]
 		}
 
-		System.out.println("62: array removeIf");
+		System.out.println("\n 62: array removeIf");
 		String[] arn = { "Hi", "How", "Are", "You" };
 		List<String> arrList = new ArrayList<>(Arrays.asList(arn));
 //		arrList.removeIf(sas -> sas.length() <= 2);
@@ -707,9 +707,9 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			// scope
 		}
 
-		System.out.println("63: protected static final can be used in instance variable");
+		System.out.println("\n 63: protected static final can be used in instance variable");
 
-		System.out.println("64: try-catch");
+		System.out.println("\n 64: try-catch");
 		c.throwingException(); // no need of throws here as try-catch is already there
 
 		try {
@@ -719,7 +719,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			e.printStackTrace();
 		}
 
-		System.out.println("65: int array");
+		System.out.println("\n 65: int array");
 		int[][] arr2 = new int[2][4];
 //		arr2[0]={1,2,3}; // can't write like this > Array constants can only be used in initializers
 		arr2[0] = new int[] { 1, 2, 3 };
@@ -740,7 +740,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			}
 		}
 
-		System.out.println("66: String array");
+		System.out.println("\n 66: String array");
 		String[] arr4 = { "Hi", "How", "Are", "You" };
 		List<String> arrList1 = new ArrayList<>(Arrays.asList(arr4));
 		if (arrList1.removeIf(ss1 -> {
@@ -749,21 +749,21 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			// one satisfies it gives true > true if any elements were removed
 			return ss1.length() <= 2; // this true is only for removing elements. First all elements go to this.
 		})) {
-			System.out.println(" removed");
+			System.out.println("\n  removed");
 		}
 
-		System.out.println("67: try-catch");
+		System.out.println("\n 67: try-catch");
 		try {
 			throw 3 < 10 ? new IOException() : new Exception();
 		} catch (IOException e) {
-			System.out.println("IOException ");
+			System.out.println("\n IOException ");
 		} catch (Exception e) { // you have to write this catch also as we wrote new Exception above
 			e.printStackTrace();
 		}
 
-		System.out.println("68: Character default value is null; char default value is blank");
+		System.out.println("\n 68: Character default value is null; char default value is blank");
 
-		System.out.println("69: String Array");
+		System.out.println("\n 69: String Array");
 		String[][] chs = new String[5][2]; // length is always first one > like row > {} in main {}
 		chs[0] = new String[2];
 		chs[1] = new String[2];
@@ -782,17 +782,17 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			System.out.println();
 		}
 
-		System.out.println("70: LocalDateTime");
+		System.out.println("\n 70: LocalDateTime");
 		LocalDateTime dt1 = LocalDateTime.of(2014, 7, 31, 1, 1, 2); // even if we don't keep 2 (seconds it works)
 		System.out.println(dt1);
 
-		System.out.println("71: Float & Double");
+		System.out.println("\n 71: Float & Double");
 		c.doSum(3, 4); // by default it takes int > goes to float for next closest thing
 		c.doSum(3.0, 4.0); // by default it is double
 
-		System.out.println("71: Hello : " + new Person("D", "J").name); // we can directly call instance variable like
+		System.out.println("\n 71: Hello : " + new Person("D", "J").name); // we can directly call instance variable like
 																		// this
-		System.out.println("72: x++ inside while");
+		System.out.println("\n 72: x++ inside while");
 		int xb = 0;
 		do {
 			System.out.print("*"); // prints 4 stars because xb++ increases in the next iteration
@@ -811,7 +811,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		}
 		System.out.println(z);
 
-		System.out.println("73: Order (Multiplication, Division, additiona) of numbes");
+		System.out.println("\n 73: Order (Multiplication, Division, additiona) of numbes");
 		// Parentheses: () are always evaluated first and can be used to override the
 		// default order.
 		// Multiplication, Division, Modulus: ∗,/ are next, evaluated from left to
@@ -828,18 +828,18 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		System.out.println(3 / 2); // Gives 1 & NOT 1.5
 
-		System.out.println("74: Static instance variables also get default values: " + ss);
+		System.out.println("\n 74: Static instance variables also get default values: " + ss);
 //		int arrayl] = new int[3] {1, 2, 3}; // You can't put like this > initialize and then set size (Both > WRONG)
 //		int array[3] = new int[] {1, 2, 3}; // left side you CAN'T Keep size
 		int array4[] = new int[] { 1, 2, 3 }; // this is fine
 		System.out.println(array4); // prints object > if we want values we need to iterate
 
-		System.out.println("74: Local variable can't be accessed outside");
+		System.out.println("\n 74: Local variable can't be accessed outside");
 		int sum = 0;
 		for (int xa1 = 1; xa1 <= 5; xa1++) {
 			sum = sum + xa1;
 		}
-//		System.out.println("The sum of " + xa1 + " numbers is: " + sum); // here xa1 can't be accessed outside the for loop
+//		System.out.println("\n The sum of " + xa1 + " numbers is: " + sum); // here xa1 can't be accessed outside the for loop
 
 		List<String> arrayList = new ArrayList<>();
 		arrayList.add("Tech");
@@ -851,7 +851,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		arrayList.replaceAll(sa3 -> sa3.concat("Group")); // this works > Replaces each element
 		System.out.println(arrayList);
 
-		System.out.println("75: Boolean");
+		System.out.println("\n 75: Boolean");
 		Boolean ba = true; // this works > directly initializing
 		Boolean ba2 = Boolean.valueOf("True"); // WORKS
 		System.out.println(ba2);
@@ -859,41 +859,56 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		System.out.println(
 				"76: Methods no need to be static in order to use static variables. However, static methods cannot use instance variables.");
-		System.out.println("77: subclass having same method as super class");
+		System.out.println("\n 77: subclass having same method as super class");
 		c.displayOnTv(10);
 //		super.displayonTv(); // Cannot use super in a static context
 		// You can call super.displayOnTv() for super class method
 
-		System.out.println("78: class A extends B implements I");
+		System.out.println("\n 78: class A extends B implements I");
 		// A a = new A(); B b = new B(); a instanceof B > true a instance of I > True
 		InterfaceA ia = new TrickyJavaCode();
 		boolean bl1 = ia instanceof InterfaceA;
 		boolean bl2 = c instanceof InterfaceA;
 		System.out.println(bl1 + " " + bl2);
 
-		System.out.println("79: Overriding in a constructor: ");
+		System.out.println("\n 79: Overriding in a constructor: ");
 		System.out.println(c.greet);
 
-		System.out.println("80: equals");
+		System.out.println("\n 80: equals");
 		c.greet = "Hello";
 		System.out.println(c.equals("Hello")); // false
-		System.out.println("Hello".equals(c.greet)); //
+		System.out.println("\n Hello".equals(c.greet)); //
 
-		System.out.println("81: continue in Switch > Doesn't work as it is for a loop");
+		System.out.println("\n 81: continue in Switch > Doesn't work as it is for a loop");
 
-		System.out.println("82: charAt(), indexOf() in String");
+		System.out.println("\n 82: charAt(), indexOf() in String");
 		String str = "Sweet Sweat";
 		// indexOf() > -1 if there is no such occurrence.
 		String stra2 = str.trim().charAt(6) + " " + str.indexOf("Sw", 1); // 1 start of substring > so it ignores the
 																			// first Sw
 		System.out.println(stra2); // S 6
-		System.out.println("82: for loop");
+		System.out.println("\n 82: for loop");
 		for (int ia1 = 100; ia1 < 100; ia1++) { // it checks the condition ia1 < 100 as well before entering the loop
-			System.out.println("Welcome " + ia1);
+			System.out.println("\n Welcome " + ia1);
 		}
 
-		System.out.println("83: variables");
+		System.out.println("\n 83: variables");
 		c.doStuff("7007");
+		
+		System.out.println("\n \n 84: String to Objects");
+		Object oa, ob, oc;
+		oa = new String("A");
+		ob = new String("B");
+		oc = oa;
+		oa = ob;
+		System.out.println("\n " + oc);
+		boolean ba3 = false;
+		boolean ba4 = false;
+//		if(ba4!=ba3=!ba4) {} // can't write like this > Multiple conditions
+		int index =1;
+		String[] strA = new String[5];
+		String myStr = strA[index];
+		System.out.println(myStr);
 	}
 
 	String myStr = "9009";
@@ -905,19 +920,19 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			myNum = Integer.parseInt(myStr);
 		} catch (NumberFormatException n) {
 //			System.out.println(myStr); // NOT even here
-			System.out.println("Error");
+			System.out.println("\n Error");
 		}
-		System.out.println("myStr: " + myStr + ", myNum: " + myNum);
+		System.out.println("\n myStr: " + myStr + ", myNum: " + myNum);
 	}
 
 	public void switchExample() {
 		String s = "D";
 		switch (s) {
 		case "D":
-			System.out.println("Letter D");
+			System.out.println("\n Letter D");
 //			continue; // continue only works inside a loop > switch is not a loop
 		case "E":
-			System.out.println("Letter E");
+			System.out.println("\n Letter E");
 		}
 	}
 
@@ -938,30 +953,30 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 	}
 
 	public void displayOnTv() {
-		System.out.println("Displaying on TV in Subclass");
+		System.out.println("\n Displaying on TV in Subclass");
 	}
 
 	static int ss;
 
 	public void doSum(float a, float b) {
-		System.out.println("Float sum is : " + (a + b));
+		System.out.println("\n Float sum is : " + (a + b));
 		System.out.println(++ss); // we can access static variable in a non static method
 	}
 
 	public void doSum(double a, double b) {
-		System.out.println("Double sum is : " + (a + b));
+		System.out.println("\n Double sum is : " + (a + b));
 	}
 
 	public void throwingException() {
 		try {
-			System.out.println("try code");
+			System.out.println("\n try code");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void throwingException1() throws IOException {
-		System.out.println("try code");
+		System.out.println("\n try code");
 		throw new IOException();
 	}
 
@@ -974,9 +989,9 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 //		char c; // if we give here, it says local variable is not initialized
 //		boolean b;
 //		float f;
-		System.out.println("c = " + c); // blank
-		System.out.println("b = " + b); /// false
-		System.out.println("f = " + f); // 0.0
+		System.out.println("\n c = " + c); // blank
+		System.out.println("\n b = " + b); /// false
+		System.out.println("\n f = " + f); // 0.0
 	}
 
 	private static int count = 0;
@@ -1001,7 +1016,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			throw a > 2 ? new Exception() : new RuntimeException();
 
 		} catch (Exception e) {
-			System.out.println("B");
+			System.out.println("\n B");
 		}
 	}
 
@@ -1013,7 +1028,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 	void methodA() {
 		double p, b, h;
 		if (area == 0) {
-			System.out.println("Double value comparision == with 0");
+			System.out.println("\n Double value comparision == with 0");
 		}
 	}
 
@@ -1031,10 +1046,10 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		//
 		switch (x) {
 		case 1:
-			System.out.println("Integer");
+			System.out.println("\n Integer");
 			break; // not mandatory > it will continue below code as well if not given
 		default: // not mandatory
-			System.out.println("Nothing");
+			System.out.println("\n Nothing");
 		}
 
 		char colorCode = 'y';
@@ -1059,13 +1074,13 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		String day = "Monday";
 		int result = switch (day) {
 		case "MONDAY" -> {
-			System.out.println("Monday");
+			System.out.println("\n Monday");
 			yield 1; // yield is compulsory here
 		} // no ; is needed here
 		case "TUESDAY" -> 2;
 		default -> 0;
 		};
-		System.out.println("Result: " + result);
+		System.out.println("\n Result: " + result);
 
 	}
 
@@ -1075,11 +1090,11 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 	}
 
 	public static void main(int[] args) {
-		System.out.println("Int main " + args[0]);
+		System.out.println("\n Int main " + args[0]);
 	}
 
 	public static void main(Object[] args) {
-		System.out.println("Object main " + args[0]);
+		System.out.println("\n Object main " + args[0]);
 	}
 
 	static int st1;
@@ -1099,11 +1114,11 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 	}
 
 	void abc() throws Exception {
-		System.out.println("abc method");
+		System.out.println("\n abc method");
 	}
 
 	void def() throws RuntimeException {
-		System.out.println("def method");
+		System.out.println("\n def method");
 	}
 
 	// We can keep protected from default if the calls is in the same package.
