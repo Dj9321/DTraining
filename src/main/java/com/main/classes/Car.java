@@ -58,3 +58,7 @@ public class Car extends Vehicle {
 		System.out.println("Number of tyres is: ");
 	}
 }
+
+class D {
+
+}

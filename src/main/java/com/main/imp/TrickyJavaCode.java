@@ -928,6 +928,24 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// import static java.lang.Math.*;
 		// even static variables we can import without Class name
 		System.out.println(min(2, 3));
+
+		System.out.println("\n 87: Inner class");
+		// You have to write like this c.new and NOT directly
+		InnerClassA aci = c.new InnerClassA();
+		System.out.println(aci.sayHi());
+
+		System.out.println("\n 88: You can have non public class in the same file. We can access it as below");
+		OusideClassInSameFile oci = new OusideClassInSameFile();
+		oci.sayHello();
+	}
+
+	private class InnerClassA { // we can even put private here
+		// but outside classes can't have this. (only abstract, final are allowed)
+
+		String sayHi() {
+			return "Hii how are you doing ?";
+		}
+
 	}
 
 	String myStr = "9009";
@@ -1162,4 +1180,11 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		e = e.concat(" W");
 	}
 
+}
+
+class OusideClassInSameFile {
+
+	String sayHello() {
+		return "Hello all. Welcome to Tricky Java Code";
+	}
 }
