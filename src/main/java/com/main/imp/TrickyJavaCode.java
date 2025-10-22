@@ -937,6 +937,99 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println("\n 88: You can have non public class in the same file. We can access it as below");
 		OusideClassInSameFile oci = new OusideClassInSameFile();
 		oci.sayHello();
+		// ClassChangedName without public can be kept in another file:
+		// ClassWithAnotherName
+		// ClassChangedName > void main() worked without public static
+		// In practice, you can write String[] args, String args[] or String… args; the
+		// compiler accepts any of these.
+		// java Zoo "San Diego" Zoo > 2 arguments
+
+//		/*
+//		 * /* ferret */ > You can't close here itself and call another closing below. Doesn't work
+//		 */
+
+		System.out.println(
+				"\n 89 Instance initializer will be called when object is created > see > Instance initializer");
+
+		System.out.println(
+				"\n 90: Integer can hold max value of : 2^32 / 2 for positive and negative and a 0. Get using: "
+						+ Integer.MAX_VALUE + " Short max value : 2^16 / 2 -1 (for 0): " + Short.MAX_VALUE);
+//		long valueV = 3123456789;  // DOES NOT COMPILE as default is int
+		long valueV = 3123456789L; // now Java knows it is a long
+
+		System.out.println("\n 91: Octal, HexaDecimal and others");
+		int octal1 = 0234; // prefix with 0; For Hexa prefix with 0x or 0X; For binary use 0b or 0B
+		System.out.println("Hex: " + Long.toHexString(156));
+		System.out.println(octal1 + " Octal");
+		byte aby = 3;
+		byte bby = 127;
+		Integer g = 1000;
+		System.out.println((aby + bby));
+		System.out.println("Binary to Integer " + Integer.valueOf("9c", 16));
+
+		System.out.println(0b11); // 3
+		System.out.println(017); // 15 8^1 + 8^0*7 = 8 + 7 = 15
+		System.out.println(0x1F); // 31 16^0*15 + 16^1 = 31
+
+		System.out.println("\n 92:");
+		int hex = 0xaff;
+		System.out.println("Hex " + hex);
+
+		float f = 333.33f;
+		int h = (int) f;
+		System.out.println(h);
+
+		// You can add underscores anywhere except at the beginning of a literal, the
+		// end of a literal, right before a decimal point, or right after a decimal
+		// point.
+//		double notAtStart = _1000.00;        // DOES NOT COMPILE
+//		double notAtEnd = 1000.00_;          // DOES NOT COMPILE
+//		double notByDecimal = 1000_.00;      // DOES NOT COMPILE
+		double annoyingButLegal = 1_00_0.0_0; // this one compiles
+
+// Primitive types will give you a compiler error if you attempt to assign them null.
+//		int value = null;   // DOES NOT COMPILE
+		System.out.println("\n 93:");
+		// You can declare many variables in the same declaration as long as they are
+		// all of the same type.
+		String s3a = "yes", s4a = "no";
+		int i1, i2, i3 = 0;
+		int i1a;
+		int i2a;// still fine if you write in a same line
+//		int i3; i4; // Doesn't work as we kept semicolon instead of comma
+		System.out.println("\n 94:");
+		String $a1 = "dd"; // valid as The name must begin with a letter or the symbol $ or _.
+		String _a2 = "EE";
+		// Java is case sensitive, so you can use versions of the keywords that only
+		// differ in case. Please don't, though.
+		String satic = "Some";
+//		String hollywood@vine; // Doesn't work  @ is not a letter, digit, $ or _
+
+		System.out.println("\n 95:");
+		String aa3;
+		if (i3 == 0) {
+			aa3 = "True";
+		} else {
+			aa3 = "False";
+		}
+		System.out.println(aa3); // if you don't give else part it doesn't compile. Because somewhere aa3 needs
+									// to be initialized before it is used as it is a local variable
+		System.out.println(c.ccc1); // default char value > '\u0000' (NUL)
+
+//	Local variables can never have a scope larger than the method they are defined in. However, they can have a smaller scope.
+		System.out.println("\n 96:");
+		boolean hungry = true;
+		if (hungry) {
+			int bitesOfCheese = 1;
+		} // bitesOfCheese goes out of scope here
+//			System.out.println(bitesOfCheese);// DOES NOT COMPILE
+	}
+
+	char ccc1;
+
+	{
+		System.out.println("Instance initializer ");
+		char ccc1; // this variable can't go to any method like instance variable
 	}
 
 	private class InnerClassA { // we can even put private here
