@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import com.main.classes.AbstractClassA;
 import com.main.classes.Car;
@@ -16,6 +17,7 @@ import com.main.classes.Planet;
 import com.main.classes.TProduct;
 import com.main.classes.Transport;
 import com.main.classes.Vehicle;
+import static java.lang.Math.*;
 
 public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
@@ -790,8 +792,9 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		c.doSum(3, 4); // by default it takes int > goes to float for next closest thing
 		c.doSum(3.0, 4.0); // by default it is double
 
-		System.out.println("\n 71: Hello : " + new Person("D", "J").name); // we can directly call instance variable like
-																		// this
+		System.out.println("\n 71: Hello : " + new Person("D", "J").name); // we can directly call instance variable
+																			// like
+																			// this
 		System.out.println("\n 72: x++ inside while");
 		int xb = 0;
 		do {
@@ -894,8 +897,8 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		System.out.println("\n 83: variables");
 		c.doStuff("7007");
-		
-		System.out.println("\n \n 84: String to Objects");
+
+		System.out.println("\n 84: String to Objects");
 		Object oa, ob, oc;
 		oa = new String("A");
 		ob = new String("B");
@@ -905,10 +908,26 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		boolean ba3 = false;
 		boolean ba4 = false;
 //		if(ba4!=ba3=!ba4) {} // can't write like this > Multiple conditions
-		int index =1;
+		int index = 1;
 		String[] strA = new String[5];
 		String myStr = strA[index];
 		System.out.println(myStr);
+
+		System.out.println("\n 85: Comments");
+		// add /** and enter on any method for java comments. If you hover on the method
+		// call you will get comments
+		Random r = new Random();
+		System.out.println(r.nextInt(10));
+
+		System.out.println("\n 86: Can't import classes from default package");
+//		MainClassOne asdfasd = new MainClassOne();
+
+		System.out.println("\n 86: Static imports > we can also import System.out > so you can write out.println()");
+		System.out.println(Math.min(2, 3));
+		// The following works after static import of Math >
+		// import static java.lang.Math.*;
+		// even static variables we can import without Class name
+		System.out.println(min(2, 3));
 	}
 
 	String myStr = "9009";
@@ -1067,10 +1086,11 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			break;
 		}
 //		System.out.println(color); // color cannot be resolved to a variable
-
-		// A switch expression yields a value for each possible selector (input value)
-		// using either arrow cases (case L -> V;) or by using a yield statement if the
-		// case uses a block.
+		/*
+		 * A switch expression yields a value for each possible selector (input value)
+		 * using either arrow cases (case L -> V;) or by using a yield statement if the
+		 * case uses a block.
+		 */
 		String day = "Monday";
 		int result = switch (day) {
 		case "MONDAY" -> {
@@ -1083,6 +1103,11 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println("\n Result: " + result);
 
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
 
 	int doStuff() {
 		int x = 100;

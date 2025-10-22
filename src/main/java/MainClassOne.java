@@ -18,7 +18,7 @@ public class MainClassOne {
 		System.out.println(Pattern.matches("(\\w+)(\\s)(\\w+)(\\s+).*", "ss ds aasdfasdf safd"));
 		System.out.println(Pattern.matches(".", " "));
 		System.out.println(Pattern.matches("g*geeks*", "geeksfor"));
-
+		
 	}
 
 }
