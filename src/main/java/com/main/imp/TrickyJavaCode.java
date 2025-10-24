@@ -1023,6 +1023,35 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			int bitesOfCheese = 1;
 		} // bitesOfCheese goes out of scope here
 //			System.out.println(bitesOfCheese);// DOES NOT COMPILE
+
+		int amount = 0b11110;
+		int hexI = 0xE;
+		double hexD = 0xE;
+		System.out.println(amount); // converted to decimal
+		System.out.println(hexI); // converted to decimal
+		System.out.println(hexD); // // converted to decimal (Double 14.0)
+
+		System.out.println("\n 97: Promotion rules");
+//		If two values have different data types, Java will automatically promote one of the values to the larger of the two data types. If int and float > it will promote to float.
+//		Smaller data types, namely byte, short, and char, are first promoted to int any time they're used with a Java binary arithmetic operator, even if neither of the operands is int.
+
+		int i9 = 10;
+		double d9 = 11;
+		System.out.println(i9 + d9); // int + double promotes to double
+		double e9 = i9 + d9;
+		System.out.println(e9);
+
+		// as multiplication and division have same priority they are evaluated from
+		// left right
+		System.out.println(6 * 2 / 4); // 12/4 = 1
+		System.out.println(6 / 2 * 4); // 3 * 4 = 12
+
+//		floating-point literals are assumed to be double, unless postfixed with an f
+		float yss = 13; // only if we keep decimals we need to keep f else not needed
+		
+//		int x = !5;  // DOES NOT COMPILE
+//		boolean y = -true;  // DOES NOT COMPILE
+//		boolean z = !0;  // DOES NOT COMPILE
 	}
 
 	char ccc1;
