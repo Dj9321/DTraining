@@ -1,6 +1,7 @@
 package com.main.imp;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -1031,7 +1032,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(hexI); // converted to decimal
 		System.out.println(hexD); // // converted to decimal (Double 14.0)
 
-		System.out.println("\n 97: Promotion rules");
+		System.out.println("\n 97: Promotion rules of numbers");
 //		If two values have different data types, Java will automatically promote one of the values to the larger of the two data types. If int and float > it will promote to float.
 //		Smaller data types, namely byte, short, and char, are first promoted to int any time they're used with a Java binary arithmetic operator, even if neither of the operands is int.
 
@@ -1048,10 +1049,52 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 //		floating-point literals are assumed to be double, unless postfixed with an f
 		float yss = 13; // only if we keep decimals we need to keep f else not needed
-		
+
 //		int x = !5;  // DOES NOT COMPILE
 //		boolean y = -true;  // DOES NOT COMPILE
 //		boolean z = !0;  // DOES NOT COMPILE
+
+		int xa2 = 3;
+		int ya2 = ++xa2 * 5 / xa2-- + --xa2; // 4 * 5 / 4 + 2 = 20/4 + 2 = 5 + 2 = 7
+		System.out.println("x is " + xa2);
+		System.out.println("y is " + ya2);
+//		long t = 192301398193810323;  // DOES NOT COMPILE as it is out of range for int (Default is int)
+		long tl = 192301398193810323l;
+		BigInteger ts = BigInteger.valueOf(192301398193810323l);
+//		int z = 9f; // doesn't compile
+		int za = (int) 9f; // casting to int
+		int za1 = (int) 9.1f; // casting to int with decimal > Still works as it fits float to int
+		System.out.println(za1);
+		short ya = (short) 1921222; // Stored as 20678 numeric overflow occurs
+		System.out.println(ya);
+		short ya1 = (short) 32768 + 32767;
+		System.out.println("Overflow: repeats from positive max to negative max and loops till value is done: " + ya1);
+		System.out.println(Short.MAX_VALUE);
+		// Since 2147483647 is the maximum int value, adding any strictly positive value
+		// to it will cause it to wrap to the next negative number.
+		System.out.print(2147483647 + 1); // -2147483648
+
+		short xa1 = 10;
+		short ya3 = 3;
+		// Even though 30 fits in short. By default the 10 is promoted to int. So cast
+		// is needed.
+//		short za3 = xa1 * ya3;  // DOES NOT COMPILE 
+		// You are telling the compiler that you have taken additional steps to prevent
+		// overflow or underflow.
+		short za3 = (short) (xa1 * ya3);
+
+		long xa3 = 10;
+		int ya4 = 5;
+//		ya4 = ya4 * xa3; // DOES NOT COMPILE as it gets promoted to bigger of them i.e long or you can use cast
+		ya4 = (int) (ya4 + xa3);
+		System.out.println("\n 98: First casts to long then does multiplication and then casts long to int");
+		ya4 += xa3; // you can do like this without cast using compound operator
+		xa3 = xa3 + ya4; // you can do this way also
+		long ya5 = ya4 * xa3;
+
+		long yb1 = (x = 3); // Still works
+		System.out.println(yb1);
+
 	}
 
 	char ccc1;
