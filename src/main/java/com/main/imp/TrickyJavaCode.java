@@ -1095,6 +1095,48 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		long yb1 = (x = 3); // Still works
 		System.out.println(yb1);
 
+		int xa4 = 6;
+		boolean ya6 = (xa4 >= 6) || (++xa4 <= 7); // x will not increment to 7 as right side is never evaluated. x is 6
+		System.out.println(xa4);
+
+		boolean yc1 = false;
+		boolean xc1 = (yc1 = true);
+		System.out.println(xc1); // Outputs true.
+		System.out.println(yc1); // Outputs true.
+		yc1 = false;
+		xc1 = (yc1 == true); // false
+		System.out.println(xc1);
+
+		if (4 == 4.0) { // gives true
+			System.out.println("4 is promoted to double as 4.0 is there");
+		}
+
+		System.out.println("\n 99: two references are true if they point to same object or both are null");
+		TrickyJavaCode tr1 = new TrickyJavaCode();
+		TrickyJavaCode tr2 = new TrickyJavaCode();
+		tr1 = tr2 = null;
+		if (tr1 == tr2) {
+			System.out.println("both references are null and equal");
+		}
+
+		int hourOfDay = 11;
+		if (hourOfDay < 15) {
+			System.out.println("Good Afternoon");
+		} else if (hourOfDay < 11) {
+			System.out.println("Good Morning"); // UNREACHABLE CODE
+		} else {
+			System.out.println("Good Evening");
+		}
+
+//		int x = 1;
+//		if(x) {  // DOES NOT COMPILE
+//		}
+
+//		if(x = 5) {  // DOES NOT COMPILE
+//			}
+//		int animal = (y < 91) ? 9 : "Horse";  // DOES NOT COMPILE
+		
+
 	}
 
 	char ccc1;
