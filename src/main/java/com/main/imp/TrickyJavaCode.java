@@ -1135,8 +1135,41 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 //		if(x = 5) {  // DOES NOT COMPILE
 //			}
 //		int animal = (y < 91) ? 9 : "Horse";  // DOES NOT COMPILE
-		
+		int ya7 = 1;
+		int za4 = 1;
+		final int xa6 = ya7 < 10 ? ya7++ : za4++;
+		System.out.println(ya7 + "," + za4); // Outputs 2,1
 
+		c.switchCaseAllowedValues("D", "J");
+	}
+
+	private int switchCaseAllowedValues(String firstName, final String lastName) {
+		String middleName = "Patricia"; // only constants (final are good) are allowed
+		final String suffix = "JR"; // as this is final it is fine to use in case
+		int id = 0;
+		switch (firstName) {
+		case "Test":
+			return 52; // returning directly instead of break
+//		case middleName: // DOES NOT COMPILE
+//			id = 5;
+//			break;
+		case suffix:
+			id = 0;
+			break;
+//		  case lastName:  // DOES NOT COMPILE > even though it is final it should be like a constant
+//			id = 8;
+//			break;
+//		  case 5:  // DOES NOT COMPILE
+//			id = 7;
+//			break;
+//		  case 'J':  // DOES NOT COMPILE
+//			id = 10;
+//			break;
+//		  case java.time.DayOfWeek.SUNDAY:  // DOES NOT COMPILE > incompatible with string
+//			id = 15;
+//			break;
+		}
+		return id;
 	}
 
 	char ccc1;
