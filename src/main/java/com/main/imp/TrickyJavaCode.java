@@ -1178,7 +1178,11 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		for (long yc = 0, zc = 4; xf < 5 && y < 10; xf++, yc++) {
 			System.out.print(yc + " ");
 		}
-		System.out.println("\n" + xf);
+//		System.out.println(yc); // doesn't compile you can get value from initialization inside for loop
+		System.out.println("\n" + xf); // you can get this as it is initialized before for loop and changed in for loop
+
+//		for(int yc1=0, long yc2=3;;) { // doesn't compile as you can't define multiple types in initialization
+//		}
 
 	}
 
