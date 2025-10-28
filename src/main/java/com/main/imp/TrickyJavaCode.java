@@ -1140,7 +1140,57 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		final int xa6 = ya7 < 10 ? ya7++ : za4++;
 		System.out.println(ya7 + "," + za4); // Outputs 2,1
 
+		System.out.println("\n 100: Swith case allowed values");
 		c.switchCaseAllowedValues("D", "J");
+
+		System.out.println("\n 101: loops");
+		int xd = 4;
+		do {
+			xd++;
+		} while (false);
+		System.out.println(xd); // prints 5 as do statements execute once before condition runs (false in this
+								// case)
+		c.eatCheese(6);
+
+		System.out.println("Both loops are same");
+		int xe = 6;
+		while (xe > 5) {
+			System.out.println("in while block");
+			xe--;
+		}
+		// the following has additional flexibility to write else block > that doesn't
+		// mean we have to use this only. It also has many lines of code.
+		if (xe > 0) {
+			do {
+				System.out.println("In do-while loop");
+				xe--;
+			} while (xe > 10);
+		}
+
+		// INFINITE LOOP
+//		for (;;) {
+//			System.out.println("Hello World");
+//		}
+
+		System.out.println("\n 102: Multiple Terms to the for Statement");
+
+		int xf = 0; // this value will be processed below inside loop
+		for (long yc = 0, zc = 4; xf < 5 && y < 10; xf++, yc++) {
+			System.out.print(yc + " ");
+		}
+		System.out.println("\n" + xf);
+
+	}
+
+	int roomInBelly = 5;
+
+	public void eatCheese(int bitesOfCheese) {
+		while (bitesOfCheese > 0 && roomInBelly > 0) { // 2 conditions
+			System.out.println("eating");
+			bitesOfCheese--;
+			roomInBelly--;
+		}
+		System.out.println(bitesOfCheese + " pieces of cheese left");
 	}
 
 	private int switchCaseAllowedValues(String firstName, final String lastName) {
