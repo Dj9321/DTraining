@@ -1184,6 +1184,94 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 //		for(int yc1=0, long yc2=3;;) { // doesn't compile as you can't define multiple types in initialization
 //		}
 
+		final String[] namesL = new String[3];
+		namesL[0] = "Dheeraj";
+		namesL[1] = "Rakesh";
+		namesL[2] = "Suresh";
+		for (String name : namesL) {
+			System.out.print(name + ", ");
+		}
+		String[] namesM = new String[3];
+		for (String name : namesM) {
+			System.out.print(name + " "); // just prints null
+		}
+
+		List<Integer> values = List.of(1, 2, 3);
+		for (java.util.Iterator<Integer> ib = values.iterator(); ib.hasNext();) {
+			int value = ib.next();
+			System.out.print(value + ", ");
+		}
+//		the above is similar to 
+		for (Integer ic : values) { // here the local variables ic should be unique outside the loop as well
+			System.out.println(ic + ", ");
+		}
+
+		for (int id = 0; id < names.size(); id++) {
+			String name = names.get(id);
+			if (id > 0) {
+				System.out.print(", "); // if counter = 0 then it doesn't print , so after last one there is no comma
+			}
+			System.out.print(name);
+		}
+
+		int[] valuesA = new int[3];
+		valuesA[0] = 10;
+		valuesA[1] = Integer.valueOf(5);
+		valuesA[2] = 15;
+		// for complicated calculations we can use standard for loop (instead of
+		// enhanced for loop)
+		for (int ie = 1; ie < valuesA.length; ie++) {
+			System.out.print(" " + (valuesA[ie] - valuesA[ie - 1]) + ", ");
+		}
+		System.out.println();
+		// mix a for and for-each loop in this example
+		int[][] myComplexArray = { { 5, 2, 1, 3 }, { 3, 9, 8, 9 }, { 5, 7, 12, 7 } };
+		for (int[] mySimpleArray : myComplexArray) {
+			for (int ig = 0; ig < mySimpleArray.length; ig++) {
+				// \t > tab
+				System.out.print(mySimpleArray[ig] + "\t");
+			}
+			System.out.println();
+		}
+
+		// gives 3 0
+		int xg = 20;
+		while (xg > 0) {
+			do {
+				xg -= 2;
+			} while (xg > 5);
+			xg--;
+			System.out.print(xg + "\t");
+		}
+
+		System.out.println("\n 103: Labels");
+		int[][] myComplexArrayA = { { 5, 2, 1, 3 }, { 3, 9, 8, 9 }, { 5, 7, 12, 7 } };
+		OUTER_LOOP: for (int[] mySimpleArray : myComplexArrayA) {
+			INNER_LOOP: for (int ih = 0; ih < mySimpleArray.length; ih++) {
+				System.out.print(mySimpleArray[ih] + "\t");
+			}
+			System.out.println();
+		}
+
+		// search example > find first and exit
+		int[][] list = { { 1, 13, 5 }, { 1, 2, 5 }, { 2, 7, 2 } };
+		int searchValue = 2;
+		int positionX = -1;
+		int positionY = -1;
+		PARENT_LOOP: for (int ih = 0; ih < list.length; ih++) {
+			for (int ja = 0; ja < list[ih].length; ja++) {
+				if (list[ih][ja] == searchValue) {
+					positionX = ih;
+					positionY = ja;
+					break PARENT_LOOP;
+				}
+			}
+		}
+		if (positionX == -1 || positionY == -1) {
+			System.out.println("Value " + searchValue + " not found");
+		} else {
+			System.out.println("Value " + searchValue + " found at: " + "(" + positionX + "," + positionY + ")");
+		}
 	}
 
 	int roomInBelly = 5;
