@@ -1263,6 +1263,8 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 				if (list[ih][ja] == searchValue) {
 					positionX = ih;
 					positionY = ja;
+					// here it breaks the above 2 for loops. If we just keep break, it only exits
+					// the inner for loop
 					break PARENT_LOOP;
 				}
 			}
@@ -1271,6 +1273,22 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			System.out.println("Value " + searchValue + " not found");
 		} else {
 			System.out.println("Value " + searchValue + " found at: " + "(" + positionX + "," + positionY + ")");
+		}
+
+		FIRST_CHAR_LOOP: for (int ad = 1; ad <= 4; ad++) {
+			for (char xh = 'a'; xh <= 'c'; xh++) {
+				if (ad == 2 || xh == 'b')
+					continue FIRST_CHAR_LOOP; // with continue it prints: 1a 3a 4a
+				System.out.print(" " + ad + xh);// without continue it prints 1a, 1b, 1c, 2a ...4c
+			}
+		}
+// 		after changing label Now it prints:  1a 3a 4a 1a 1c 3a 3c 4a 4c
+		for (int ad1 = 1; ad1 <= 4; ad1++) {
+			FIRST_CHAR_LOOP: for (char xh1 = 'a'; xh1 <= 'c'; xh1++) {
+				if (ad1 == 2 || xh1 == 'b')
+					continue FIRST_CHAR_LOOP;
+				System.out.print(" " + ad1 + xh1);
+			}
 		}
 
 		System.out.println(
@@ -1329,6 +1347,16 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 
 		c.didIt(); // needs throws ClassNotFoundException at method level\
 		c.doIt();
+
+		byte xh = 5;
+		byte yc = 10;
+		int zb = xh + yc; // WORKS
+		long zc = xh + yc; // WORKS
+		double zd = xh + yc; // WORKS
+//		byte ze = xh + yc; // DOESN'T WORK as by default numbers will be int. We need to keep cast
+		byte zf = (byte) (xh + yc);
+		
+		// While keeping cast remember (byte) xh +yc > applies cast only to xh and not sum. use brackets (byte) (xh + yc);
 	}
 
 	static void didIt() throws ClassNotFoundException {
