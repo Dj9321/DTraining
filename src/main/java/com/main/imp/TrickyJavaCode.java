@@ -25,7 +25,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 	// we can have same variable name as in super class
 	public double price;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, IOException {
 
 		// Mostly from: https://www.examtopics.com/exams/oracle/1z0-808/
 
@@ -1272,6 +1272,84 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		} else {
 			System.out.println("Value " + searchValue + " found at: " + "(" + positionX + "," + positionY + ")");
 		}
+
+		System.out.println(
+				"\n 104: Methods in StringBuffer: NO concat(), default capacity:  16, then increases (old capacity×2)+2 ");
+		StringBuffer sba = new StringBuffer(); // just giving number is capacity, " " for String
+		sba.append("Java");
+		sba.append("language has functional programming as well"); // Might trigger resizing if capacity is exceeded
+//		sb.concat("Hello"); // NO such method concat
+//		sba.append(" SE 8 above 16 characters increases based on the capcacity");
+		System.out.println(sba.length());
+		System.out.println(sba.capacity()); // 16
+
+		StringBuffer sbb = new StringBuffer("Example"); // Capacity = 16 + 7 = 23
+
+		System.out.println("\n 105: Jagged arrays");
+		char cd = 65; // still works > But prints characters > see validCapitalLetters() (65 to 90 &
+						// 97 to 122)
+		System.out.println(cd);
+		// This creates a jagged array (an array of arrays), where there are 10 rows,
+		// but the number of columns in each row isn’t set yet.
+		double[][] da = new double[10][];
+		// Each row is a double[]. Before you use each inner array, you must allocate
+		// its size separately.
+		da[0] = new double[3];
+		da[0][0] = 3;
+		System.out.println(da[0][0]);
+
+		c.defA(); // still works
+
+		System.out.println(true | false ^ true);
+		System.out.println((true | false) ^ true);
+
+//		static int a = 3; // DOesn't compile can't have static inside a method
+		int arrayA[] = new int[ab];
+		arrayA[1] = 7;
+
+		c.swtichCases();
+
+		// all methods of super class can be used in subclass (only public, protected
+		// ..)
+		// all fields can be used in subclass from that of super class > FALSE
+		// we can hide the stati methods of superclass by defining a metohd in subclass
+		// with same signature as in superclass
+		double[] arrayB[] = new double[10][]; // still good even if we kept [] to both sides
+//		double[] arrayC[] = new double[][1]; // Cannot specify an array dimension after an empty dimension
+//		ArrayList<Object> aA = new ArrayList<Person>(); // Type mismatch: cannot convert from ArrayList<Person> to
+		// ArrayList<Object>
+		int ai = 10;
+//		if(ai=>10) {}
+
+		long[][] i2d;
+		long[] i1d = { 1, 2, 3 };
+		Object o = i1d;
+		i2d = new long[3][3];
+//		i2d[0][0] = (long[]) o; // Type mismatch: cannot convert from long[] to long
+
+		c.didIt(); // needs throws ClassNotFoundException at method level\
+		c.doIt();
+	}
+
+	static void didIt() throws ClassNotFoundException {
+		throw new SecurityException();
+	}
+
+	static void doIt() throws java.io.IOException {
+		throw new java.io.IOException();
+	}
+
+	static int ab = 2;
+
+	public void defA() {
+		System.out.println("void return type but we are just saying return; back to calling method");
+		return;
+	}
+
+	public double methodX(byte by) {
+
+		double d = 10.0;
+		return (long) by / d * 3;
 	}
 
 	int roomInBelly = 5;
@@ -1283,6 +1361,14 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 			roomInBelly--;
 		}
 		System.out.println(bitesOfCheese + " pieces of cheese left");
+	}
+
+	private void swtichCases() {
+		final char d = 'D';
+		switch (d) {
+		case d:
+			System.out.println(d);
+		}
 	}
 
 	private int switchCaseAllowedValues(String firstName, final String lastName) {
