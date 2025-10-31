@@ -1425,7 +1425,7 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		byte xq = 127; // max can be 127 only
 		byte xr = 10, xs = 20;
 //		byte xt = xr + xs; // doesn't compile as both will be auto promoted to int
-//		byte xu = (byte) xr + xs; // Doesn't compile; only one is converted to byte
+//		byte xu = (byte) xr + xs; // TRAP Doesn't compile; only one is converted to byte
 
 		int xv = 5 * 4 % 3; // code will be evaluated from left to right as * ^ % have same precedence
 		int xw = 4 * 2 / 3; // 8 / 4 > division: you will get 2 and remainder 2. Remainder is ignored here.
@@ -1433,6 +1433,36 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		System.out.println(xw);
 		System.out.println(xy);
 
+		int xz = 0;
+		String sa = null;
+//		if (xz == sa) // Incompatible types > neither variable can be converted to the other variable's type.
+//			System.out.println("Success");
+//		else
+//			System.out.println("Failure");
+
+		int yd = 50, ye = 75;
+		boolean bb = yd >= ye;
+		if (bb = true) // TRAP > its not comparision its assignment > so Success is only printed >
+						// doesn't go to else block
+			System.out.println("Success");
+		else
+			System.out.println("Failure");
+
+		int ca = 7;
+		int result = 4;
+		result += ++ca; // result = result + ++c; > works fine
+		System.out.println(result);
+
+//		int x = 1, y = 15;
+		// while x < 10 // TRAP > no parenthesis
+//	   y––;
+//		x++;
+//		System.out.println(x+", "+y);
+
+//		do {
+//			int yf = 1;
+//			System.out.print(yf++ + " ");
+//		} while (yf <= 10); // yf is declared within do so it is out of scope outside do here
 	}
 
 	static void didIt() throws ClassNotFoundException {
