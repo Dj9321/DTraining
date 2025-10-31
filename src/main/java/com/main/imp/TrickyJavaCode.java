@@ -1082,8 +1082,10 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		// You are telling the compiler that you have taken additional steps to prevent
 		// overflow or underflow.
 		short za3 = (short) (xa1 * ya3);
+		int xj = xa1 * ya3; // This works FINE
 
 		long xa3 = 10;
+
 		int ya4 = 5;
 //		ya4 = ya4 * xa3; // DOES NOT COMPILE as it gets promoted to bigger of them i.e long or you can use cast
 		ya4 = (int) (ya4 + xa3);
@@ -1355,16 +1357,90 @@ public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 		double zd = xh + yc; // WORKS
 //		byte ze = xh + yc; // DOESN'T WORK as by default numbers will be int. We need to keep cast
 		byte zf = (byte) (xh + yc);
-		
-		// While keeping cast remember (byte) xh +yc > applies cast only to xh and not sum. use brackets (byte) (xh + yc);
+
+		int xi = 9;
+//		String message = x > 10 ? "Greater than" : false; // DOESN’T compile because of string and boolean (both
+		// different)
+
+		List<Integer> listI = new ArrayList<Integer>();
+		listI.add(10);
+		listI.add(14);
+		for (int xk : listI) { // getting Integer as int
+			System.out.print(xk + ", ");
+			break;
+		}
+
+		int xl = 4;
+		long yk = x * 4 - xl++; // int fits in long > so no issues
+		if (yk < 10)
+			System.out.println("Too Low");
+		else
+			System.out.println("Just right");
+//		 else System.out.println("Too High"); // DOESN'T COMPILE else without else if or just if
+
+		System.out.println("\n 106 Ternary operation");
+		int xm = 5;
+		System.out.println(xm > 2 ? x < 4 ? 10 : 8 : 7); // gives 10 > check ? properly
+		System.out.println(xm > 2 ? (x < 4 ? 10 : 8) : 7);
+
+		System.out.println("\n 107 Bitwise operations");
+		System.out.println(true | true); // | > at least one true > it will be true > false only when both are false
+		System.out.println(true | false); // evaluates both
+		System.out.println(false | false);
+
+		System.out.println(false & false);
+		System.out.println(true & false);
+		System.out.println(true & true); // true only when both are true
+
+		System.out.println(" ^ " + (false ^ false));
+		System.out.println(" ^ " + (true ^ false)); // true when both are different TF or FT. false when both are same
+		System.out.println(" ^ " + (true ^ true)); // its like opposite magnets attract > gives true
+
+		boolean xn = true, zg = true;
+		int yl = 20;
+		xn = (yl != 10) ^ (zg = false); // (zg=false) assigns the value false to z and returns false for the entire
+										// expression.
+		System.out.println((yl != 10) ^ (zg = true)); // zg = true assigns true and returns true
+		System.out.println(xn + ", " + yl + ", " + zg);
+
+		int xp, xo = (xp = 1); // sets xo to 1
+		System.out.println(xo + " " + xp);
+		int ic = 3;
+		for (int ib = 0; ib < 10;) {
+			ib = ib++; // here it increases but ib value again changes to 0 as ib++ will increase in
+						// the future.
+//			ib++; // if this is there it increases
+//			System.out.println(ib); //
+//			System.out.println(ib++);
+			ib = ++ib; // THIS WORKS
+			System.out.println(ib);
+			ic++;
+			if (ic == 23)
+				break;
+			System.out.println("Hello World");
+		}
+		System.out.println(ic);
+		System.out.println("\n 108 byte max value: -128 to 127");
+
+		byte xq = 127; // max can be 127 only
+		byte xr = 10, xs = 20;
+//		byte xt = xr + xs; // doesn't compile as both will be auto promoted to int
+//		byte xu = (byte) xr + xs; // Doesn't compile; only one is converted to byte
+
+		int xv = 5 * 4 % 3; // code will be evaluated from left to right as * ^ % have same precedence
+		int xw = 4 * 2 / 3; // 8 / 4 > division: you will get 2 and remainder 2. Remainder is ignored here.
+		int xy = (int) (1.3 / 1.2); // if we don't give cast > default decimal numbers are double
+		System.out.println(xw);
+		System.out.println(xy);
+
 	}
 
 	static void didIt() throws ClassNotFoundException {
-		throw new SecurityException();
+//		throw new SecurityException();
 	}
 
 	static void doIt() throws java.io.IOException {
-		throw new java.io.IOException();
+//		throw new java.io.IOException();
 	}
 
 	static int ab = 2;
