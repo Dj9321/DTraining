@@ -79,6 +79,22 @@ public class TrickyJavaCodePart2 {
 		b = b.replace("B", "2").replace('C', '3');
 		System.out.println("a=" + a); // a is not changed > abc
 		System.out.println("b=" + b);
+
+		String alpha = "";
+		for (char current = 'a'; current <= 'z'; current++) // appending char gives another char of alphabets
+			alpha += current; // creates 27 objects including one blank string initially > all eligible for
+								// garbage collection
+		System.out.println(alpha);
+
+		String alpha1 = "";
+		for (char current = 'A'; current <= 'z'; current++) // appending char gives another char of alphabets
+			alpha1 += current; // creates small & capital letters > all eligible for garbage collection
+		System.out.println(alpha1);
+
+		System.out.println("\n 5: There are three ways to construct a StringBuilder");
+		StringBuilder sb1 = new StringBuilder();
+		StringBuilder sb2 = new StringBuilder("animal");
+		StringBuilder sb3 = new StringBuilder(10); // capacity	
 	}
 
 }
