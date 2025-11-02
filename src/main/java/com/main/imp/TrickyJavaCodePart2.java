@@ -1,5 +1,7 @@
 package com.main.imp;
 
+import javax.accessibility.AccessibleEditableText;
+
 public class TrickyJavaCodePart2 {
 
 	public static void main(String[] args) {
@@ -94,7 +96,99 @@ public class TrickyJavaCodePart2 {
 		System.out.println("\n 5: There are three ways to construct a StringBuilder");
 		StringBuilder sb1 = new StringBuilder();
 		StringBuilder sb2 = new StringBuilder("animal");
-		StringBuilder sb3 = new StringBuilder(10); // capacity	
+		StringBuilder sb3 = new StringBuilder(10); // capacity
+
+		StringBuilder alpha2 = new StringBuilder();
+		for (char current = 'a'; current <= 'z'; current++)
+			alpha2.append(current);
+		System.out.println(alpha2);
+
+		StringBuilder sb = new StringBuilder("start");
+		sb.append("+middle"); // sb = "start+middle" > returns reference to this object
+		StringBuilder same = sb.append("+end"); // "start+middle+end"
+		System.out.println(same + " " + sb); // here there is only one object and both references point to that object
+												// only
+
+		StringBuilder aa = new StringBuilder("abc");
+		StringBuilder ba = aa.append("de");
+		ba = ba.append("f").append("g");
+		System.out.println("a=" + aa);
+		System.out.println("b=" + ba);
+
+		StringBuilder ab = new StringBuilder("D");
+		StringBuilder ac = ab.append("J");
+		ab.append("S");
+		ac.append("-SDJ");
+		System.out.println(ab + " " + ac); // both are same here as both point to same object
+		ab.isEmpty();
+		String s = "d";
+		s.isBlank();
+		s.isEmpty();
+
+		StringBuilder sb4 = new StringBuilder("animals");
+		String sub = sb4.substring(sb4.indexOf("a"), sb4.indexOf("al")); // string starting with index 0 and ending
+																			// right before index 4 or al
+		int len = sb4.length();
+		char ch = sb4.charAt(6); // returns String and not StringBuilder
+		System.out.println(sub + " " + len + " " + ch); // anim 7 s
+
+		// different method signatures > argument changes
+		StringBuilder sb5 = new StringBuilder().append(1).append('c'); // append() is called directly after the
+																		// constructor
+		sb5.append("-").append(true);
+		System.out.println(sb5); // 1c-true
+
+//		Pay attention to the offset
+		StringBuilder sb6 = new StringBuilder("animals");
+		sb6.insert(7, "-"); // sb6 = animals-
+		sb6.insert(0, "-"); // sb6 = -animals-
+		sb6.insert(4, "-"); // sb6 = -ani-mals Insert dash at index 4 (starts index at 0)
+		System.out.println(sb6);
+
+		// delete & deleteCharAt()
+		StringBuilder sb7 = new StringBuilder("abcdef");
+		sb7.delete(1, 3); // sb7 = adef > ending before 3 so till 2 only it will delete
+		sb7.deleteCharAt(3); // ade
+		System.out.println(sb7);
+
+		// reverse
+		StringBuilder sb8 = new StringBuilder("ABC");
+		sb8.reverse();
+		System.out.println(sb8);
+
+		// Maybe we want to send to an argument which is expecting String
+		String ad = sb8.toString();
+
+		System.out.println("\n 6: Equality");
+		StringBuilder one = new StringBuilder();
+		StringBuilder two = new StringBuilder();
+		StringBuilder three1 = one.append("a");
+		System.out.println(one == two); // false > different objects
+		System.out.println(one == three1); // true > same objects > references are referring to the same object
+
+		// one is computed at compile time and another at runtime so a new String is
+		// created although both are same after evaluating
+		String x = "Hello World";
+		String z = " Hello World".trim();
+		System.out.println(x == z); // false
+
+		String x1 = new String("Hello World"); // you have specifically requested a different String object, the pooled
+												// value isn't shared.
+		String y1 = "Hello World";
+		System.out.println(x1 == y1); // false
+		System.out.println(x1.equals(y1)); // true
+
+//		 the authors of StringBuilder did not implement equals(). If you call equals() on two StringBuilder instances, it will check reference equality.
+		StringBuilder one1 = new StringBuilder().append("SDJ");
+		StringBuilder two1 = new StringBuilder().append("SDJ");
+		; // 2 o rmore semicolons ? not an issue
+		System.out.println(one1.equals(two1)); // ITS A FALSE **
+
+		// Object equality
+		TrickyJavaCodePart2 t1 = new TrickyJavaCodePart2();
+		TrickyJavaCodePart2 t2 = new TrickyJavaCodePart2();
+		System.out.println(t1.equals(t2)); // false as it is same as == checks same object as we didn't implement
+											// equals() method
 	}
 
 }
