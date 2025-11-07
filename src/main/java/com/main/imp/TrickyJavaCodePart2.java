@@ -1,5 +1,6 @@
 package com.main.imp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.accessibility.AccessibleEditableText;
@@ -219,6 +220,74 @@ public class TrickyJavaCodePart2 {
 		String[] againStrings = (String[]) objects; // a cast is needed because we are moving to a more specific type
 //		againStrings[0] = new StringBuilder();   // DOES NOT COMPILE
 //		objects[0] = new StringBuilder(); // careful > throws ArrayStoreException
+
+		int[] numbers = new int[10];
+		for (int i = 0; i < numbers.length; i++)
+			numbers[i] = i + 5;
+
+		System.out.println(Arrays.toString(numbers));
+//		numbers[numbers.length] = 5; // index of array.length will always give ArrayIndexOutOfBoundsException
+
+		System.out.println("\n 9: Arrays: Sort");
+		Arrays.sort(numbers);
+
+		int[] numbers1 = { 6, 9, 1 };
+		Arrays.sort(numbers1);
+		for (int i = 0; i < numbers1.length; i++)
+			System.out.print(numbers1[i] + " ");
+		for (int n : numbers1)
+			System.out.println(n);
+
+		// String sort
+		String[] strings1 = { "10", "9", "100", "DHJ", "SDJ", "dheeraj" };
+		Arrays.sort(strings1);
+		// String sorts in alphabetic order, and 1 sorts before 9. (Numbers sort before
+		// letters and uppercase sorts before lowercase,
+		for (String string1 : strings1)
+			System.out.print(string1 + " "); // sorts as 10 100 9
+
+		System.out.println("\n 9: Arrays binarySearch(array, elementToFind)");
+		int[] numbers4 = { 2, 4, 6, 8 };
+		System.out.println(Arrays.binarySearch(numbers4, 2)); // 0
+		System.out.println(Arrays.binarySearch(numbers4, 4)); // 1
+		System.out.println(Arrays.binarySearch(numbers4, 1)); // -1 > 1 should be placed in first place (0 index -1)
+		System.out.println(Arrays.binarySearch(numbers4, 3)); // -2 > 3 should be placed in 2nd place (1 index negate >
+																// -1 -1 = -2
+		System.out.println(Arrays.binarySearch(numbers4, 9)); // -5 > 9 should be placed in 4th index > (-4 -1 = -5)
+
+		int[] numbers5 = { 8, 10, 6, 2 };
+		System.out.println(Arrays.binarySearch(numbers5, 6)); // 0
+
+		int[] vars4[], space[][]; // a 2D AND a 3D array
+
+		// array rectangle with three elements, each of which refers to an array of two
+		// elements. You can think of the addressable range as [0][0] through [2][1],
+		// but don't think of it as a structure of addresses like [0,0] or [2,1].
+		String[][] rectangle = new String[3][2];
+
+		System.out.println(" \n 10: Assymetric Array");
+		int[][] differentSize = { { 1, 4 }, { 3 }, { 9, 8, 7 } };
+		int[][] args1 = new int[4][];
+		args1[0] = new int[5];
+		args1[1] = new int[3];
+
+		int[][] twoD = new int[3][2];
+		for (int i = 0; i < twoD.length; i++) {
+			for (int j = 0; j < twoD[i].length; j++)
+				System.out.print(twoD[i][j] + " "); // print element
+			System.out.println(); // time for a new row
+		}
+
+		// same using enhanced for loop
+		for (int[] inner : twoD) {
+			for (int num : inner)
+				System.out.print(num + " ");
+			System.out.println();
+		}
+
+		ArrayList list1 = new ArrayList(); // arraylist with default space
+		ArrayList list2 = new ArrayList(10); // with space 10
+		ArrayList list3 = new ArrayList(list2); // with another arraylist
 
 	}
 
