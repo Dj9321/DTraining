@@ -1,5 +1,7 @@
 package com.main.imp;
 
+import java.util.Arrays;
+
 import javax.accessibility.AccessibleEditableText;
 
 public class TrickyJavaCodePart2 {
@@ -189,6 +191,35 @@ public class TrickyJavaCodePart2 {
 		TrickyJavaCodePart2 t2 = new TrickyJavaCodePart2();
 		System.out.println(t1.equals(t2)); // false as it is same as == checks same object as we didn't implement
 											// equals() method
+
+		System.out.println("\n 7: Arrays > all initialized to default values");
+		int[] a1 = new int[5];
+		System.out.println(a1[0]);
+		int[] numbers2 = new int[] { 42, 55, 99 };
+		// The following approach is called an anonymous array. It is anonymous because
+		// you don't specify the type and size.
+		int[] numbers3 = { 42, 55, 99 }; // can also directly write like this instead of new int[] {}
+		// instead of below use Arrays.toString()
+		System.out.println(numbers2); // will get [I@764c12b6 because it is an object array
+		// if you print above and get [I > Integer array > [L means it is an array,
+
+		int numAnimals3[]; // [] without space > still VALID
+
+		int[] ids, types; // gives 2 int [] (array) variables);
+		int ids1[], types2; // gives only one int array and other is normal int.
+
+		String[] bugs = { "cricket", "beetle", "ladybug" };
+		String[] alias = bugs;
+		System.out.println(bugs.equals(alias)); // true
+		System.out.println(Arrays.toString(bugs));
+
+		System.out.println("\n 8: Arrays: Downcasting");
+		String[] strings = { "stringValue" };
+		Object[] objects = strings; // doesn't require a cast because Object is a broader type than String
+		String[] againStrings = (String[]) objects; // a cast is needed because we are moving to a more specific type
+//		againStrings[0] = new StringBuilder();   // DOES NOT COMPILE
+//		objects[0] = new StringBuilder(); // careful > throws ArrayStoreException
+
 	}
 
 }
