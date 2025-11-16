@@ -2,6 +2,7 @@ package com.main.imp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.accessibility.AccessibleEditableText;
 
@@ -288,6 +289,26 @@ public class TrickyJavaCodePart2 {
 		ArrayList list1 = new ArrayList(); // arraylist with default space
 		ArrayList list2 = new ArrayList(10); // with space 10
 		ArrayList list3 = new ArrayList(list2); // with another arraylist
+
+		// You can store an ArrayList in a List reference variable but not vice versa.
+		List<String> list6 = new ArrayList<>();
+//		ArrayList<String> list7 = new List<>(); // DOES NOT COMPILE
+
+		ArrayList<String> list8 = new ArrayList<>();
+		list8.add("hello");
+		list8.add(1, "Hi"); // can add at 1st index as well
+		list8.add(2, "how");
+//		list8.add(4, "how"); // doesn't compile as we skipped 3
+		list8.addFirst("first");
+		list8.addLast("Last");
+		list8.add(1, "adding at 1"); // replaced at 1
+		System.out.println(list8);
+//		list8.add(Boolean.TRUE); // adds true
+
+//		ArrayList<E> list9 = new ArrayList()<>; // can't keep as <E>
+		ArrayList list9 = new ArrayList();
+		list9.add(Boolean.TRUE); // adds true as it is object type
+		System.out.println(list9);
 
 	}
 
