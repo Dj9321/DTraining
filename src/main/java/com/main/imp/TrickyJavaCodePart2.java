@@ -285,6 +285,8 @@ public class TrickyJavaCodePart2 {
 				System.out.print(num + " ");
 			System.out.println();
 		}
+		
+		System.out.print("\n 11: ArrayList methods");
 
 		ArrayList list1 = new ArrayList(); // arraylist with default space
 		ArrayList list2 = new ArrayList(10); // with space 10
@@ -301,14 +303,25 @@ public class TrickyJavaCodePart2 {
 //		list8.add(4, "how"); // doesn't compile as we skipped 3
 		list8.addFirst("first");
 		list8.addLast("Last");
-		list8.add(1, "adding at 1"); // replaced at 1
+		list8.add(1, "adding at 1"); // adds at 1 > doesn't replace
 		System.out.println(list8);
-//		list8.add(Boolean.TRUE); // adds true
+//		list8.add(Boolean.TRUE); // here it can't add as type safe is String otherwise adds true
 
 //		ArrayList<E> list9 = new ArrayList()<>; // can't keep as <E>
 		ArrayList list9 = new ArrayList();
 		list9.add(Boolean.TRUE); // adds true as it is object type
 		System.out.println(list9);
+
+		list8.add("first");
+		System.out.println(list8);
+		boolean isRemoved = list8.remove("first"); // removes first occurrence only
+		System.out.println(isRemoved + " >>>  " + list8);
+		list8.remove(2);
+		System.out.println(list8);
+		list8.addAll(list9); // here it pull the true value from list9 and adds here > no issues with boolean
+		System.out.println(list8);
+		boolean removed1 = list8.remove("JJJJJJJJJJJJJJJJ");
+		System.out.println(removed1); // gives false
 
 	}
 
