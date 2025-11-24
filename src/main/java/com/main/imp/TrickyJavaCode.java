@@ -1,5 +1,7 @@
 package com.main.imp;
 
+import static java.lang.Math.min;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -18,7 +20,6 @@ import com.main.classes.Planet;
 import com.main.classes.TProduct;
 import com.main.classes.Transport;
 import com.main.classes.Vehicle;
-import static java.lang.Math.*;
 
 public class TrickyJavaCode extends AbstractClassA implements InterfaceA {
 

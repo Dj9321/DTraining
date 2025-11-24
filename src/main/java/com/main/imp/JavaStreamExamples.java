@@ -23,7 +23,6 @@ import java.util.stream.Stream;
 
 import com.main.classes.EmployeeRecord;
 import com.main.classes.Person;
-import com.main.classes.PersonDetails;
 import com.main.classes.PersonFullDetails;
 
 public class JavaStreamExamples {
