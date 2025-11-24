@@ -9,6 +9,6 @@ public abstract class FourWheeler extends Vehicle implements Transport, Transpor
 //	}
 
 	// if it is abstract you have to explicitly mention it as abstract
-	public abstract void getTransport(); 
+	public abstract void getTransport();
 
 }

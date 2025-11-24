@@ -285,7 +285,7 @@ public class TrickyJavaCodePart2 {
 				System.out.print(num + " ");
 			System.out.println();
 		}
-		
+
 		System.out.print("\n 11: ArrayList methods");
 
 		ArrayList list1 = new ArrayList(); // arraylist with default space
@@ -323,6 +323,7 @@ public class TrickyJavaCodePart2 {
 		boolean removed1 = list8.remove("JJJJJJJJJJJJJJJJ");
 		System.out.println(removed1); // gives false
 
+		System.out.print("\n 12: ");
 	}
 
 }

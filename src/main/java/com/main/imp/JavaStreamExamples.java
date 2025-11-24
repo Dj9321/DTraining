@@ -643,7 +643,7 @@ public class JavaStreamExamples {
 		empList.add(e2);
 		empList.add(e3);
 		empList.add(e4);
-		// collect(Collector), 
+		// collect(Collector),
 		// collect(supplier, BiConsumer accumulator, BiConsumercombiner)
 		var highestSalaryMap = empList.stream().collect(Collectors.groupingBy(EmployeeRecord::department,
 				Collectors.maxBy(Comparator.comparingInt(EmployeeRecord::salary))));

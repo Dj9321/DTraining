@@ -7,5 +7,4 @@ public record PersonDetails(String name, int age, String Dob) implements PersonI
 		return "Business Analyst";
 	}
 
-
 }

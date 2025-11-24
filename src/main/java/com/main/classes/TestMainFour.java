@@ -45,24 +45,24 @@ public class TestMainFour {
 		fs1.mkdir();
 		fs1.createNewFile();
 		String o = "true";
-		switch(o) {
+		switch (o) {
 		case "true":
 			System.out.println("True");
 		}
-		
+
 		int sa = 1;
 		float sb = 1f;
 		double sc = 9;
 		sb = sa;
-		sc =sb;
-		
-		float xa = 22.00f%3.00f;
-		int xb = 22%3;
+		sc = sb;
+
+		float xa = 22.00f % 3.00f;
+		int xb = 22 % 3;
 		System.out.println(xa);
 		System.out.println(xb);
-		
+
 		String saa = "java Duke ";
 		System.out.println(saa.trim().length());
-		
+
 	}
 }

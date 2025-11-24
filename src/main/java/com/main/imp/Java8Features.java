@@ -142,13 +142,13 @@ public class Java8Features implements InterfaceA {
 		// removeIf() from Collection. List.of() is immutable so we can't remove.
 //		personsList.removeIf(pp);
 //		ArrayList<PersonDetails> personModifiableList = new ArrayList<> (List.of(personList));
-		
+
 		List<Person> p = new ArrayList<>();
 		p.add(pn1);
 		p.add(pn2);
 		p.add(pn3);
-		
-		// removeIf(Predicate) 
+
+		// removeIf(Predicate)
 		p.removeIf(c -> c.getDepartment().equals("HR"));
 		System.out.println(p);
 	}
@@ -271,7 +271,7 @@ public class Java8Features implements InterfaceA {
 	}
 
 	int instanceVariable = 44;
-	
+
 	public void lambdaExpressions(int parameter) {
 		instanceVariable = 33; // we can change this
 		int localVariable = 10;

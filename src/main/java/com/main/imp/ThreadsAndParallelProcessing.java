@@ -25,14 +25,14 @@ public class ThreadsAndParallelProcessing {
 //		t1.interrupt();
 //	    nr.waitForReady();
 //	    Thread.sleep(5 * 1000);
-	    nr.setReady();
+		nr.setReady();
 		synchronized (nr) {
 			System.out.println("In synchronized block");
 //			Thread.sleep(5 * 1000);
 //			nr.wait();
 		}
 //		t1.wait();
-		
+
 //		Thread.sleep(5 * 1000); // sleep for 5 seconds
 		t2.start();
 //		t2.interrupt();
