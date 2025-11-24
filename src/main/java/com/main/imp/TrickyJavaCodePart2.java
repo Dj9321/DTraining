@@ -321,7 +321,40 @@ public class TrickyJavaCodePart2 {
 		boolean removed1 = list8.remove("JJJJJJJJJJJJJJJJ");
 		System.out.println(removed1); // gives false
 
-		System.out.print("\n 12: ");
+		System.out.print("\n 12: \n");
+		int numFish = 4;
+		String fishType = "tuna";
+//		 String anotherFish = numFish + 1; // cannot convert from int to String
+		System.out.println(numFish + " " + 1);
+
+		String s4 = "Hello";
+		String t = new String(s4);
+		if ("Hello".equals(s))
+			System.out.println("one");
+		if (t == s4)
+			System.out.println("two");
+		if (t.equals(s4))
+			System.out.println("new String() equals Hello");
+		if ("Hello" == s4)
+			System.out.println(" Hello == s4");
+		if ("Hello" == t)
+			System.out.println("Hello == new String > False");
+
+		System.out.print(
+				"\n 13: String Builder is mutable so we don't need to assign back to instance. append(), insert() > Chaining methods \n ");
+		StringBuilder sb9 = new StringBuilder();
+		sb9.append("aaa").insert(1, "bb").insert(4, "ccc");
+		System.out.println(sb9);
+
+		System.out.print(
+				"\n 14: Java doesn't allow you to compare with == for incompatible types. Incompatible operand types String and StringBuilder \n");
+		String s5 = "java";
+		StringBuilder sB = new StringBuilder("java");
+//		if (s5 == sB) // THIS statement doesn't even compile
+			System.out.print("1");
+		if (s5.equals(sB))
+			System.out.print("2");
+		
 	}
 
 }
