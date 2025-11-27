@@ -352,8 +352,11 @@ public class TrickyJavaCodePart2 {
 		StringBuilder sB = new StringBuilder("java");
 //		if (s5 == sB) // THIS statement doesn't even compile
 			System.out.print("1");
-		if (s5.equals(sB))
+		if (s5.equals(sB)) // this works but is FALSE > as it is comparing string with StringBuilder Object 
 			System.out.print("2");
+		if(s5.equals(sB.toString())) {
+			System.out.println("\n Now it works > String to StringBuilder.toString()");
+		}
 		
 	}
 

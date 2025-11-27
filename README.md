@@ -11,5 +11,6 @@ Streams, Functional interfaces, lamdas, Date and time, Java newer version exampl
 * Java Stream Examples
 * Simple Programs & Simple Integer Programs
 * Threads & Parallel Processing
+* Plugins: SonarQube for IDE, Github copilot
 
 Author: Dheeraj S
