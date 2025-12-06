@@ -358,6 +358,12 @@ public class TrickyJavaCodePart2 {
 			System.out.println("\n Now it works > String to StringBuilder.toString()");
 		}
 		
+		// UnicodeDemo call
+		System.out.println("\n 15: Unicode characters");
+		UnicodeDemo.main(new String[]{"direct-call"});
+		
+		// passing hex in string
+		System.out.println(0x1F60A); // prints decimal value of hex > 128522
 	}
 
 }
