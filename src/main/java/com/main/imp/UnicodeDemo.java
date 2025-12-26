@@ -13,10 +13,11 @@ public class UnicodeDemo {
 		System.out.println("string with unicode escape = " + sEsc);
 
 		char c1[] = Character.toChars(0x1F60A); // Returns {'\uD83D', '\uDE0A'}
+		System.out.println(c1); // prints emoji directly
 		System.out.println(new String(c1));
 		System.out.println(Arrays.toString(c1));
 		for (char ch : c1) {
-			System.out.println("char" + ch);
+			System.out.println("char: " + ch);
 		}
 		System.out.println("Printing emoji. Doesn't work without new String or print directly without this"
 				+ new String(Character.toChars(0x1F60A))); // directly printing emoji using Character.toChars /
