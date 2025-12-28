@@ -1,10 +1,13 @@
 package com.main.imp;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -126,15 +129,46 @@ public class DateAndTime {
 		System.out.println(date5.plus(period1)); // 2015-02-20
 		System.out.println(dateTime6.plus(period1)); // 2015-02-20T06:15
 //		System.out.println(time4.plus(period)); // UnsupportedTemporalTypeException > Unsupported unit: Months
-		
-		// More information from Date: getDayOfWeek(), getMonth(), getYear(), getDayOfYear()
+
+		// More information from Date: getDayOfWeek(), getMonth(), getYear(),
+		// getDayOfYear()
 		LocalDate date6 = LocalDate.of(2020, Month.JANUARY, 20);
-		System.out.println(date6.getDayOfWeek());     // MONDAY
-		System.out.println(date6.getMonth());          // JANUARY
-		System.out.println(date6.getYear());          // 2020
-		System.out.println(date6.getDayOfYear());     // 20
-		
+		System.out.println(date6.getDayOfWeek()); // MONDAY
+		System.out.println(date6.getMonth()); // JANUARY
+		System.out.println(date6.getYear()); // 2020
+		System.out.println(date6.getDayOfYear()); // 20
+
 //		To format date the way we like we can use DateTimeFormatter.
+//		LocalDate date = LocalDate.of(2020, Month.JANUARY, 20);
+//		LocalTime time = LocalTime.of(11, 12, 34);
+//		LocalDateTime dateTime = LocalDateTime.of(date, time);
+		// ISO LOCAL DATE, TIME, DATE_TIME
+		System.out.println(date.format(DateTimeFormatter.ISO_LOCAL_DATE));
+		System.out.println(time.format(DateTimeFormatter.ISO_LOCAL_TIME));
+		System.out.println(dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+
+		// FormatStyle.SHORT, MEDIUM, LONG
+		// DateTimeFormatter . ofLocalizedDate(), ofLocalizedTime(),
+		// ofLocalizedDateTime()
+		// ofLocalizedDateTime > doesn't work on date & time only
+		// ofLocalizedTime works on time, dateTime
+		// ofLocalizedDate works on date, dateTime
+		DateTimeFormatter shortDateTimeFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+		System.out.println(shortDateTimeFormat.format(dateTime)); // 1/20/20
+		System.out.println(shortDateTimeFormat.format(date)); // 1/20/20
+		// we can't format time with DateTimeFormatter
+//		System.out.println(shortDateTime.format(time)); // UnsupportedTemporalTypeException Unsupported field: MonthOfYear
+
+		// Custom format ofPattern()
+		DateTimeFormatter f = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm");
+		System.out.println(dateTime.format(f)); // January 20, 2020, 11:12
+//		MMMM M represents the month. The more Ms you have, the more verbose the Java output. For example, M outputs 1, MM outputs 01, MMM outputs Jan, and MMMM outputs January.
+
+		// OLD formatter:
+		SimpleDateFormat sf = new SimpleDateFormat("hh:mm");
+		sf.format(date);
+
+		DateTimeFormatter f1 = DateTimeFormatter.ofPattern("hh:mm"); // this doesn't work for date
 		
 	}
 
